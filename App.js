@@ -7,7 +7,7 @@
  */
 
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
 import {
@@ -27,7 +27,19 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import RNBootSplash from "react-native-bootsplash";
+
 const App: () => React$Node = () => {
+  let init = async () => {
+    // …do multiple async tasks
+  };
+
+  useEffect(() => {
+    init().finally(() => {
+      RNBootSplash.hide({ duration: 250 });
+    });
+  }, []);
+
   return (
     <NavigationContainer>
       <StatusBar barStyle="dark-content" />
