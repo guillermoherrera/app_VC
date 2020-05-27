@@ -15,6 +15,7 @@ import java.util.Arrays;
 import com.facebook.react.shell.MainReactPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.devfd.RNGeocoder.RNGeocoderPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -30,8 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
           return Arrays.<ReactPackage>asList(
               new MainReactPackage(),
               new RNDeviceInfo(),
-              new RNGestureHandlerPackage()
-              //new RNGeocoderPackage(),
+              new RNGestureHandlerPackage(),
+              new RNGeocoderPackage()
               //new RNGestureHandlerPackage(),
               //new VectorIconsPackage(),
               //new RNBootSplashPackage()
