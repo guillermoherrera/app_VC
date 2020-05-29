@@ -1,129 +1,62 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import 'react-native-gesture-handler';
-import React, { useEffect } from 'react';
+import React, {Component, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
+import { View, Text, AsyncStorage} from 'react-native';
+import {constants} from './src/assets';
+import {createStore, applyMiddleware} from 'redux';
+import reducers from './src/store/reducers';
+import ReduxThunk from 'redux-thunk';
+import {createRootNavigator} from './src/config/routes';
 import RNBootSplash from "react-native-bootsplash";
+import {Root} from 'native-base';
+import {Provider} from 'react-redux'
+import NavigationService from './src/services/navigation'
 
-const App: () => React$Node = () => {
-  let init = async () => {
-    // …do multiple async tasks
+export default class App extends Component {
+  state = {
+    signedIn: true,
+    checkedSignIn: false
   };
 
-  useEffect(() => {
-    init().finally(() => {
-      RNBootSplash.hide({ duration: 250 });
+  componentDidMount() {
+    this.isSignedIn()
+      .then(res => { this.setState({ signedIn: res, checkedSignIn: true }); RNBootSplash.hide(); })
+      .catch(err => console.log("App Error",err));
+  }
+
+  isSignedIn() {
+    return new Promise((resolve, reject) => {
+      AsyncStorage.getItem(constants.TOKEN)
+        .then(async res => {          
+          let address = await AsyncStorage.getItem(constants.ADDRESS)
+          if (res !== null && address) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        })
+        .catch(err => reject(err));
     });
-  }, []);
+  }
 
-  return (
-    <NavigationContainer>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </NavigationContainer>
-  );
+  render(){
+    const { checkedSignIn, signedIn } = this.state;
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+    const AppNavigator = createRootNavigator(signedIn)
+
+    if (!checkedSignIn) {
+      return (<View >
+        <Text>Hola Mundo</Text>
+      </View>);
+    }
+    return (
+      <Root>
+        <Provider store={store}>
+          <AppNavigator ref={navigatorRef => NavigationService.setTopLevelNavigator(navigatorRef)} />
+        </Provider>
+      </Root>
+    );
+  }
+  
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
-
-export default App;
