@@ -26,14 +26,14 @@ import {
   //ErrorScreen,
   //SuccessCredit,
   ActivateAccount,
-  //Address,
+  Address,
   //AssignCredit,
   //ValidateConfiaShopCode,
   //ConfiaShopError,
   //SuccessConfiaShop,
-  //ChangePassword,
-  //ErrorLogin,
-  //SuccessAuth,
+  ChangePassword,
+  ErrorLogin,
+  SuccessAuth,
   //CustomerAdd,
   //SuccessModal,
   //ErrorModal
@@ -47,10 +47,10 @@ import { colors } from '../assets';
 const NotAuthNavigator = createStackNavigator({
   Login: Login,
   Recovery: ActivateAccount,
-  //ChangePassword: ChangePassword,
-  //Address: Address,
-  //Error: ErrorLogin,
-  //Success: SuccessAuth
+  ChangePassword: ChangePassword,
+  Address: Address,
+  Error: ErrorLogin,
+  Success: SuccessAuth
 },{
   initialRouteName: 'Login',    
   headerMode: 'none'
