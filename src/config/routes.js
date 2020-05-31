@@ -25,7 +25,7 @@ import {
   //ConfiaShop,
   //ErrorScreen,
   //SuccessCredit,
-  //ActivateAccount,
+  ActivateAccount,
   //Address,
   //AssignCredit,
   //ValidateConfiaShopCode,
@@ -45,8 +45,8 @@ import { Icon } from 'native-base';
 import { colors } from '../assets';
 
 const NotAuthNavigator = createStackNavigator({
-  Login: Login
-  //Recovery: ActivateAccount,
+  Login: Login,
+  Recovery: ActivateAccount,
   //ChangePassword: ChangePassword,
   //Address: Address,
   //Error: ErrorLogin,
