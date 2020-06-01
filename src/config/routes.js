@@ -4,16 +4,17 @@ import { moderateScale } from 'react-native-size-matters';
 
 import { 
   createAppContainer, 
-  createStackNavigator, 
-  createSwitchNavigator,
-  createBottomTabNavigator } from "react-navigation";
+  createSwitchNavigator } from "react-navigation";
+
+import {createStackNavigator} from 'react-navigation-stack'
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import {
   //Loans,
   Login,
   //NewVale,  
   //Profile,    
-  //Home,
+  Home,
   //CustomerProfile,
   //Customers,    
   //CustomerInformation,
@@ -56,7 +57,7 @@ const NotAuthNavigator = createStackNavigator({
   headerMode: 'none'
 });
 
-/*
+
 const TabNavigator = createBottomTabNavigator({
   Home: {
     screen: Home,
@@ -67,7 +68,7 @@ const TabNavigator = createBottomTabNavigator({
       )
     },
   },
-  Loans: {
+  /*Loans: {
     screen: Loans,
     navigationOptions: {
       tabBarLabel: "Vales",
@@ -93,7 +94,7 @@ const TabNavigator = createBottomTabNavigator({
         <Icon type="FontAwesome5" name={"shopping-cart"} style={{ color: tintColor, fontSize: moderateScale(20) }} />
       )
     },
-  },
+  },*/
 },{
   swipeEnabled: true,
   tabBarPosition: 'bottom',
@@ -122,39 +123,39 @@ const AuthNavigator = createStackNavigator({
   Home: {
     screen: TabNavigator,
   },    
-  Profile,  
-  NewVale,  
-  CustomerProfile,    
-  CustomerInformation,
-  TransactionTypes,
-  ValeSection,
-  Reasons,
-  LoanDetails,
-  ValidateCode,
-  Error: ErrorScreen,
-  Success: SuccessCredit,
-  AssignCredit,
-  ValidateConfiaShopCode,
-  ConfiaShopError,
-  SuccessConfiaShop,
-  CustomerAdd,
-  SuccessModal,
-  ErrorModal
+  //Profile,  
+  //NewVale,  
+  //CustomerProfile,    
+  //CustomerInformation,
+  //TransactionTypes,
+  //ValeSection,
+  //Reasons,
+  //LoanDetails,
+  //ValidateCode,
+  //Error: ErrorScreen,
+  //Success: SuccessCredit,
+  //AssignCredit,
+  //ValidateConfiaShopCode,
+  //ConfiaShopError,
+  //SuccessConfiaShop,
+  //CustomerAdd,
+  //SuccessModal,
+  //ErrorModal
 },{
   initialRouteName: 'Home',  
   headerMode: 'none'  
 });
-*/
+
 
 export const createRootNavigator = (signedIn = false) => {
   const AppNavigator = createSwitchNavigator(
     {
-      //Home: AuthNavigator,
+      Home: AuthNavigator,
       Login: NotAuthNavigator
     },
     {
-      initialRouteName: "Login"//signedIn ? "Home" : "Login"
+      initialRouteName: signedIn ? "Home" : "Login"
     }
   );
-  return createAppContainer(AppNavigator)
+  return createAppContainer(AppNavigator);
 }

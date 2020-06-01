@@ -1,6 +1,6 @@
-import 'react-native-gesture-handler';
+//import 'react-native-gesture-handler';
 import React, {Component, useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+//import { NavigationContainer } from '@react-navigation/native';
 
 import { View, Text, AsyncStorage} from 'react-native';
 import {constants} from './src/assets';
