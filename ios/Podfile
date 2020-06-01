@@ -79,6 +79,8 @@ target 'Confia' do
 
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
   target 'ConfiaTests' do
     inherit! :complete
     # Pods for testing

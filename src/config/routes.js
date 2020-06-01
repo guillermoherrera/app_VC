@@ -13,7 +13,7 @@ import {
   //Loans,
   Login,
   //NewVale,  
-  //Profile,    
+  Profile,    
   Home,
   //CustomerProfile,
   //Customers,    
@@ -123,7 +123,7 @@ const AuthNavigator = createStackNavigator({
   Home: {
     screen: TabNavigator,
   },    
-  //Profile,  
+  Profile,  
   //NewVale,  
   //CustomerProfile,    
   //CustomerInformation,
