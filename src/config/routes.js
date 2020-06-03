@@ -10,7 +10,7 @@ import {createStackNavigator} from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import {
-  //Loans,
+  Loans,
   Login,
   //NewVale,  
   Profile,    
@@ -21,7 +21,7 @@ import {
   //TransactionTypes,
   //ValeSection,
   //Reasons,
-  //LoanDetails,
+  LoanDetails,
   //ValidateCode,
   //ConfiaShop,
   //ErrorScreen,
@@ -68,7 +68,7 @@ const TabNavigator = createBottomTabNavigator({
       )
     },
   },
-  /*Loans: {
+  Loans: {
     screen: Loans,
     navigationOptions: {
       tabBarLabel: "Vales",
@@ -77,7 +77,7 @@ const TabNavigator = createBottomTabNavigator({
       )
     },
   },
-  Customers: {
+  /*Customers: {
     screen: Customers,
     navigationOptions: {
       tabBarLabel: "Clientes",
@@ -130,7 +130,7 @@ const AuthNavigator = createStackNavigator({
   //TransactionTypes,
   //ValeSection,
   //Reasons,
-  //LoanDetails,
+  LoanDetails,
   //ValidateCode,
   //Error: ErrorScreen,
   //Success: SuccessCredit,

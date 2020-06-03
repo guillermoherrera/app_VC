@@ -5,3 +5,5 @@ export * from './Header';
 export * from './CardBalance';
 export * from './Title';
 export * from './UserInfo';
+export * from './Filters';
+export * from './Item';
