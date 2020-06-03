@@ -7,3 +7,5 @@ export * from './Title';
 export * from './UserInfo';
 export * from './Filters';
 export * from './Item';
+export * from './ItemMethodTransaction';
+export * from './ItemReason';
