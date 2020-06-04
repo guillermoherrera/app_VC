@@ -36,8 +36,8 @@ import {
   ErrorLogin,
   SuccessAuth,
   CustomerAdd,
-  //SuccessModal,
-  //ErrorModal
+  SuccessModal,
+  ErrorModal
 } from '../components/screens';
 
 
@@ -139,8 +139,8 @@ const AuthNavigator = createStackNavigator({
   //ConfiaShopError,
   //SuccessConfiaShop,
   CustomerAdd,
-  //SuccessModal,
-  //ErrorModal
+  SuccessModal,
+  ErrorModal
 },{
   initialRouteName: 'Home',  
   headerMode: 'none'  

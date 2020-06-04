@@ -12,6 +12,7 @@ import RNBootSplash from "react-native-bootsplash";
 import {Root} from 'native-base';
 import {Provider} from 'react-redux'
 import NavigationService from './src/services/navigation'
+import { Loading } from './src/components/common';
 
 export default class App extends Component {
   state = {
@@ -41,14 +42,13 @@ export default class App extends Component {
   }
 
   render(){
+    console.disableYellowBox = true;
     const { checkedSignIn, signedIn } = this.state;
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     const AppNavigator = createRootNavigator(signedIn)
 
     if (!checkedSignIn) {
-      return (<View >
-        <Text>Hola Mundo</Text>
-      </View>);
+      return <Loading />;
     }
     return (
       <Root>
