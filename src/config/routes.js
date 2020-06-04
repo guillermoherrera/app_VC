@@ -15,8 +15,8 @@ import {
   NewVale,  
   Profile,    
   Home,
-  //CustomerProfile,
-  //Customers,    
+  CustomerProfile,
+  Customers,    
   CustomerInformation,
   TransactionTypes,
   ValeSection,
@@ -35,7 +35,7 @@ import {
   ChangePassword,
   ErrorLogin,
   SuccessAuth,
-  //CustomerAdd,
+  CustomerAdd,
   //SuccessModal,
   //ErrorModal
 } from '../components/screens';
@@ -77,7 +77,7 @@ const TabNavigator = createBottomTabNavigator({
       )
     },
   },
-  /*Customers: {
+  Customers: {
     screen: Customers,
     navigationOptions: {
       tabBarLabel: "Clientes",
@@ -86,7 +86,7 @@ const TabNavigator = createBottomTabNavigator({
       )
     },
   },
-  ConfiaShop: {
+  /*ConfiaShop: {
     screen: ConfiaShop,
     navigationOptions: {
       tabBarLabel: "ConfiaShop",
@@ -125,7 +125,7 @@ const AuthNavigator = createStackNavigator({
   },    
   Profile,  
   NewVale,  
-  //CustomerProfile,    
+  CustomerProfile,    
   CustomerInformation,
   TransactionTypes,
   ValeSection,
@@ -138,7 +138,7 @@ const AuthNavigator = createStackNavigator({
   //ValidateConfiaShopCode,
   //ConfiaShopError,
   //SuccessConfiaShop,
-  //CustomerAdd,
+  CustomerAdd,
   //SuccessModal,
   //ErrorModal
 },{

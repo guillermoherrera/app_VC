@@ -9,3 +9,5 @@ export * from './Filters';
 export * from './Item';
 export * from './ItemMethodTransaction';
 export * from './ItemReason';
+export * from './Loading';
+export * from './ItemHistory';
