@@ -11,3 +11,4 @@ export * from './ItemMethodTransaction';
 export * from './ItemReason';
 export * from './Loading';
 export * from './ItemHistory';
+export * from './Spinner';
