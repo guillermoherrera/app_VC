@@ -23,7 +23,7 @@ import {
   Reasons,
   LoanDetails,
   ValidateCode,
-  //ConfiaShop,
+  ConfiaShop,
   ErrorScreen,
   SuccessCredit,
   ActivateAccount,
@@ -86,7 +86,7 @@ const TabNavigator = createBottomTabNavigator({
       )
     },
   },
-  /*ConfiaShop: {
+  ConfiaShop: {
     screen: ConfiaShop,
     navigationOptions: {
       tabBarLabel: "ConfiaShop",
@@ -94,7 +94,7 @@ const TabNavigator = createBottomTabNavigator({
         <Icon type="FontAwesome5" name={"shopping-cart"} style={{ color: tintColor, fontSize: moderateScale(20) }} />
       )
     },
-  },*/
+  },
 },{
   swipeEnabled: true,
   tabBarPosition: 'bottom',
