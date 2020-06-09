@@ -56,7 +56,8 @@ export const ItemQ = (props) => {
       <Left>
         <Col>
           <Text style={[styles.txtName, { flex: 1, flexWrap: 'wrap' }]}>{client.primerNombre} {client.primerApellido}</Text>
-          <Text style={styles.txtDates}>{client.telefono}</Text>          
+          <Text style={styles.txtDates}>{client.telefono}</Text>
+          <Text style={[styles.txtDates, { color: 'black' }]}>ID #{client.clienteId}</Text>
         </Col>
       </Left>
       <Right style={{ flex: 1.1 }}>
@@ -87,6 +88,7 @@ export const LoanItem = ({ loan, onPress, isLoan, valeType }) => (
       <Col>
         <View style={{ flex: 1, flexWrap: 'wrap' }}>
           <Text style={styles.txtName}>{isLoan ? `#${loan.noCredito}{\n}` : loan.nombreCliente}</Text>
+          {/* {!isLoan && <Text style={[styles.txtDates, { color: 'black' }]}>{loan.clienteId}</Text>} */}
         </View>
         <Row>
           <Text style={styles.txtDates}>{moment(valeType != 'FolioDigital' ? loan.fechaCredito : loan.fhRegistro).format('DD/MM/YY HH:mm a')}</Text>

@@ -26,6 +26,7 @@ export const login = (data) => {
   return dispatch => {
     dispatch({ type: USER_FETCHING });
     return request(methods.POST, paths.login, data).then(async response => {
+      console.log("Response",response)
       await AsyncStorage.setItem(constants.USER, JSON.stringify({ DistribuidorId: data.distribuidor, categoriaId: response.categoriaId }))
       await AsyncStorage.setItem(constants.TOKEN, response.token);
       if (response.direccionActualizada) {
@@ -75,7 +76,7 @@ export const validateUser = (payload) => {
     let rules = {
       usuario: 'required',
       codigo: 'required',
-      telefono: 'required|numeric|min:10',
+      telefono: 'required|numeric|digits:10',
     }
     //Nombre de los campos para mostrar en los errores
     let customAttributes = {
@@ -90,10 +91,12 @@ export const validateUser = (payload) => {
       let message = Object.values(validator.errors)[0][0]
 
       toast.showToast(message, 5000, 'warning')
-    }
-    else {
+    }    
+    else {      
       dispatch({ type: USER_FETCHING });
-      return request(methods.POST, paths.activate, payload).then(async response => {
+      let data = { usuario: payload.usuario, codigo: payload.codigo, telefono: payload.telefono }
+      console.log("Activate",data)
+      request(methods.POST, paths.activate, data).then(async response => {
         console.log("ValidateUser", response)
         navigation.navigate("ChangePassword");
         dispatch({ type: USER_VALIDATE_FETCH, payload: response });

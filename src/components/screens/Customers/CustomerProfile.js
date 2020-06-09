@@ -32,7 +32,7 @@ class CustomerProfile extends Component {
     let { customer_details, loading } = vale
     if (customer_details && !loading) {
       return (
-        <Row style={{ backgroundColor: colors.white }}>
+        <Row style={{ backgroundColor: colors.white, paddingBottom: moderateScale(10) }}>
           {customer_details.telefono ? <Left style={{ marginLeft: moderateScale(60) }}>
             <Icon
               raised

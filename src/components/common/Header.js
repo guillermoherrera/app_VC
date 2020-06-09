@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { verticalScale, moderateScale, scale } from 'react-native-size-matters';
-import { StyleSheet, Platform, Image } from 'react-native'
-import { Icon, Left, Body, Right, Title, Button, Header, Container, Content, Footer } from 'native-base';
+import { StyleSheet, Platform, Image, Text } from 'react-native'
+import { Icon, Left, Body, Right, Title, Button, Header, Container, Content, Footer, Col } from 'native-base';
 import { colors, images } from '../../assets';
 import navigation from '../../services/navigation';
 import { SafeAreaView } from 'react-navigation';
+import { getVersion } from 'react-native-device-info';
 
 class HeaderS extends Component {
   render() {
@@ -20,7 +21,10 @@ class HeaderS extends Component {
             </Button> : null}
           </Left>
           <Body style={styles.bodyNav}>
-            {!props.title ? <Image style={{ width: moderateScale(150), height: moderateScale(100) }} source={!props.imageTitle ? images.logo : images.confiashop}></Image> : <Title style={styles.textTitle}>{props.title}</Title>}
+            <Col style={{ alignItems: 'center', justifyContent: 'flex-start'}}>
+              {!props.title ? <Image style={{ width: moderateScale(150), height: moderateScale(100) }} source={!props.imageTitle ? images.logo : images.confiashop}></Image> : <Title style={styles.textTitle}>{props.title}</Title>}
+              <Text style={[styles.textTitle, { marginTop: moderateScale(!props.title ? -25 : 0)}]}>v. {getVersion()}</Text>
+            </Col>
           </Body>
           <Right style={{ flex: 1, paddingRight: moderateScale(10), alignItems: "center" }}>
             {props.contentLeft}
@@ -34,7 +38,7 @@ class HeaderS extends Component {
           {props.children}
         </Content>
         {props.footer ? <SafeAreaView>
-          <Footer style={{ height: Platform.OS === 'ios' ? scale(30) : scale(40), borderTopColor: 'white', backgroundColor: 'transparent', elevation: Platform.OS === 'android' ? 0 : 1 }}>
+          <Footer style={{ height: Platform.OS === 'ios' ? scale(35) : scale(40), borderTopColor: 'white', backgroundColor: 'transparent', elevation: Platform.OS === 'android' ? 0 : 1 }}>
             {props.footer}
           </Footer>
         </SafeAreaView> : null}
@@ -79,7 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white
   },
   header: {
-    height: verticalScale(95),
+    height: verticalScale(130),
     backgroundColor: colors.secondary,
     borderBottomColor: 'transparent'
   },

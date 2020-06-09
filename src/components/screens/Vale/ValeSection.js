@@ -14,7 +14,8 @@ class ValeSection extends Component {
   }
 
   componentDidMount() {
-    this.props.getValesDeadlines()
+    let { customer_details } = this.props.vale
+    this.props.getValesDeadlines(customer_details.clienteId)
   }
 
   _renderFooter() {

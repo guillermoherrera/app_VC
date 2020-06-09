@@ -184,6 +184,7 @@ const customerSave = (payload) => {
       let dataUpperCase = JSON.parse(JSON.stringify(data, function(a, b) {
         return typeof b === "string" ? b.toUpperCase() : b
       }));      
+      console.log("Data",dataUpperCase)
       request(methods.POST, paths.customer_add, dataUpperCase).then(async response => {        
         navigation.navigate("SuccessModal", { title: 'Cliente agregado', message: 'Se ha agregado exitosamente al cliente', buttonText: 'Aceptar', route: 'Home' });
         dispatch({ type: CUSTOMER_ADD_FETCH });

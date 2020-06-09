@@ -32,7 +32,7 @@ export class AssignCredit extends Component {
       idTicket: ticketId,
       distribuidorId: user.DistribuidorId
     }
-
+    console.log("ticket",ticketId)
     this.props.associateTicket(payload)
   }
 

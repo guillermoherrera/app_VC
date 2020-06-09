@@ -102,11 +102,11 @@ const onReasonChanged = (payload) => ({
   payload
 })
 
-const getValesDeadlines = () => {
+const getValesDeadlines = (clienteId) => {
   return async dispatch => {
     dispatch({ type: VALE_FETCHING })
     let user = JSON.parse(await AsyncStorage.getItem(constants.USER))
-    getRequest(methods.GET, `${paths.vale_calculate}${user.DistribuidorId}`).then(async response => {
+    getRequest(methods.GET, `${paths.vale_calculate}${user.DistribuidorId}/${clienteId}`).then(async response => {
       console.log("ValesDeadlines", response)
       dispatch({ type: VALE_VALES_DEADLINES, payload: response.data });
     }).catch(error => {

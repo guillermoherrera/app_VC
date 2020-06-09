@@ -146,6 +146,7 @@ const logout = () => {
       await AsyncStorage.removeItem(constants.TOKEN);
       await AsyncStorage.removeItem(constants.USER);
       await AsyncStorage.removeItem(constants.ADDRESS);
+      await AsyncStorage.removeItem(constants.TICKET);
       dispatch({ type: USER_LOGOUT })
       NavigationService.navigate("Login")
     }).catch(async error => {
@@ -154,6 +155,7 @@ const logout = () => {
       await AsyncStorage.removeItem(constants.TOKEN);
       await AsyncStorage.removeItem(constants.USER);
       await AsyncStorage.removeItem(constants.ADDRESS);
+      await AsyncStorage.removeItem(constants.TICKET);
       dispatch({ type: USER_LOGOUT })
       NavigationService.navigate("Login")
     });
@@ -169,7 +171,7 @@ const getdeferredCharges = () => {
       dispatch({ type: USER_DEFERRED_CHARGES_FETCH, payload: response.datos });
     }).catch(error => {
       dispatch({ type: USER_FETCH_FAILED, payload: error.message });
-      toast.showToast(error.message, 5000, "danger")
+      //toast.showToast(error.message, 5000, "danger")
     });
   }
 }

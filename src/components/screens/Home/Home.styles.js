@@ -187,10 +187,10 @@ export default styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderTopRightRadius: moderateScale(40),
     borderTopLeftRadius: moderateScale(40),
-    borderBottomLeftRadius:0,
-    borderBottomRightRadius:0,
-    paddingLeft: moderateScale(8),
-    paddingRight: moderateScale(8),
+    //borderBottomLeftRadius:0,
+    //borderBottomRightRadius:0,
+    //paddingLeft: moderateScale(15),
+    //paddingRight: moderateScale(12),
     paddingTop: moderateScale(15),
     marginTop: moderateScale(-32),
     flexWrap:"wrap"
@@ -210,7 +210,7 @@ export default styles = StyleSheet.create({
   },
   bodyCardItems:{
     flex:1,
-    margin: moderateScale(8),
+    margin: moderateScale(10),
     flexDirection: 'column',
     alignItems:"stretch",
   },

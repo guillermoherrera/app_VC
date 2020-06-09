@@ -71,6 +71,7 @@ export const constants = {
   TOKEN: "token",
   USER: 'user',
   ADDRESS: "address",
+  TICKET: "ticketId",
   methods: {
     POST: "post",
     GET: "get",

@@ -7,19 +7,19 @@ import { moderateScale, scale } from 'react-native-size-matters'
 const CustomModal = ({ children, onSubmit, onCancel, image, title, description, buttonText, cancelText, type, isLoading }) => {
   return (
     <View style={styles.container}>
-      <View style={{ flex: 2, backgroundColor: type === "danger" ? colors.danger : colors.secondary }}>
+      <View style={{ flex: 1, backgroundColor: type === "danger" ? colors.danger : colors.secondary }}>
         <Image source={image} resizeMode="contain" style={styles.image} />
         <View style={styles.viewCenter}>
           <Text style={styles.title}>{title}</Text>
         </View>
       </View>
-      <View style={{ flex: 2, backgroundColor: colors.white }}>
+      <View style={{ flex: 1.5, backgroundColor: colors.white, justifyContent: 'center', alignItems: 'center' }}>
         <View style={styles.viewCenter}>
           <Text style={styles.description}>
             {description}
-          </Text>
-          {children}
+          </Text>          
         </View>
+        {children}
         {isLoading ? <View style={styles.buttonContainer}><ActivityIndicator color={colors.primary} size="large" /></View> : <View style={styles.buttonContainer}>
           <Button onPress={onSubmit} style={styles.button} >
             <Text style={styles.buttonText}>
@@ -57,10 +57,11 @@ const styles = StyleSheet.create({
   description: {
     color: colors.gray_normal,
     fontSize: moderateScale(20),
-    textAlign: 'center'
+    textAlign: 'center',
+    padding: moderateScale(10)
   },
   viewCenter: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: moderateScale(10)

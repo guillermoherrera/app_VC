@@ -57,13 +57,13 @@ class Home extends PureComponent {
     return (
       <HeaderQ
         navigation={this.props.navigation}
-        contentStyle={[styles.headerContent, { backgroundColor: colors.secondary}]}
+        contentStyle={[styles.headerContent, { backgroundColor: colors.secondary }]}
         noPaddingBottom
         noback={true}
         contentLeft={
           <TouchableOpacity
             onPress={() => navigation.navigate("Profile")}>
-            <Thumbnail
+            <Thumbnail              
               source={loading_photo ? images.photo : user_photo ? { uri: `data:image/jpeg;base64,${user_photo}` } : images.nophoto}
             />
           </TouchableOpacity>
@@ -124,33 +124,40 @@ class Home extends PureComponent {
           </View>}
           {!profile.refreshing && <View style={[styles.bodyCard, { marginTop: atraso ? moderateScale(-6) : styles.bodyCard.marginTop }]}>
             <View style={styles.bodyCardItems}>
-              {bonus.length > 0 && <View style={styles.bodyItem}>
+              {bonus.length > 0 && <Col style={styles.bodyItem}>
                 <Text style={styles.titleBodyNew}>
                   {'Gana más \npagando antes'}
                 </Text>
-                <View style={styles.datesContent}>
-                  <View style={styles.itemDate}>
+                <Row>
+                  <Left>
                     <Text style={styles.itemTextLeft}>Fecha de pago:</Text>
+                  </Left>
+                  <Right>
                     <Text style={styles.itemTextRight}>{moment(bonus[0].fechaPago).format('DD/MMM/YYYY')}</Text>
-                  </View>
-                  <View style={styles.itemDate}>
+                  </Right>
+                </Row>
+                <Row>
+                  <Left>
                     <Text style={styles.itemTextLeft}>Tasa Porcentaje:</Text>
+                  </Left>
+                  <Right>
                     <Text style={styles.itemTextRight}>{bonus[0].porcentajeBonificacion}%</Text>
-                  </View>
-                  <View style={[styles.itemDate, { marginBottom: moderateScale(8)}]}>
+                  </Right>
+                </Row>
+                <Row>
+                  <Left>
                     <Text style={styles.itemTextLeft}>Bonificación:</Text>
+                  </Left>
+                  <Right>
                     <Text style={styles.itemTextRight}>${bonus[0].bonificacionImporte.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
-                  </View>
-                  {/* <Text style={styles.textFooterItem}>
-                    Última actualización {this.state.now}
-                  </Text> */}
-                </View>
-              </View>}
-              {detalleCargosDiferidos && <View style={styles.bodyItem}>
+                  </Right>                  
+                </Row>
+              </Col>}
+              {detalleCargosDiferidos && <Col style={styles.bodyItem}>
                 <Text style={styles.titleBodyNew}>
                   {'Saldo COVID'}
                   {'\n'}
-                  <Text style={styles.subtitleBodyNew}>
+                  <Text style={[styles.subtitleBodyNew, { color: 'black'}]}>
                     {detalleCargosDiferidos.titulo}
                   </Text>
                 </Text>
@@ -169,17 +176,14 @@ class Home extends PureComponent {
                         <Text style={styles.itemTextLeft}>Importe:</Text>
                         <Text style={styles.itemTextRight}>${item.importe.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
                       </View>
-                      <View style={[styles.itemDate, { marginBottom: moderateScale(8)}]}>
+                      <View style={[styles.itemDate, { marginBottom: moderateScale(8) }]}>
                         <Text style={styles.itemTextLeft}>Saldo:</Text>
                         <Text style={styles.itemTextRight}>${item.saldo.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
                       </View>
                     </Col>
                   ))
-                }
-                {/* <Text style={styles.textFooterItem}>
-                  Última actualización {this.state.now}
-                </Text> */}
-              </View>}
+                }               
+              </Col>}
               {relation && <View style={styles.bodyItem}>
                 <Text style={styles.titleBodyNew}>
                   {'Tus últimas \nrelaciones'}
@@ -187,7 +191,7 @@ class Home extends PureComponent {
                 <View style={styles.datesContent}>
                   {
                     relation.map((item, index) => (
-                      <View key={`relacion-${index + 1}`} style={[styles.itemDate, { marginBottom: moderateScale(8)}]}>
+                      <View key={`relacion-${index + 1}`} style={[styles.itemDate, { marginBottom: moderateScale(8) }]}>
                         <Text style={styles.itemTextLeft}>{moment(item.fechaRelacion).format('DD/MMM/YYYY')}</Text>
                         <Text style={styles.itemTextRight}>${item.importePago.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
                       </View>
@@ -214,7 +218,7 @@ class Home extends PureComponent {
                     <Text style={styles.itemTextLeft}>Abono quincenal:</Text>
                     <Text style={styles.itemTextRight}>${personal_loan.importePagoPrestamoPersonal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
                   </View>
-                  <View style={[styles.itemDate, { marginBottom: moderateScale(8)}]}>
+                  <View style={[styles.itemDate, { marginBottom: moderateScale(8) }]}>
                     <Text style={styles.itemTextLeft}>Saldo vencido:</Text>
                     <Text style={styles.itemTextRight}>${personal_loan.saldoAtrasadoPrestamoPersonal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
                   </View>

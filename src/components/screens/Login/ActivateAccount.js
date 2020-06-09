@@ -8,6 +8,7 @@ import { onFormRecoveryChanged, validateUser } from '../../../store/actions';
 import { colors, images } from '../../../assets';
 import styles from './Login.styles';
 import navigation from '../../../services/navigation';
+import { getVersion } from 'react-native-device-info';
 
 class ActivateAccount extends React.Component {
   render() {
@@ -28,6 +29,7 @@ class ActivateAccount extends React.Component {
           </Header>
           <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: moderateScale(8) }}>
             <Image source={images.logo} style={{ width: scale(180), height: verticalScale(75) }} />
+            <Text style={[styles.textInput, { fontSize: moderateScale(20), color: 'white' }]}>v. {getVersion()}</Text>
             <Image source={images.sublogo} style={{ width: scale(180), height: verticalScale(75) }} />
           </View>
           <View style={{ flex: 1, marginLeft: moderateScale(10), marginRight: moderateScale(10) }}>

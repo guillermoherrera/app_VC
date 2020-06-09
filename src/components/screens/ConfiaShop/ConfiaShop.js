@@ -21,6 +21,13 @@ class ConfiaShop extends Component {
     })
   }
 
+  componentDidUpdate(){
+    if (this.props.profile.user.DistribuidorId){
+      let { user } = this.props.profile
+      console.log(`https://confia-qa.supernova-desarrollo.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}`)
+    }
+  }
+
   componentWillUnmount(){
     this.focusListener.remove();
   }
@@ -36,7 +43,8 @@ class ConfiaShop extends Component {
   render() {
     let { profile } = this.props;
     let { user } = profile
-    if (!user) {
+
+    if (!user.DistribuidorId) {
       return <Loading />
     }
 

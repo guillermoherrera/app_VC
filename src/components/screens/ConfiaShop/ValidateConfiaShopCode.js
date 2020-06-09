@@ -28,7 +28,7 @@ class ValidateConfiaShopCode extends Component {
         onSubmit={() => this._finish()}
         isLoading={loading}
         buttonText="SIGUIENTE"
-        description={`Hemos enviado tu código al ${selectedItem == 1 ? phoneInput ? `+52${phoneInput}` : `+52${getPhoneNumberSync()}` : phoneInput ? `+52${phoneInput}` : `52${customer.telefono}`}`}
+        description={`Hemos enviado tu código al ${selectedItem == 1 ? phoneInput ? `+52${phoneInput}` : `+52${getPhoneNumberSync()}` : phoneInput ? `+52${phoneInput}` : `52${customer.telefono}`}`}        
         image={images.check}
         title="Código Enviado"
       >

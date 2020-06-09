@@ -46,7 +46,7 @@ const associateTicket = (payload) => {
 
 const setTicket = (payload) => {
   return async (dispatch) => {
-    await AsyncStorage.setItem('ticketId', payload)
+    await AsyncStorage.setItem(constants.TICKET, payload)
     dispatch({ type: CONFIASHOP_SET_TICKET, payload })
     navigation.navigate('AssignCredit')
   }
@@ -54,7 +54,7 @@ const setTicket = (payload) => {
 
 const getTicket = () => {
   return async (dispatch) => {
-    let ticketId = await AsyncStorage.getItem('ticketId')
+    let ticketId = await AsyncStorage.getItem(constants.TICKET)
     
     if (ticketId) {
       Alert.alert('Confia', 'Tienes un folio de compra sin asignar, ¿Deseas continuar con el mismo folio?', [{ text: 'Sí', onPress: () => { dispatch(setTicket(ticketId));  } }, { text: 'No', onPress: () => dispatch(removeTicket()) }], { cancelable: false })

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { HeaderQ as Content, ItemQ, ItemMethodTransaction } from '../../common';
 import { moderateScale } from 'react-native-size-matters';
@@ -12,7 +12,12 @@ class TransactionType extends Component {
   componentDidMount() {
     let { vale } = this.props
     let { customer_details } = vale
+    console.log("ClienteId",customer_details.clienteId)
     this.props.getTransactionTypes(customer_details.clienteId);    
+  }
+
+  componentDidUpdate(){
+    console.log("Desembolsos",this.props.vale.methods)
   }
 
   _nextPage() {
@@ -56,12 +61,11 @@ class TransactionType extends Component {
               {'Selecciona el tipo de desembolso'}
             </Text>
           </View>
-          {methods.map((method, index) =>
-            <ItemMethodTransaction
-              onPress={() => this.props.onTransactionChanged({ desembolsoTipoId: method.desembolsoTipoId, index })}
-              key={index}
-              {...method} />
-          )}
+          <FlatList
+            data={methods}
+            keyExtractor={(item, index) => `method-${index}`}
+            renderItem={({ item, index }) => <ItemMethodTransaction onPress={() => this.props.onTransactionChanged({ desembolsoTipoId: item.desembolsoTipoId, index })} {...item} />}
+          />          
         </View>}
       </Content>
     )
