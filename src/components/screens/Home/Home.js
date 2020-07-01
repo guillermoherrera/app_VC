@@ -124,7 +124,7 @@ class Home extends PureComponent {
           </View>}
           {!profile.refreshing && <View style={[styles.bodyCard, { marginTop: atraso ? moderateScale(-6) : styles.bodyCard.marginTop }]}>
             <View style={styles.bodyCardItems}>
-              {bonus.length > 0 && <Col style={styles.bodyItem}>
+              {bonus.length > 0 && <Col >
                 <Text style={styles.titleBodyNew}>
                   {'Gana más \npagando antes'}
                 </Text>
