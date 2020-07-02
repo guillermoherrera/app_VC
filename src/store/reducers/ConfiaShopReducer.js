@@ -45,7 +45,7 @@ export default (state = initialState, { type, payload }) => {
     case CONFIASHOP_PAGE_CHANGED:
       return { ...state, initialPage: payload }
     case CONFIASHOP_CODE_VALIDATE:
-      return { ...state, successMessage: payload, loading: false, ticketId: '', phoneInput: '', code: '', transaccionId: '', creditoId: '', selectedItem: '', initialPage: null, showValidationCode: false }
+      return { ...state, successMessage: payload, loading: false, ticketId: '', phoneInput: '', code: '', transaccionId: '', creditoId: '', initialPage: null, showValidationCode: false }
     case CONFIASHOP_TOGGLE_MODAL:
       return { ...state, showModal: false, showValidationCode: true }
     case CONFIASHOP_DISMISS_ERROR:

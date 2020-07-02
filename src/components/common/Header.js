@@ -22,7 +22,7 @@ class HeaderS extends Component {
           </Left>
           <Body style={styles.bodyNav}>
             <Col style={{ alignItems: 'center', justifyContent: 'flex-start'}}>
-              {!props.title ? <Image style={{ width: moderateScale(150), height: moderateScale(100) }} source={!props.imageTitle ? images.logo : images.confiashop}></Image> : <Title style={styles.textTitle}>{props.title}</Title>}
+              {!props.title ? <Image style={{ width: moderateScale(150), height: moderateScale(100), marginTop: moderateScale(-10) }} source={!props.imageTitle ? images.logo : images.confiashop}></Image> : <Title style={styles.textTitle}>{props.title}</Title>}
               <Text style={[styles.textTitle, { marginTop: moderateScale(!props.title ? -25 : 0)}]}>v. {getVersion()}</Text>
             </Col>
           </Body>
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontSize: moderateScale(20),
+    marginBottom: moderateScale(20),
     color: colors.white,
     textAlign: 'center',
     alignSelf: 'center',
