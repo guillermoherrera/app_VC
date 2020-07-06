@@ -24,7 +24,7 @@ class ConfiaShop extends Component {
   componentDidUpdate(){
     if (this.props.profile.user.DistribuidorId){
       let { user } = this.props.profile
-      console.log(`https://confia-qa.supernova-desarrollo.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}`)
+      console.log(`https://confia-dev.supernova-desarrollo.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}`)
     }
   }
 
@@ -32,7 +32,9 @@ class ConfiaShop extends Component {
     this.focusListener.remove();
   }
 
-  _setTicket(ticket) {    
+  _setTicket(ticket) {   
+    console.log("_setTicket", "### ###");
+    console.log("Ticket", ticket);
     this.props.setTicket(ticket);
   }
 
@@ -60,7 +62,7 @@ class ConfiaShop extends Component {
               renderLoading={() => <Loading />}
               javaScriptEnabled={true}
               onMessage={(event) => this._setTicket(event.nativeEvent.data)}
-              source={{ uri: `https://confia-qa.supernova-desarrollo.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}` }}
+              source={{ uri: `https://confia-dev.supernova-desarrollo.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}` }}
             />
           </SafeAreaView>
         </View>

@@ -45,6 +45,8 @@ const associateTicket = (payload) => {
 }
 
 const setTicket = (payload) => {
+  console.log("setTicket_Action", "### ###")
+  console.log("payload", payload)
   return async (dispatch) => {
     await AsyncStorage.setItem(constants.TICKET, payload)
     dispatch({ type: CONFIASHOP_SET_TICKET, payload })
