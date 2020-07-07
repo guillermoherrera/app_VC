@@ -1,10 +1,17 @@
 import { AsyncStorage } from "react-native";
 import { getUniqueId } from "react-native-device-info";
 import { constants } from '../assets';
-import { URL } from "../config/env";
+import { URL, URL_DEMO } from "../config/env";
+
+const getEnv = async () => {
+  let _env = await AsyncStorage.getItem('env');
+  return _env == "DEMO" ? URL_DEMO : URL;
+}
 
 export const request = async (type, path, data = {}) => {
-  return await fetch(`${URL}/${path}`, {
+  let _url = await getEnv();
+  console.log("url request --> ", `${_url}/${path}`);
+  return await fetch(`${_url}/${path}`, {
     method: type,
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +29,9 @@ export const request = async (type, path, data = {}) => {
 }
 
 export const getRequest = async (type, path) => {  
-  return await fetch(`${URL}/${path}`, {    
+  let _url = await getEnv();
+  console.log("url getRequest --> ", `${_url}/${path}`);
+  return await fetch(`${_url}/${path}`, {    
     method: type,
     headers: {
       'Content-Type': 'application/json',
@@ -39,7 +48,9 @@ export const getRequest = async (type, path) => {
 }
 
 export const requestFile = async (type, path, data = {}) => {
-  return await fetch(`${URL}/${path}`, {
+  let _url = await getEnv();
+  console.log("url requestFile --> ", `${_url}/${path}`);
+  return await fetch(`${_url}/${path}`, {
     method: type,
     headers: {
       'Content-Type': 'application/json',

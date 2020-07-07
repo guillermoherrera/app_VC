@@ -2,13 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { WebView } from 'react-native-webview'
 //import { WebView } from "react-native-webview-messaging/WebView";
-import { View, SafeAreaView, StatusBar, Platform } from 'react-native'
+import { View, SafeAreaView, StatusBar, Platform, AsyncStorage } from 'react-native'
 import { Container } from 'native-base'
 import { getProfile, setTicket, getTicket, removeTicket } from '../../../store/actions';
 import { Loading } from '../../common';
 import { colors } from '../../../assets';
 
 class ConfiaShop extends Component {  
+  state = {
+    env: 'dev'
+  }
+
   componentWillMount() {
     this.props.getProfile(true);    
   }
@@ -19,12 +23,21 @@ class ConfiaShop extends Component {
     this.focusListener = navigation.addListener("didFocus", () => {
       this.props.getTicket();
     })
+
+    AsyncStorage.getItem('env').then((env) => {
+      console.log("env###", env);
+      if(env != "DEMO"){
+        this.setState({
+          env: 'qa'
+        });
+      }
+    });
   }
 
   componentDidUpdate(){
     if (this.props.profile.user.DistribuidorId){
       let { user } = this.props.profile
-      console.log(`https://confia-dev.supernova-desarrollo.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}`)
+      console.log('confiashop env -->', `https://confia-${this.state.env}.supernova-desarrollo.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}`)
     }
   }
 
@@ -35,7 +48,9 @@ class ConfiaShop extends Component {
   _setTicket(ticket) {   
     console.log("_setTicket", "### ###");
     console.log("Ticket", ticket);
-    this.props.setTicket(ticket);
+    if(ticket != ""){
+      this.props.setTicket(ticket);
+    }
   }
 
   _removeTicket() {
@@ -62,7 +77,7 @@ class ConfiaShop extends Component {
               renderLoading={() => <Loading />}
               javaScriptEnabled={true}
               onMessage={(event) => this._setTicket(event.nativeEvent.data)}
-              source={{ uri: `https://confia-dev.supernova-desarrollo.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}` }}
+              source={{ uri: `https://confia-${this.state.env}.supernova-desarrollo.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}` }}
             />
           </SafeAreaView>
         </View>

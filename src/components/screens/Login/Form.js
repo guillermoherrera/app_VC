@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Keyboard, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Text, Keyboard, TouchableOpacity, ActivityIndicator, AsyncStorage } from 'react-native';
 import { Content, View, Toast, Card, CardItem } from 'native-base';
 import styles from './Login.styles';
 import { connect } from 'react-redux';
@@ -16,8 +16,15 @@ class Form extends React.Component {
     this.state = { distribuidor: null, password: null };
   }
 
+  _storeData = async (distribuidor) => {
+    try {
+      await AsyncStorage.setItem('env', distribuidor.charAt(0) == "D" ? 'DEMO' : 'PRODUCTION');
+    } catch (error) {console.log("error", error);}
+  };
+
   signIn(distribuidor, password) {
     Keyboard.dismiss();
+    this._storeData(distribuidor);
     if (distribuidor && password) {
       let uniqueId = getUniqueId();
       this.props.login({ distribuidor, password, identificador: uniqueId });
