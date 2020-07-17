@@ -76,7 +76,7 @@ class Reasons extends Component {
           <Dialog.Description>
             Ingresa el número de teléfono del cliente para poder validar el crédito solicitado
           </Dialog.Description>
-          <Dialog.Input keyboardType="phone-pad" value={phoneInput} onChangeText={(phoneNumber) => this.props.onPhoneInputChanges(phoneNumber)} autofocus />
+          <Dialog.Input style={{backgroundColor: '#f0f0f0', borderBottomWidth : 1.0, borderBottomColor: '#d0d0d0'}} autoFocus={true} placeholder=" Ingresa aquí el número de teléfono" keyboardType="phone-pad" value={phoneInput} onChangeText={(phoneNumber) => this.props.onPhoneInputChanges(phoneNumber)} />
           <Dialog.Button label="Cancelar" onPress={() => this.props.onTogglePhoneInput()} />
           <Dialog.Button disabled={phoneInput.length == 10 ? !loading ? false : true : true} label="Aceptar" onPress={() => this._save()} />
         </Dialog.Container>
