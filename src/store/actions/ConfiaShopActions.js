@@ -1,4 +1,4 @@
-import { CONFIASHOP_CUSTOMER_INPUT_CHANGED, CONFIASHOP_ASSOCIATE_TICKET, CONFIASHOP_FETCHING, CONFIASHOP_FETCH_FAILED, CONFIASHOP_SET_TICKET, CONFIASHOP_ITEM_CHANGED, CONFIASHOP_CUSTOMER_SELECTED, CONFIASHOP_TOGGLE_PHONE_INPUT, CONFIASHOP_PHONE_INPUT_CHANGED, CONFIASHOP_CODE_CHANGED, CONFIASHOP_PAGE_CHANGED, CONFIASHOP_CODE_VALIDATE, CONFIASHOP_TOGGLE_MODAL, CONFIASHOP_DISMISS_ERROR } from "../types";
+import { CONFIASHOP_CUSTOMER_INPUT_CHANGED, CONFIASHOP_ASSOCIATE_TICKET, CONFIASHOP_FETCHING, CONFIASHOP_FETCH_FAILED, CONFIASHOP_SET_TICKET, CONFIASHOP_ITEM_CHANGED, CONFIASHOP_CUSTOMER_SELECTED, CONFIASHOP_TOGGLE_PHONE_INPUT, CONFIASHOP_PHONE_INPUT_CHANGED, CONFIASHOP_CODE_CHANGED, CONFIASHOP_PAGE_CHANGED, CONFIASHOP_CODE_VALIDATE, CONFIASHOP_TOGGLE_MODAL, CONFIASHOP_DISMISS_ERROR, CONFIASHOP_ADDRESSES_FETCH } from "../types";
 import { constants, toast } from '../../assets';
 import { request } from '../../config/service';
 import { AsyncStorage, Alert } from "react-native";
@@ -51,6 +51,15 @@ const setTicket = (payload) => {
     await AsyncStorage.setItem(constants.TICKET, payload)
     dispatch({ type: CONFIASHOP_SET_TICKET, payload })
     navigation.navigate('AddressSelection')
+  }
+}
+
+const getAddresses = () => {
+  return async dispatch => {
+    dispatch({ type: CONFIASHOP_FETCHING });
+    let response = [{direccion: "1"}, {direccion: "2"}, {direccion: "3"}, {direccion: "4"}];
+    dispatch({ type: CONFIASHOP_ADDRESSES_FETCH, payload: response });
+    //setTimeout(function(){dispatch({ type: CONFIASHOP_ADDRESSES_FETCH, payload: response })}, 5000);
   }
 }
 
@@ -155,5 +164,6 @@ export {
   removeTicket,
   onConfiaShopValidateCode,
   onConfiaShopModalConfirm,
-  dismissError
+  dismissError,
+  getAddresses
 }
