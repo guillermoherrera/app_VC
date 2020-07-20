@@ -409,6 +409,35 @@ export default styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,    
   },
+  addressCard: {    
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "center",    
+    width: '100%',
+    backgroundColor: colors.secondary,
+    borderTopColor: 'white',
+    borderTopRightRadius: moderateScale(10),
+    borderTopLeftRadius: moderateScale(10),
+    borderBottomLeftRadius: moderateScale(10),
+    borderBottomRightRadius: moderateScale(10),
+    padding: moderateScale(20),    
+  },
+  addressCardUnChecked: {    
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "center",    
+    width: '100%',
+    backgroundColor: 'lightgrey',
+    borderTopColor: 'white',
+    borderTopRightRadius: moderateScale(10),
+    borderTopLeftRadius: moderateScale(10),
+    borderBottomLeftRadius: moderateScale(10),
+    borderBottomRightRadius: moderateScale(10),
+    paddingLeft: moderateScale(20),
+    paddingBottom:  moderateScale(10),
+    paddingTop:  moderateScale(10),
+    paddingRight:  moderateScale(20),    
+  },
   textButton: {
     color: colors.white,
     fontWeight: "bold",
@@ -416,6 +445,17 @@ export default styles = StyleSheet.create({
     textAlign: "center",
     alignSelf: "center",
     marginLeft: moderateScale(8)
+    // marginBottom: moderateScale(22)
+  },
+  textButtonAddress: {
+    color: colors.white,
+    fontWeight: "bold",
+    fontSize: moderateScale(16),
+    textAlign: "center",
+    alignSelf: "center",
+    //marginLeft: moderateScale(8),
+    paddingLeft: moderateScale(8),
+    paddingRight: moderateScale(8)
     // marginBottom: moderateScale(22)
   },
   celdaPin: {
@@ -429,5 +469,43 @@ export default styles = StyleSheet.create({
   espacioInferiorEstandar: {
     marginBottom: moderateScale(8),
     marginTop: moderateScale(30)
-  }
+  },
+  contentButton:{
+    flexDirection:"row",
+    justifyContent:"center",
+    alignItems:"center",
+    paddingTop: moderateScale(16),
+  },
+  buttonNewVale:{    
+    width: undefined,
+    flex: 1,
+    backgroundColor: colors.white,   
+    margin: moderateScale(6),
+    justifyContent: 'center',   
+    borderRadius: moderateScale(10)
+  },
+  buttonAddAddress:{    
+    width: undefined,
+    flex: 1,
+    backgroundColor: colors.tertiary,   
+    margin: moderateScale(6),
+    justifyContent: 'center',   
+    borderRadius: moderateScale(10)
+  },
+  iconNew:{
+    color: colors.secondary,    
+    fontSize: moderateScale(14),
+  },
+  textButtonNew:{
+    color: colors.secondary,   
+    textAlign: 'left', 
+    fontSize: moderateScale(14),    
+    fontWeight: 'bold'
+  },
+  textButtonNew2:{
+    color: colors.white,   
+    textAlign: 'left', 
+    fontSize: moderateScale(14),    
+    fontWeight: 'bold'
+  },
 });

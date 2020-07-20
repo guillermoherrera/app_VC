@@ -50,7 +50,7 @@ const setTicket = (payload) => {
   return async (dispatch) => {
     await AsyncStorage.setItem(constants.TICKET, payload)
     dispatch({ type: CONFIASHOP_SET_TICKET, payload })
-    navigation.navigate('AssignCredit')
+    navigation.navigate('AddressSelection')
   }
 }
 
