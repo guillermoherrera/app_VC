@@ -6,12 +6,13 @@ import { colors } from '../../../assets';
 import styles from './ConfiaShop.styles';
 import { moderateScale} from 'react-native-size-matters';
 import navigation from '../../../services/navigation';
-import { getAddresses } from '../../../store/actions';
+import { getAddresses, onAddressChanged } from '../../../store/actions';
+import { Loading } from '../../common';
 
 export class AddressSelection extends Component{
   componentDidMount() {
     console.log("111", this.props.confiashop.addresses)
-    if (!this.props.confiashop.addresses) {
+    if (!this.props.confiashop.addresses.length) {
       this.props.getAddresses()
       console.log("!!!", this.props.confiashop.addresses)
     }
@@ -21,7 +22,9 @@ export class AddressSelection extends Component{
     
     let { confiashop } = this.props
     let { addresses } = confiashop
-
+    if (this.props.confiashop.loading) {
+      return <Loading />
+    }
 		return (
 			<Container style={{ backgroundColor: colors.tertiary }}>
 				<Header noShadow transparent androidStatusBarColor={colors.tertiary} iosBarStyle="light-content">
@@ -37,12 +40,12 @@ export class AddressSelection extends Component{
 				</Header>
         <SafeAreaView style={{ flex: 1 }}>
           <Card style={{ flex: 1, paddingTop: moderateScale(10), paddingBottom: moderateScale(10), borderRadius: moderateScale(25) }}>
-            <FlatList
+            {this.props.confiashop.loading ? <Loading /> : <FlatList
               numColumns={1}
               data={addresses}
               keyExtractor={(item, index) => `address-${index.toString()}`}
               renderItem={({ item, index }) => <CardItem style={{borderRadius: moderateScale(25) }}>
-                {item.direccion == 1 ? <TouchableOpacity
+                {item.active ? <TouchableOpacity
                   onPress={() => {}}
                   style={[styles.addressCard]}>
                   <Col>
@@ -57,7 +60,7 @@ export class AddressSelection extends Component{
                         {'Nombre de Calle '+item.direccion+' #1234 nombre de colonia 0000 municipio, Estado Pais '+item.direccion}
                       </Text>
                     </View>
-                    <View style={[styles.contentButton]}>
+                    {/*<View style={[styles.contentButton]}>
                       <View style={{ flex: .3 }}/>
                       <Button icon onPress={() => {}} style={[styles.buttonNewVale]}>
                         <Text style={styles.textButtonNew}><Icon type="FontAwesome5" name="edit" style={styles.iconNew} /> EDITAR</Text>
@@ -65,10 +68,10 @@ export class AddressSelection extends Component{
                       <Button icon onPress={() => {}} style={[styles.buttonNewVale]}>
                         <Text style={styles.textButtonNew}><Icon type="FontAwesome5" name="trash" style={styles.iconNew} /> ELIMINAR</Text>
                       </Button>
-                    </View>
+                    </View>*/}
                   </Col>
                 </TouchableOpacity> : <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={() => {console.log(item); this.props.onAddressChanged(item)}}
                   style={[styles.addressCardUnChecked]}>
                   <Col>
                     <View style={{  flexDirection: 'row' }}>
@@ -80,7 +83,7 @@ export class AddressSelection extends Component{
                   </Col>
                 </TouchableOpacity>}
               </CardItem>
-              } />
+              } />}
             <CardItem style={{ borderRadius: moderateScale(25) }}>
               <Button icon onPress={() => {}} style={[styles.buttonAddAddress]}>
                 <Text style={styles.textButtonNew2}><Icon type="FontAwesome5" name="plus" style={styles.iconNew} /> AÑADIR OTRA DIRECCION</Text>
@@ -112,7 +115,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  getAddresses
+  getAddresses,
+  onAddressChanged
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddressSelection)

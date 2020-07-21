@@ -1,4 +1,4 @@
-import { CONFIASHOP_CUSTOMER_INPUT_CHANGED, CONFIASHOP_ASSOCIATE_TICKET, CONFIASHOP_FETCHING, CONFIASHOP_FETCH_FAILED, CONFIASHOP_SET_TICKET, CONFIASHOP_ITEM_CHANGED, CONFIASHOP_CUSTOMER_SELECTED, CONFIASHOP_TOGGLE_PHONE_INPUT, CONFIASHOP_PHONE_INPUT_CHANGED, CONFIASHOP_CODE_CHANGED, CONFIASHOP_PAGE_CHANGED, CONFIASHOP_CODE_VALIDATE, CONFIASHOP_TOGGLE_MODAL, CONFIASHOP_DISMISS_ERROR, CONFIASHOP_ADDRESSES_FETCH } from "../types";
+import { CONFIASHOP_CUSTOMER_INPUT_CHANGED, CONFIASHOP_ASSOCIATE_TICKET, CONFIASHOP_FETCHING, CONFIASHOP_FETCH_FAILED, CONFIASHOP_SET_TICKET, CONFIASHOP_ITEM_CHANGED, CONFIASHOP_CUSTOMER_SELECTED, CONFIASHOP_TOGGLE_PHONE_INPUT, CONFIASHOP_PHONE_INPUT_CHANGED, CONFIASHOP_CODE_CHANGED, CONFIASHOP_PAGE_CHANGED, CONFIASHOP_CODE_VALIDATE, CONFIASHOP_TOGGLE_MODAL, CONFIASHOP_DISMISS_ERROR, CONFIASHOP_ADDRESSES_FETCH, CONFIASHOP_ADDRESS_CHANGED } from "../types";
 import { constants, toast } from '../../assets';
 import { request } from '../../config/service';
 import { AsyncStorage, Alert } from "react-native";
@@ -57,11 +57,18 @@ const setTicket = (payload) => {
 const getAddresses = () => {
   return async dispatch => {
     dispatch({ type: CONFIASHOP_FETCHING });
-    let response = [{direccion: "1"}, {direccion: "2"}, {direccion: "3"}, {direccion: "4"}];
-    dispatch({ type: CONFIASHOP_ADDRESSES_FETCH, payload: response });
-    //setTimeout(function(){dispatch({ type: CONFIASHOP_ADDRESSES_FETCH, payload: response })}, 5000);
+    let response = [{direccionId: 1, direccion: "1"}, {direccionId: 2, direccion: "2"}, {direccionId: 3, direccion: "3"}, {direccionId: 4, direccion: "4"}];
+    response[0] = {...response[0], active: true}
+    //response.map(reason => reason.motivoTipoId == payload.motivoTipoId ? { ...reason, active: true } : { ...reason, active: false })
+    //dispatch({ type: CONFIASHOP_ADDRESSES_FETCH, payload: response });
+    setTimeout(function(){dispatch({ type: CONFIASHOP_ADDRESSES_FETCH, payload: response })}, 5000);
   }
 }
+
+const onAddressChanged = (payload) => ({
+  type: CONFIASHOP_ADDRESS_CHANGED,
+  payload
+})
 
 const getTicket = () => {
   return async (dispatch) => {
@@ -165,5 +172,6 @@ export {
   onConfiaShopValidateCode,
   onConfiaShopModalConfirm,
   dismissError,
-  getAddresses
+  getAddresses,
+  onAddressChanged
 }

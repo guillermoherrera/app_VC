@@ -1,4 +1,4 @@
-import { CUSTOMER_BANK_DATA_FETCH, CONFIASHOP_FETCHING, CONFIASHOP_CUSTOMER_INPUT_CHANGED, CONFIASHOP_SET_TICKET, CONFIASHOP_ITEM_CHANGED, CONFIASHOP_CUSTOMER_SELECTED, CONFIASHOP_TOGGLE_PHONE_INPUT, CONFIASHOP_ASSOCIATE_TICKET, CONFIASHOP_PHONE_INPUT_CHANGED, CONFIASHOP_FETCH_FAILED, CONFIASHOP_CODE_CHANGED, CONFIASHOP_PAGE_CHANGED, CONFIASHOP_CODE_VALIDATE, CONFIASHOP_TOGGLE_MODAL, CONFIASHOP_DISMISS_ERROR, CONFIASHOP_ADDRESSES_FETCH } from "../types"
+import { CUSTOMER_BANK_DATA_FETCH, CONFIASHOP_FETCHING, CONFIASHOP_CUSTOMER_INPUT_CHANGED, CONFIASHOP_SET_TICKET, CONFIASHOP_ITEM_CHANGED, CONFIASHOP_CUSTOMER_SELECTED, CONFIASHOP_TOGGLE_PHONE_INPUT, CONFIASHOP_ASSOCIATE_TICKET, CONFIASHOP_PHONE_INPUT_CHANGED, CONFIASHOP_FETCH_FAILED, CONFIASHOP_CODE_CHANGED, CONFIASHOP_PAGE_CHANGED, CONFIASHOP_CODE_VALIDATE, CONFIASHOP_TOGGLE_MODAL, CONFIASHOP_DISMISS_ERROR, CONFIASHOP_ADDRESSES_FETCH, CONFIASHOP_ADDRESS_CHANGED } from "../types"
 
 const initialState = {
   loading: false,
@@ -15,7 +15,8 @@ const initialState = {
   code: '',
   transaccionId: '',
   creditoId: '',
-  errorMessage: ''
+  errorMessage: '',
+  addresses: []
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -52,6 +53,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, errorMessage: '', showValidationCode: state.showValidationCode ? true : false }
     case CONFIASHOP_ADDRESSES_FETCH:
       return {...state, addresses: payload, loading: false}
+    case CONFIASHOP_ADDRESS_CHANGED:
+      return {...state, addresses: state.addresses.map(address => address.direccionId == payload.direccionId ? { ...address, active: true } : { ...address, active: false }) }
     default:
       return state
   }
