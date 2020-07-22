@@ -4,19 +4,19 @@ import { moderateScale, verticalScale, scale } from 'react-native-size-matters';
 import { View, Text, ActivityIndicator, Image } from 'react-native';
 import { Container, Content, Card, Root, Header, Left, Button, Icon, Body, Right, Picker } from 'native-base';
 import { ButtonQ, InputQ } from '../../common';
-import { onFormRecoveryChanged, updateAddress } from '../../../store/actions';
+import { onFormRecoveryChanged, updateAddressCF } from '../../../store/actions';
 import { colors, images } from '../../../assets';
-import styles from './Login.styles';
+import styles from '../Login/Login.styles';
 import navigation from '../../../services/navigation';
 import { getVersion } from 'react-native-device-info';
 
-class Address extends React.Component {
+class AddressCF extends React.Component {
   render() {
     let { formRecovery, loading } = this.props;
     return (
       <Root>
-        <Container style={{ backgroundColor: colors.secondary }}>
-          <Header noShadow transparent androidStatusBarColor={colors.secondary} iosBarStyle="light-content" style={{ height: verticalScale(50) }}>
+        <Container style={{ backgroundColor: colors.tertiary }}>
+          <Header noShadow transparent androidStatusBarColor={colors.tertiary} iosBarStyle="light-content" style={{ marginTop: 15, height: verticalScale(50) }}>
             <Left style={{ flex: 1, paddingLeft: moderateScale(10) }}>
               <Button transparent onPress={() => navigation.goBack()}>
                 <Icon style={{ fontSize: moderateScale(28), color: colors.white, fontWeight: "bold" }} name='arrow-back' />
@@ -27,11 +27,6 @@ class Address extends React.Component {
             </Body>
             <Right style={{ flex: 1 }} />
           </Header>
-          <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: moderateScale(8) }}>
-            <Image source={images.logo} style={{ width: scale(180), height: verticalScale(75) }} />
-            <Text style={[styles.textInput, { fontSize: moderateScale(20), color: 'white' }]}>v. {getVersion()}</Text>
-            <Image source={images.sublogo} style={{ width: scale(180), height: verticalScale(75) }} />
-          </View>
           <Content padder contentContainerStyle={{ flexDirection: "column", alignItems: "stretch" }} style={{ flex: 1 }}>
             <Card style={styles.card}>
               <InputQ
@@ -74,8 +69,8 @@ class Address extends React.Component {
                 label={"Código postal"}
                 onChangeText={(value) => { this.props.onFormRecoveryChanged({ key: "codigoPostal", value }) }}
                 value={formRecovery.codigoPostal}
-                placeholder="Código postal"                
-                kType="numeric"
+                placeholder="Código postal" 
+                kType="numeric"               
                 maxLength={5}
               />
               <InputQ
@@ -126,14 +121,14 @@ class Address extends React.Component {
                 label={"Teléfono"}
                 onChangeText={(value) => { this.props.onFormRecoveryChanged({ key: "telefonoEnvio", value }) }}
                 value={formRecovery.telefonoEnvio}
-                placeholder="Teléfono"                
-                kType="numeric"
+                placeholder="Teléfono"  
+                kType="numeric"              
                 maxLength={10}
               />
               <View style={styles.contButton}>
                 {loading ? <ActivityIndicator color={colors.tertiary} size="large" style={{ margin: moderateScale(8) }} /> : <ButtonQ
                   block
-                  onPress={() => this.props.updateAddress(formRecovery)}
+                  onPress={() => this.props.updateAddressCF(formRecovery)}
                   style={styles.button}
                   text="Guardar"
                 />}
@@ -154,7 +149,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   onFormRecoveryChanged,
-  updateAddress
+  updateAddressCF
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Address)
+export default connect(mapStateToProps, mapDispatchToProps)(AddressCF)

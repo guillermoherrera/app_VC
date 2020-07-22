@@ -167,7 +167,7 @@ export const updateAddress = (payload) => {
   return async dispatch => {
     //Reglas para validación
     let rules = {
-      codigoPostal: 'required',
+      codigoPostal: 'required|size:5',
       estado: 'required',
       municipio: 'required',
       colonia: 'required',
@@ -177,7 +177,7 @@ export const updateAddress = (payload) => {
       entreCalle2: 'required',
       tipoDomicilio: 'required',
       descripcionDomicilio: 'required',
-      telefonoEnvio: 'required'
+      telefonoEnvio: 'required|size:10'
     }
     //Nombre de los campos para mostrar en los errores
     let customAttributes = {

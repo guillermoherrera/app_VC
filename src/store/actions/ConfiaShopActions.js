@@ -1,8 +1,9 @@
-import { CONFIASHOP_CUSTOMER_INPUT_CHANGED, CONFIASHOP_ASSOCIATE_TICKET, CONFIASHOP_FETCHING, CONFIASHOP_FETCH_FAILED, CONFIASHOP_SET_TICKET, CONFIASHOP_ITEM_CHANGED, CONFIASHOP_CUSTOMER_SELECTED, CONFIASHOP_TOGGLE_PHONE_INPUT, CONFIASHOP_PHONE_INPUT_CHANGED, CONFIASHOP_CODE_CHANGED, CONFIASHOP_PAGE_CHANGED, CONFIASHOP_CODE_VALIDATE, CONFIASHOP_TOGGLE_MODAL, CONFIASHOP_DISMISS_ERROR, CONFIASHOP_ADDRESSES_FETCH, CONFIASHOP_ADDRESS_CHANGED } from "../types";
+import { CONFIASHOP_CUSTOMER_INPUT_CHANGED, CONFIASHOP_ASSOCIATE_TICKET, CONFIASHOP_FETCHING, CONFIASHOP_FETCH_FAILED, CONFIASHOP_SET_TICKET, CONFIASHOP_ITEM_CHANGED, CONFIASHOP_CUSTOMER_SELECTED, CONFIASHOP_TOGGLE_PHONE_INPUT, CONFIASHOP_PHONE_INPUT_CHANGED, CONFIASHOP_CODE_CHANGED, CONFIASHOP_PAGE_CHANGED, CONFIASHOP_CODE_VALIDATE, CONFIASHOP_TOGGLE_MODAL, CONFIASHOP_DISMISS_ERROR, CONFIASHOP_ADDRESSES_FETCH, CONFIASHOP_ADDRESS_CHANGED, LOGIN_ERROR, USER_FETCHING, USER_UPDATE_ADDRESS_FETCH } from "../types";
 import { constants, toast } from '../../assets';
-import { request } from '../../config/service';
+import { request, getRequest } from '../../config/service';
 import { AsyncStorage, Alert } from "react-native";
 import navigation from "../../services/navigation";
+import { ValidatorService } from "../../services/validator";
 // methods allowed and paths to request
 const { methods } = constants;
 const { paths } = constants;
@@ -57,11 +58,83 @@ const setTicket = (payload) => {
 const getAddresses = () => {
   return async dispatch => {
     dispatch({ type: CONFIASHOP_FETCHING });
-    let response = [{direccionId: 1, direccion: "1"}, {direccionId: 2, direccion: "2"}, {direccionId: 3, direccion: "3"}, {direccionId: 4, direccion: "4"}];
-    response[0] = {...response[0], active: true}
-    //response.map(reason => reason.motivoTipoId == payload.motivoTipoId ? { ...reason, active: true } : { ...reason, active: false })
-    //dispatch({ type: CONFIASHOP_ADDRESSES_FETCH, payload: response });
-    setTimeout(function(){dispatch({ type: CONFIASHOP_ADDRESSES_FETCH, payload: response })}, 5000);
+    let user = JSON.parse(await AsyncStorage.getItem(constants.USER))
+    let responseDos = [];
+    getRequest(methods.GET, `${paths.get_addresses}${user.DistribuidorId}`).then(async response => {
+      responseDos = response.data;
+      responseDos[0] = {...responseDos[0], active: true}
+      dispatch({ type: CONFIASHOP_ADDRESSES_FETCH, payload: responseDos })
+    }).catch(error => {
+      console.log("ERROR", error.message)
+      toast.showToast(error.message, 5000, "danger")
+    });
+  }
+}
+
+export const updateAddressCF = (payload) => {
+  return async dispatch => {
+    //Reglas para validación
+    let rules = {
+      codigoPostal: 'required|size:5',
+      estado: 'required',
+      municipio: 'required',
+      colonia: 'required',
+      calle: 'required',
+      numExterior: 'required',
+      entreCalle1: 'required',
+      entreCalle2: 'required',
+      tipoDomicilio: 'required',
+      descripcionDomicilio: 'required',
+      telefonoEnvio: 'required|size:10'
+    }
+    //Nombre de los campos para mostrar en los errores
+    let customAttributes = {
+      codigoPostal: 'codigo postal',
+      estado: 'estado',
+      municipio: 'municipio',
+      colonia: 'colonia',
+      calle: 'calle',
+      numExterior: 'número exterior',
+      entreCalle1: 'entre calle',
+      entreCalle2: 'y entre calle',
+      tipoDomicilio: 'tipo de domicilio',
+      descripcionDomicilio: 'descripción del domicilio',
+      telefonoEnvio: 'teléfono'
+    }
+
+    let validator = ValidatorService.validate(payload, rules, customAttributes)
+
+    if (validator.fails) {
+      console.log(validator.errors)
+      let message = Object.values(validator.errors)[0][0]
+
+      toast.showToast(message, 5000, 'warning')
+    }
+    else {
+      dispatch({ type: USER_FETCHING });
+      let user = JSON.parse(await AsyncStorage.getItem(constants.USER))
+      let data = { ...payload, distribuidorId: user.DistribuidorId }
+      return request(methods.POST, paths.update_address, data).then(async response => {
+        console.log("UpdateAddress", response)
+        await AsyncStorage.setItem(constants.ADDRESS, 'true')
+        dispatch(getAddresses());
+        navigation.goBack();
+        //navigation.navigate("Success", { success: 'Se ha activado tu cuenta exitosamente, ahora puedes disfrutar de todos los beneficios de ValeConfia.'});        
+        dispatch({ type: USER_UPDATE_ADDRESS_FETCH });
+      }).catch(error => {
+        console.log("Error", error.message);
+        dispatch({ type: LOGIN_ERROR });
+        try {
+          let JSONError = JSON.parse(error.message)
+          toast.showToast(JSONError.resultDesc, 5000, 'danger')
+          //navigation.navigate('Error', { error: JSONError.resultDesc })
+        }
+        catch (e) {
+          toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 5000, 'danger')
+          //navigation.navigate('Error', { error: "OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE" })
+        }
+      });
+    }
   }
 }
 

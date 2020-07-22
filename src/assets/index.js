@@ -106,7 +106,8 @@ export const constants = {
     update_address: "secure/exec/distribuidor/actualizaDireccion",
     customer_add: "secure/exec/cliente/alta",
     cancel_vale: "secure/exec/creditos/cancelaVale",
-    deferred_charges: "secure/consulta/detalleCargosDiferidos/"
+    deferred_charges: "secure/consulta/detalleCargosDiferidos/",
+    get_addresses: "secure/consulta/direcciones/"
   }
 }
 

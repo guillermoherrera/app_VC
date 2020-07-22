@@ -126,7 +126,7 @@ class Home extends PureComponent {
             <View style={styles.bodyCardItems}>
               {bonus.length > 0 && <Col >
                 <Text style={styles.titleBodyNew}>
-                  {'Gana más \npagando antes'}
+                  {'Gana más pagando antes'}
                 </Text>
                 <Row>
                   <Left>
@@ -186,7 +186,7 @@ class Home extends PureComponent {
               </Col>}
               {relation && <View style={styles.bodyItem}>
                 <Text style={styles.titleBodyNew}>
-                  {'Tus últimas \nrelaciones'}
+                  {'\nTus últimas relaciones'}
                 </Text>
                 <View style={styles.datesContent}>
                   {
@@ -204,7 +204,7 @@ class Home extends PureComponent {
               </View>}
               {personal_loan && <View style={[styles.bodyItem]}>
                 <Text style={styles.titleBodyNew}>
-                  {'Préstamos \npersonales'}
+                  {'\nPréstamos personales'}
                   {/* <Text style={styles.subtitleBodyNew}>
                     Antes de relizar cualquier depósito es necesario que acuda con su coordinador para informarle que desea realizar la liquidación de su préstamo persona y le indique el proceso a seguir.
                   </Text> */}

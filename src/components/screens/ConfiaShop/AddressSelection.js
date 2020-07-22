@@ -57,7 +57,7 @@ export class AddressSelection extends Component{
                     <View style={{  flexDirection: 'row' }}>
                       <Radio selectedColor={colors.tertiary} selected={true} color='white'/>
                       <Text style={styles.textButtonAddress}>
-                        {'Nombre de Calle '+item.direccion+' #1234 nombre de colonia 0000 municipio, Estado Pais '+item.direccion}
+                        {item.calle+' #'+item.numExterior+' '+item.numInterior+' '+item.colonia+' '+item.codigoPostal+' '+item.ciudad+', '+item.estado+'. | '+item.tipoDomicilio+' '+item.telefonoEnvio}
                       </Text>
                     </View>
                     {/*<View style={[styles.contentButton]}>
@@ -77,7 +77,7 @@ export class AddressSelection extends Component{
                     <View style={{  flexDirection: 'row' }}>
                       <Radio selectedColor={colors.tertiary} selected={false} color='white'/>
                       <Text style={styles.textButtonAddress}>
-                        {'Nombre de Calle '+item.direccion+' #1234 nombre de colonia2 0000 municipio2, Estado2 Pais'}
+                        {item.calle+' #'+item.numExterior+' '+item.numInterior+' '+item.colonia+' '+item.codigoPostal+' '+item.ciudad+', '+item.estado+'. | '+item.tipoDomicilio+' '+item.telefonoEnvio}
                       </Text>
                     </View>
                   </Col>
@@ -85,7 +85,7 @@ export class AddressSelection extends Component{
               </CardItem>
               } />}
             <CardItem style={{ borderRadius: moderateScale(25) }}>
-              <Button icon onPress={() => {}} style={[styles.buttonAddAddress]}>
+              <Button icon onPress={() => navigation.navigate('AddressCF')} style={[styles.buttonAddAddress]}>
                 <Text style={styles.textButtonNew2}><Icon type="FontAwesome5" name="plus" style={styles.iconNew} /> AÑADIR OTRA DIRECCION</Text>
               </Button>
             </CardItem>
@@ -93,7 +93,7 @@ export class AddressSelection extends Component{
           {true &&
             <Footer style={{ height: moderateScale(55), backgroundColor: colors.tertiary, elevation: 0, borderTopColor: 'transparent' }}>
               <TouchableOpacity
-                onPress={() => {}}
+                onPress={() => navigation.navigate('AssignCredit')}
                 style={[styles.footerCard]}>
                 <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                   <Icon style={{ color: colors.white }} type="FontAwesome5" name="arrow-right" />

@@ -3,7 +3,8 @@ Validator.setMessages('en', {
   required: 'El campo :attribute es obligatorio',
   same: 'El campo :attribute no coincide',
   numeric: 'El campo :attribute sólo acepta números',
-  digits: 'El campo :attribute debe tener una longitud mínima de 10'
+  digits: 'El campo :attribute debe tener una longitud mínima de 10',
+  size: 'El campo :attribute debe tener :size caracteres'
 })
 
 const ValidatorService = {

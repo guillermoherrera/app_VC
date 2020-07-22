@@ -193,7 +193,7 @@ export default styles = StyleSheet.create({
     //paddingRight: moderateScale(12),
     paddingTop: moderateScale(15),
     marginTop: moderateScale(-32),
-    flexWrap:"wrap"
+    //flexWrap:"wrap"
   },
   footerCard:{
     flex:1,
@@ -218,7 +218,7 @@ export default styles = StyleSheet.create({
     borderBottomColor: colors.white_strong,
     borderBottomWidth: moderateScale(.5),    
     // height: moderateScale(230),
-    flexWrap:"wrap",
+    //flexWrap:"wrap",
   },
   bodyItemLarge:{
     height: moderateScale(380),
@@ -241,7 +241,7 @@ export default styles = StyleSheet.create({
   titleHeaderNew:{
     fontSize: moderateScale(32),
     color: colors.green_lighter,
-    fontWeight: '900',
+    fontWeight: 'bold',
     textAlign:"left"
   },
   subtitleHeaderNew:{
@@ -294,11 +294,12 @@ export default styles = StyleSheet.create({
   titleBodyNew:{
     flex:1,
     fontSize: moderateScale(34),
+    fontWeight: "bold",
     color: colors.black,
-    fontWeight: '900',
+    //fontWeight: '900',
     textAlign:"left",
     flexWrap: "wrap",
-    marginBottom: moderateScale(20),
+    marginBottom: moderateScale(10),
     flexDirection: "row",
   },
   titleFooter:{

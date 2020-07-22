@@ -19,7 +19,8 @@ export class AssignCredit extends Component {
 
   _save() {
     let { user } = this.props.profile
-    let { ticketId, selectedItem, phoneInput, customer } = this.props.confiashop
+    let { ticketId, selectedItem, phoneInput, customer, addresses } = this.props.confiashop
+    let address = addresses.find(address => address.active).direccionId
     let phone = selectedItem == 1 ? phoneInput ? `${phoneInput}` : `${getPhoneNumberSync()}` : phoneInput ? `${phoneInput}` : `${customer.telefono}`
     let payload = {
       clienteId: selectedItem == 1 ? 0 : customer.clienteId,
@@ -30,8 +31,10 @@ export class AssignCredit extends Component {
       tipoPlazoId: "",
       valeTipoId: 0,
       idTicket: ticketId,
-      distribuidorId: user.DistribuidorId
+      distribuidorId: user.DistribuidorId,
+      direccionId: address
     }
+    console.log("payload", payload)
     console.log("ticket",ticketId)
     this.props.associateTicket(payload)
   }
