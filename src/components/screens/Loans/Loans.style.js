@@ -388,10 +388,22 @@ export default styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center"
   },
+  itemTextRightCS: {
+    fontWeight: "400",
+    margin: moderateScale(1),
+    paddingLeft: moderateScale(10),
+    paddingRight: moderateScale(10),
+    fontSize: moderateScale(10),
+  },
   itemTextRight: {
     fontWeight: "400",
     margin: moderateScale(8),
     fontSize: moderateScale(15),
+  },
+  itemTextLeftCS: {
+    color: colors.gray_normal,
+    margin: moderateScale(1),
+    fontSize: moderateScale(10),
   },
   itemTextLeft: {
     color: colors.gray_normal,

@@ -79,9 +79,11 @@ class LoanDetails extends Component {
 								</Row>
 							</Left>
 							{creditDetails.telefono && <Right>
-								<TouchableOpacity onPress={this._openPhone.bind(this)}>
-									<Image resizeMode="contain" style={{ width: scale(35), height: verticalScale(35) }} source={images.phone} />
-								</TouchableOpacity>
+								<Row style={{ marginTop: verticalScale(10) }}>
+									<TouchableOpacity onPress={this._openPhone.bind(this)}>
+										<Image resizeMode="contain" style={{ width: scale(35), height: verticalScale(35) }} source={images.phone} />
+									</TouchableOpacity>
+								</Row>
 							</Right>}
 						</Row>
 					</View>
@@ -89,11 +91,7 @@ class LoanDetails extends Component {
 						<Text style={[styles.titleBodyNew, { flex: 0 }]}>
 							{'Información General'}
 						</Text>
-						{
-							isFrom == 'ConfiaShop' && <View style={[styles.contentProduct, { flex: 0, justifyContent: 'flex-start', alignItems: 'flex-start' }]}>
-								{(creditDetails.detalleVenta || []).map(product => <Text key={`product-${product.idSku}`} style={styles.titleProduct}>- {product.jerarquia01}, {product.jerarquia02}, {product.jerarquia03}, {product.jerarquia04}</Text>)}
-							</View>
-						}
+						
 						<View style={[styles.datesContent, { flex: 0 }]}>
 							<View style={[styles.itemDate, { flex: 0 }]}>
 								<Text style={styles.itemTextLeft}>Monto Total:</Text>
@@ -128,6 +126,53 @@ class LoanDetails extends Component {
 							</View>
 						</View>
 					</View>}
+					{
+						isFrom == 'ConfiaShop' && <View style={[styles.bodyItem, { height: null, flex: 1 }]}>
+							<Text style={[styles.titleBodyNew, { flex: 0 }]}>
+								{'Artículo detalle'}
+							</Text>
+						
+							{(creditDetails.detalleVenta || []).map(product => <Row>
+								<Image resizeMode="contain" style={{ width: scale(85), height: verticalScale(85) }} source={{uri:'https://confiashop.com/empresas/000001/0000006395/A.jpg'}} />
+								<View style={[styles.datesContent, { flex: 0 }]}>
+									<View style={[styles.itemDate, { flex: 0 }]}>
+										<Text style={styles.itemTextLeftCS}>Marca:</Text>
+										<Text style={styles.itemTextRightCS}>{product.marca.substring(0,10)}</Text>
+									</View>
+									<View style={[styles.itemDate, { flex: 0 }]}>
+										<Text style={styles.itemTextLeftCS}>Estilo:</Text>
+										<Text style={styles.itemTextRightCS}>{product.estilo.substring(0,10)}</Text>
+									</View>
+									<View style={[styles.itemDate, { flex: 0 }]}>
+										<Text style={styles.itemTextLeftCS}>Color:</Text>
+										<Text style={styles.itemTextRightCS}>{product.color.substring(0,10)}</Text>
+									</View>
+									<View style={[styles.itemDate, { flex: 0 }]}>
+										<Text style={styles.itemTextLeftCS}>Cantidad:</Text>
+										<Text style={styles.itemTextRightCS}>{product.cantidad}</Text>
+									</View>
+								</View>
+								<View style={[styles.datesContent, { flex: 0 }]}>
+									<View style={[styles.itemDate, { flex: 0 }]}>
+										<Text style={styles.itemTextLeftCS}>sku:</Text>
+										<Text style={styles.itemTextRightCS}>{product.idSku}</Text>
+									</View>
+									<View style={[styles.itemDate, { flex: 0 }]}>
+										<Text style={styles.itemTextLeftCS}>Desc:</Text>
+										<Text style={styles.itemTextRightCS}>{product.jerarquia04+'\n'+product.jerarquia03+'\n'+product.jerarquia02+'\n'+product.jerarquia01}</Text>
+									</View>
+								</View>
+							</Row>)}
+							<Row>
+								<Right>
+									<TouchableOpacity onPress={() => {}}>
+										<Text style={{color: colors.primary}}>Detalle del envío</Text>
+									</TouchableOpacity>
+								</Right>
+							</Row>
+							{/*(creditDetails.detalleVenta || []).map(product => <Text key={`product-${product.idSku}`} style={styles.titleProduct}>- {product.jerarquia01}, {product.jerarquia02}, {product.jerarquia03}, {product.jerarquia04}</Text>)*/}
+						</View>
+					}
 				</View>}
 			</HeaderQ>
 		)
