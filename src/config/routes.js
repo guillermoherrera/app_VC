@@ -39,7 +39,8 @@ import {
   SuccessModal,
   ErrorModal,
   AddressSelection,
-  AddressCF
+  AddressCF,
+  DeliveryDetails
 } from '../components/screens';
 
 
@@ -144,7 +145,8 @@ const AuthNavigator = createStackNavigator({
   SuccessModal,
   ErrorModal,
   AddressSelection,
-  AddressCF
+  AddressCF,
+  DeliveryDetails
 },{
   initialRouteName: 'Home',  
   headerMode: 'none'  

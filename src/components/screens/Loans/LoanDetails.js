@@ -133,8 +133,8 @@ class LoanDetails extends Component {
 							</Text>
 						
 							{(creditDetails.detalleVenta || []).map(product => <Row>
-								<Image resizeMode="contain" style={{ width: scale(85), height: verticalScale(85) }} source={{uri:'https://confiashop.com/empresas/000001/0000006395/A.jpg'}} />
-								<View style={[styles.datesContent, { flex: 0 }]}>
+								<Image resizeMode="contain" style={{ width: scale(95), height: verticalScale(95) }} source={{uri:product.url}} />
+								<View style={[styles.datesContent, { flex: 0, paddingTop: moderateScale(10), }]}>
 									<View style={[styles.itemDate, { flex: 0 }]}>
 										<Text style={styles.itemTextLeftCS}>Marca:</Text>
 										<Text style={styles.itemTextRightCS}>{product.marca.substring(0,10)}</Text>
@@ -152,7 +152,7 @@ class LoanDetails extends Component {
 										<Text style={styles.itemTextRightCS}>{product.cantidad}</Text>
 									</View>
 								</View>
-								<View style={[styles.datesContent, { flex: 0 }]}>
+								<View style={[styles.datesContent, { flex: 0, paddingTop: moderateScale(10), }]}>
 									<View style={[styles.itemDate, { flex: 0 }]}>
 										<Text style={styles.itemTextLeftCS}>sku:</Text>
 										<Text style={styles.itemTextRightCS}>{product.idSku}</Text>
@@ -165,7 +165,7 @@ class LoanDetails extends Component {
 							</Row>)}
 							<Row>
 								<Right>
-									<TouchableOpacity onPress={() => {}}>
+									<TouchableOpacity onPress={() => navigation.navigate('DeliveryDetails')}>
 										<Text style={{color: colors.primary}}>Detalle del envío</Text>
 									</TouchableOpacity>
 								</Right>

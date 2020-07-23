@@ -185,7 +185,7 @@ export default styles = StyleSheet.create({
     borderBottomColor: colors.white_strong,
     borderBottomWidth: moderateScale(.5),
     height: moderateScale(190),
-    flexWrap: "wrap",
+    //flexWrap: "wrap",
     marginTop: moderateScale(10),
     paddingLeft: moderateScale(10),
     paddingRight: moderateScale(10)
@@ -350,7 +350,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     fontSize: moderateScale(24),
     color: colors.black,
-    fontWeight: '900',
+    fontWeight: 'bold',
     textAlign: "left",
     flexWrap: "wrap",
     marginBottom: 0,
