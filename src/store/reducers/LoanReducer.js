@@ -1,4 +1,4 @@
-import { LOAN_FETCH_FAILED, LOAN_FETCHING, LOAN_LOANS_FETCH, LOAN_CHANGED_TAB, LOAN_TOGGLE_FILTER, LOAN_FILTER_CHANGED, LOAN_ORDER_CHANGED, LOAN_STATUS_CHANGED, LOAN_DATE_CHANGED, LOAN_VALES_FETCH, LOAN_CREDIT_DETAILS_FETCH, LOAN_CONFIASHOP_FETCH, LOAN_VALE_TYPE_CHANGED, LOAN_SET_FOLIO_DIGITAL, LOAN_VALE_CANCEL } from "../types"
+import { LOAN_FETCH_FAILED, LOAN_FETCHING, LOAN_LOANS_FETCH, LOAN_CHANGED_TAB, LOAN_TOGGLE_FILTER, LOAN_FILTER_CHANGED, LOAN_ORDER_CHANGED, LOAN_STATUS_CHANGED, LOAN_DATE_CHANGED, LOAN_VALES_FETCH, LOAN_CREDIT_DETAILS_FETCH, LOAN_CONFIASHOP_FETCH, LOAN_VALE_TYPE_CHANGED, LOAN_SET_FOLIO_DIGITAL, LOAN_VALE_CANCEL, DELIVERY_FETCHING } from "../types"
 import { colors } from "../../assets"
 
 const statuses = [{
@@ -39,6 +39,7 @@ const initialState = {
   showValeFilter: false,
   showShopFilter: false,
   showLoanFilter: false,
+  delivery: null,
   valeFilter: {
     valeSelector: [...valeSelector],
     valeSelected: 1,
@@ -94,6 +95,8 @@ export default (state = initialState, { type, payload }) => {
     case LOAN_VALE_CANCEL:
       let vale_index = state.valesFiltered.findIndex(vale => vale.valeId == payload.valeId)
       return { ...state, valesFiltered: [...state.valesFiltered.slice(0, vale_index), { ...state.valesFiltered[vale_index], cancelado: true }, ...state.valesFiltered.slice(vale_index + 1)], loading: false }
+    case DELIVERY_FETCHING:
+      return { ...state, delivery: payload, loading: false}
     default:
       return state
   }

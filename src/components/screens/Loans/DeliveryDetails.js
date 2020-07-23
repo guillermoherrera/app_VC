@@ -8,6 +8,7 @@ import { moderateScale} from 'react-native-size-matters';
 import navigation from '../../../services/navigation';
 import { Loading } from '../../common';
 import StepIndicator from 'react-native-step-indicator';
+import { getDeliveryInfo } from '../../../store/actions';
 
   const customStyles = {
     stepIndicatorSize: 25,
@@ -35,11 +36,18 @@ import StepIndicator from 'react-native-step-indicator';
 
 class DeliveryDetails extends React.Component {
 
+  componentDidMount() {
+    this.props.getDeliveryInfo()
+    console.log("!!!", this.props.loan.delivery)
+  }
+
   onPageChange(position){
     this.setState({currentPosition: position});
   }
 
   render() {
+      let { loan } = this.props
+      let { delivery } = loan
       return (
       <Container style={{ backgroundColor: colors.tertiary }}>
         <Header noShadow transparent androidStatusBarColor={colors.tertiary} iosBarStyle="light-content">
@@ -49,24 +57,24 @@ class DeliveryDetails extends React.Component {
             </Button>
         </Left>
         <Body style={{ flex: 3, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={[styles.titleBodyCenter, { color: colors.white, fontSize: moderateScale(20) }]}>Detalle del envío</Text>
+            <Text style={[styles.titleBodyCenter, { color: colors.white, fontSize: moderateScale(20) }]}>{'DETALLE DEL ENVÍO\n(PROXIMAMENTE)'}</Text>
         </Body>
         <Right style={{ flex: 1 }} />
         </Header>
         <SafeAreaView style={{ flex: 1 }}>
           <Card style={{ flex: 1, paddingTop: moderateScale(10), paddingBottom: moderateScale(10), borderRadius: moderateScale(25) }}>
-            {this.props.loan.loading ? <Loading /> : <View style={[styles.bodyItem ,{flex: 1}]}>
-                <Title style={styles.itemTextTitle}>PROXIMAMENTE</Title>
+            {this.props.loan.loading ? <View style={[styles.bodyItem ,{flex: 1}]}><Loading /></View> : <View style={[styles.bodyItem ,{flex: 1}]}>
+                <Title style={styles.itemTextTitle}>{delivery ? delivery.estadoActual : "CARGANDO"}</Title>
                 <Container style={{alignSelf: 'center',}}>
                 
                   <StepIndicator
                     customStyles={customStyles}
-                    currentPosition={0}
+                    currentPosition={delivery ? delivery.paso : 0}
                     labels={[
                         "EN PREPARACIÓN\nEstamos preparando tu paquete\ndd/mm/YYYY",
                         "EN CAMINO\nTu paquete esta en viaje\ndd/mm/YYYY",
                         "EN PROCESO DE ENTREGA",
-                        "ENTREGADO\ndd/mm/YYYY"
+                        "ENTREGA\nFecha estimada dd/mm/YYYY"
                       ]
                     }
                     direction={'vertical'}
@@ -75,9 +83,9 @@ class DeliveryDetails extends React.Component {
                   
                 </Container>
                 <Icon type="FontAwesome5" name="map-marker" style={{alignSelf: 'center', color: colors.tertiary}}/>
-                <Text style={[styles.itemTextRight, {fontWeight:'bold'}]}>Datos de entrega: Nombre de calle #Numero Colonia c.p. Municipio, Estado Pais. | Nombre Apellidos Teléfono</Text>
+                <Text style={[styles.itemTextRight, {fontWeight:'bold'}]}>Datos de entrega: Nombre de calle #Numero Colonia c.p. Municipio, Estado Pais. | Nombre Apellidos Teléfono | Guia 0123456789101112131415</Text>
                 <Icon type="FontAwesome5" name="truck" style={{alignSelf: 'center', color: colors.tertiary}}/>
-                <Text style={[styles.itemTextRight, {alignSelf: 'center', fontWeight:'bold', paddingBottom: moderateScale(50),}]}>Envío por Estafeta.</Text>
+                <Text style={[styles.itemTextRight, {alignSelf: 'center', fontWeight:'bold'}]}>{'Envío por Estafeta.'}</Text>
             </View>}
           </Card>
         </SafeAreaView>
@@ -90,6 +98,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
+  getDeliveryInfo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeliveryDetails)

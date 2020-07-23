@@ -16,7 +16,8 @@ import {
   LOAN_CONFIASHOP_FETCH,
   LOAN_VALE_TYPE_CHANGED,
   LOAN_SET_FOLIO_DIGITAL,
-  LOAN_VALE_CANCEL
+  LOAN_VALE_CANCEL,
+  DELIVERY_FETCHING
 } from "../types"
 import moment from "moment"
 import navigation from "../../services/navigation"
@@ -217,6 +218,15 @@ const onCancelVale = (payload) => {
   }
 }
 
+const getDeliveryInfo = () => {
+  return async dispatch => {
+    dispatch({ type: LOAN_FETCHING });
+    let response = {paso: 0, estadoActual:"EN PREPARACIÓN"}
+    setTimeout(function(){dispatch({ type: DELIVERY_FETCHING, payload: response})}, 1000)
+    //dispatch({ type: DELIVERY_FETCHING, payload: response});
+  }
+}
+
 export {
   onChangeTab,
   onToggleFilter,
@@ -229,5 +239,6 @@ export {
   getDetailsCredit,
   getConfiaShopCredits,
   onValeTypeChanged,
-  onCancelVale
+  onCancelVale,
+  getDeliveryInfo
 }
