@@ -410,6 +410,12 @@ export default styles = StyleSheet.create({
     margin: moderateScale(8),
     fontSize: moderateScale(15),
   },
+  itemTextTitle: {
+    color: colors.tertiary,
+    fontWeight: 'bold',
+    fontSize: moderateScale(25),
+    alignSelf: 'center',
+  },
   iconCancel: {
     fontSize: moderateScale(20),
     color: colors.white
