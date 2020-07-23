@@ -46,7 +46,7 @@ export const login = (data) => {
         toast.showToast(JSONError.resultDesc, 3000, "danger");
       }
       catch (e) {
-        toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 3000, "danger");
+        toast.showToast("ERROR AL INICIAR SESIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
       }
     });
   }
@@ -108,7 +108,7 @@ export const validateUser = (payload) => {
           navigation.navigate('Error', { error: JSONError.resultDesc })
         }
         catch (e) {
-          navigation.navigate('Error', { error: "OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE" })
+          navigation.navigate('Error', { error: "ERROR AL VALIDAR LA INFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
         }
       });
     }
@@ -156,7 +156,7 @@ export const changePassword = (payload, identificador) => {
           navigation.navigate('Error', { error: JSONError.resultDesc })
         }
         catch (e) {
-          navigation.navigate('Error', { error: "OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE" })
+          navigation.navigate('Error', { error: "ERROR AL CAMBIAR LA CONTRASEÑA\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
         }
       });
     }
@@ -219,7 +219,7 @@ export const updateAddress = (payload) => {
           navigation.navigate('Error', { error: JSONError.resultDesc })
         }
         catch (e) {
-          navigation.navigate('Error', { error: "OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE" })
+          navigation.navigate('Error', { error: "ERROR AL ACTUALIZAR LA DIRECCIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
         }
       });
     }

@@ -37,7 +37,7 @@ const getVales = (path) => {
         setTimeout(() => toast.showToast(JSONError.resultDesc, 5000, "danger"), 100)
       }
       catch (e) {
-        setTimeout(() => toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 5000, "danger"), 100)
+        setTimeout(() => toast.showToast("ERROR AL OBTENER VALES\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 100)
       }
     })
   }
@@ -56,7 +56,7 @@ const getConfiaShopCredits = () => {
         setTimeout(() => toast.showToast(JSONError.resultDesc, 5000, "danger"), 100)
       }
       catch (e) {
-        setTimeout(() => toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 5000, "danger"), 100)
+        setTimeout(() => toast.showToast("ERROR AL OBTENER CREDITOS CONFIASHOP\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 100)
       }
     })
   }
@@ -91,7 +91,7 @@ const getDetailsCredit = (credit) => {
           setTimeout(() => toast.showToast(JSONError.resultDesc, 5000, "danger"), 1000)
         }
         catch (e) {
-          setTimeout(() => toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 5000, "danger"), 1000)
+          setTimeout(() => toast.showToast("ERROR AL OBTENER DETALLE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 1000)
         }
 
       })
@@ -188,7 +188,7 @@ const onValeTypeChanged = (payload) => {
           setTimeout(() => toast.showToast(JSONError.resultDesc, 5000, "danger"), 100)
         }
         catch (e) {
-          setTimeout(() => toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 5000, "danger"), 100)
+          setTimeout(() => toast.showToast("ERROR AL OBTENER INFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 100)
         }
       })
     }
@@ -211,7 +211,7 @@ const onCancelVale = (payload) => {
         setTimeout(() => toast.showToast(JSONError.resultDesc, 5000, "danger"), 100)
       }
       catch (e) {
-        setTimeout(() => toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 5000, "danger"), 100)
+        setTimeout(() => toast.showToast("ERROR AL CANCELAR VALE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 100)
       }
     })
   }

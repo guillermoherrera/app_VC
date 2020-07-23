@@ -27,7 +27,7 @@ const getCustomerDetails = (payload) => {
         toast.showToast(JSONError.resultDesc, 3000, "danger");
       }
       catch (e) {
-        toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 3000, "danger");
+        toast.showToast("ERROR AL OBTENER DETALLE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
       }
     });
   }
@@ -47,7 +47,7 @@ const getTransactionTypes = (clienteId) => {
         toast.showToast(JSONError.resultDesc, 3000, "danger");
       }
       catch (e) {
-        toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 3000, "danger");
+        toast.showToast("ERROR AL OBTENER INFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
       }
     });
   }
@@ -91,7 +91,7 @@ const getReasons = () => {
         toast.showToast(JSONError.resultDesc, 3000, "danger");
       }
       catch (e) {
-        toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 3000, "danger");
+        toast.showToast("ERROR AL OBTENER MOTIVOS\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
       }
     });
   }
@@ -116,7 +116,7 @@ const getValesDeadlines = (clienteId) => {
         toast.showToast(JSONError.resultDesc, 3000, "danger");
       }
       catch (e) {
-        toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 3000, "danger");
+        toast.showToast("ERROR AL OBTENERINFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
       }
     });
   }

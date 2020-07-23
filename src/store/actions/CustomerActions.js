@@ -21,7 +21,7 @@ const getCustomersWithBankData = () => {
         setTimeout(() => toast.showToast(JSONError.resultDesc, 5000, "danger"), 100)
       }
       catch (e) {
-        setTimeout(() => toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 5000, "danger"), 100)
+        setTimeout(() => toast.showToast("ERROR AL OBTENER INFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 100)
       }
     })
   }
@@ -40,7 +40,7 @@ const getCustomers = () => {
         setTimeout(() => toast.showToast(JSONError.resultDesc, 5000, "danger"), 100)
       }
       catch (e) {
-        setTimeout(() => toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 5000, "danger"), 100)
+        setTimeout(() => toast.showToast("ERROR AL OBTENER LOS CLIENTES\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 100)
       }
     })
   }
@@ -115,7 +115,7 @@ const blockCustomer = (clienteId) => {
         setTimeout(() => toast.showToast(JSONError.resultDesc, 5000, "danger"), 100)
       }
       catch (e) {
-        setTimeout(() => toast.showToast("OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE", 5000, "danger"), 100)
+        setTimeout(() => toast.showToast("ERROR AL BLOCKEAR AL CLIENTE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 100)
       }
     })
   }
@@ -195,7 +195,7 @@ const customerSave = (payload) => {
           navigation.navigate('ErrorModal', { error: JSONError.resultDesc })
         }
         catch (e) {
-          navigation.navigate('ErrorModal', { error: "OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE" })
+          navigation.navigate('ErrorModal', { error: "ERROR AL GUARDAR AL CLIENTE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
         }
       });
     }
