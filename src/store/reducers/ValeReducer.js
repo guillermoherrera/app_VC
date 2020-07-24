@@ -113,7 +113,7 @@ export default (state = initialState, { type, payload }) => {
     case VALE_CODE_CHANGED:
       return { ...state, code: payload.toUpperCase() }
     case VALE_VALES_DEADLINES:
-      return { ...state, fortnights: payload[0].hasOwnProperty('plazo') ? payload : state.fortnights, loading: false }
+      return { ...state, fortnights: payload[0].hasOwnProperty('plazo') ? payload : [], loading: false }
     case VALE_AMOUNT_INCREASES:
       return { ...state, amount_selected: state.amount_selected + 1 }
     case VALE_AMOUNT_DECREASES:

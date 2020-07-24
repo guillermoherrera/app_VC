@@ -46,12 +46,17 @@ class TransactionType extends Component {
   render() {
     let { vale } = this.props
     let { loading, customer_details, methods } = vale
-   
+    let desembolsoId = null;
+    if(methods.find(method => method.active) != undefined){
+      desembolsoId = methods.find(method => method.active).desembolsoTipoId;
+    }
+
     return (
       <Content
         title="Nuevo Vale"
         contentStyle={styles.containerStyle}        
         footer={this._renderFooter()}
+        color={desembolsoId == 14 ? colors.tertiary : null}
       >
         {loading ? <ActivityIndicator style={{ marginTop: moderateScale(8) }} color={colors.primary} /> : <View style={[styles.bodyCard, { height: undefined }]}>
           <ItemQ client={customer_details} />

@@ -44,6 +44,7 @@ export const colors = {
   white_lighther: '#EEEEEE',
   white_strong: '#F2F2F2',
   white_light: 'rgba(255, 255, 255, 0.82)',
+  blue_light: '#84BCEA'
 }
 
 export const style = {

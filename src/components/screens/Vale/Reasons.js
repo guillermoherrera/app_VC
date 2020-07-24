@@ -63,13 +63,18 @@ class Reasons extends Component {
 
   render() {
     let { vale } = this.props
-    let { loading, customer_details, reasons, showValeConfirmation, showInputPhone, phoneInput } = vale   
+    let { loading, customer_details, reasons, showValeConfirmation, showInputPhone, phoneInput, methods } = vale   
+    let desembolsoId = null;
+    if(methods.find(method => method.active) != undefined){
+      desembolsoId = methods.find(method => method.active).desembolsoTipoId;
+    }
 
     return (
       <Content
         title="Nuevo Vale"
         contentStyle={styles.containerStyle}        
         footer={this._renderFooter()}
+        color={desembolsoId == 14 ? colors.tertiary : null}
       >
         <Dialog.Container visible={showInputPhone}>
           <Dialog.Title>Confia</Dialog.Title>
@@ -83,7 +88,7 @@ class Reasons extends Component {
         {loading ? <ActivityIndicator style={{ marginTop: moderateScale(8) }} color={colors.primary} /> : <View style={[styles.bodyCard, { height: undefined}]}>
           <ItemQ client={customer_details} />
           <View
-            style={[styles.bodyItem, { justifyContent: "center", height: moderateScale(60), flexDirection: 'column', borderBottomColor: 'transparent' }]}>            
+            style={[{ justifyContent: "center", height: moderateScale(60), flexDirection: 'column', borderBottomColor: 'transparent' }]}>            
             <Text style={styles.titleBodyCenter}>
               Selecciona el motivo del prestamo de tu cliente
             </Text>

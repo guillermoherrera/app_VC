@@ -87,7 +87,7 @@ export default styles = StyleSheet.create({
     borderBottomColor: colors.gray_strong,
     borderBottomWidth: moderateScale(.5),
     height: moderateScale(130),
-    flexWrap: "wrap",
+    //flexWrap: "wrap",
     marginTop: moderateScale(10),
     paddingLeft: moderateScale(10),
     paddingRight: moderateScale(10)
@@ -138,6 +138,12 @@ export default styles = StyleSheet.create({
   },
   activeNumber: {
     backgroundColor: colors.secondary,
+    borderColor: 'transparent',
+    borderWidth: 0
+
+  },
+  activeNumberCS: {
+    backgroundColor: colors.tertiary,
     borderColor: 'transparent',
     borderWidth: 0
 
@@ -305,7 +311,7 @@ export default styles = StyleSheet.create({
   textPayment: {
     fontWeight: "bold",
     fontSize: moderateScale(20),
-    color: colors.green,
+    //color: colors.green,
     marginLeft: moderateScale(12)
   },
   textCantPayment: {
