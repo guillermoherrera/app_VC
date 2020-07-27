@@ -9,6 +9,7 @@ import navigation from '../../../services/navigation';
 import { Loading } from '../../common';
 import StepIndicator from 'react-native-step-indicator';
 import { getDeliveryInfo } from '../../../store/actions';
+import { HeaderQ} from '../../common'
 
   const customStyles = {
     stepIndicatorSize: 25,
@@ -48,9 +49,19 @@ class DeliveryDetails extends React.Component {
   render() {
       let { loan } = this.props
       let { delivery } = loan
+      let color = colors.tertiary
       return (
+      <HeaderQ
+				navigation={navigation}
+				imageTitle={true}
+				contentStyle={[styles.containerStyle, { backgroundColor: color }]}
+				noPaddingBottom
+				scroll={true}
+				color={color}
+				//footer={this._renderFooter()}
+      >
       <Container style={{ backgroundColor: colors.tertiary }}>
-        <Header noShadow transparent androidStatusBarColor={colors.tertiary} iosBarStyle="light-content">
+        {/*<Header noShadow transparent androidStatusBarColor={colors.tertiary} iosBarStyle="light-content">
         <Left style={{ paddingLeft: moderateScale(8), flex: 1 }}>
             <Button transparent onPress={() => navigation.goBack()}>
             <Icon style={{ fontSize: moderateScale(28), fontWeight: "bold", color: colors.white }} name='arrow-back' />
@@ -60,10 +71,11 @@ class DeliveryDetails extends React.Component {
             <Text style={[styles.titleBodyCenter, { color: colors.white, fontSize: moderateScale(20) }]}>{'DETALLE DEL ENVÍO\n(PROXIMAMENTE)'}</Text>
         </Body>
         <Right style={{ flex: 1 }} />
-        </Header>
+        </Header>*/}
         <SafeAreaView style={{ flex: 1 }}>
           <Card style={{ flex: 1, paddingTop: moderateScale(10), paddingBottom: moderateScale(10), borderRadius: moderateScale(25) }}>
             {this.props.loan.loading ? <View style={[styles.bodyItem ,{flex: 1}]}><Loading /></View> : <View style={[styles.bodyItem ,{flex: 1}]}>
+                <Text style={[styles.titleBodyCenter, { color: colors.black, fontSize: moderateScale(20) }]}>{'DETALLE DEL ENVÍO\n(PROXIMAMENTE)'}</Text>
                 <Title style={styles.itemTextTitle}>{delivery ? delivery.estadoActual : "CARGANDO"}</Title>
                 <Container style={{alignSelf: 'center',}}>
                 
@@ -89,7 +101,8 @@ class DeliveryDetails extends React.Component {
             </View>}
           </Card>
         </SafeAreaView>
-    </Container>)
+    </Container>
+    </HeaderQ>)
   }
 }
 

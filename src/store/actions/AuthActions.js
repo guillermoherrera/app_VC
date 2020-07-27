@@ -46,7 +46,12 @@ export const login = (data) => {
         toast.showToast(JSONError.resultDesc, 3000, "danger");
       }
       catch (e) {
-        toast.showToast("ERROR AL INICIAR SESIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
+        try{
+          toast.showToast("resultDesc: "+error.message, 5000, "danger")
+        }
+        catch(er){
+          toast.showToast("ERROR AL INICIAR SESIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger")
+        }
       }
     });
   }
@@ -108,7 +113,12 @@ export const validateUser = (payload) => {
           navigation.navigate('Error', { error: JSONError.resultDesc })
         }
         catch (e) {
-          navigation.navigate('Error', { error: "ERROR AL VALIDAR LA INFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
+          try{
+            navigation.navigate('Error', { error: "resultDesc: " + error.message})
+          }
+          catch(er){
+            navigation.navigate('Error', { error: "ERROR AL VALIDAR LA INFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
+          }          
         }
       });
     }
@@ -156,7 +166,12 @@ export const changePassword = (payload, identificador) => {
           navigation.navigate('Error', { error: JSONError.resultDesc })
         }
         catch (e) {
-          navigation.navigate('Error', { error: "ERROR AL CAMBIAR LA CONTRASEÑA\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
+          try{
+            navigation.navigate('Error', { error: "resultDesc: " + error.message})
+          }
+          catch(er){
+            navigation.navigate('Error', { error: "ERROR AL CAMBIAR LA CONTRASEÑA\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
+          }
         }
       });
     }
@@ -219,7 +234,12 @@ export const updateAddress = (payload) => {
           navigation.navigate('Error', { error: JSONError.resultDesc })
         }
         catch (e) {
-          navigation.navigate('Error', { error: "ERROR AL ACTUALIZAR LA DIRECCIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
+          try{
+            navigation.navigate('Error', { error: "resultDesc: " + error.message})
+          }
+          catch(er){
+            navigation.navigate('Error', { error: "ERROR AL ACTUALIZAR LA DIRECCIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
+          }
         }
       });
     }

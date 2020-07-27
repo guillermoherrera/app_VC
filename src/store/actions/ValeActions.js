@@ -27,7 +27,12 @@ const getCustomerDetails = (payload) => {
         toast.showToast(JSONError.resultDesc, 3000, "danger");
       }
       catch (e) {
-        toast.showToast("ERROR AL OBTENER DETALLE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
+        try{
+          toast.showToast("resultDesc: "+error.message, 5000, "danger")
+        }
+        catch(er){
+          toast.showToast("ERROR AL OBTENER DETALLE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger")
+        }
       }
     });
   }
@@ -47,7 +52,12 @@ const getTransactionTypes = (clienteId) => {
         toast.showToast(JSONError.resultDesc, 3000, "danger");
       }
       catch (e) {
-        toast.showToast("ERROR AL OBTENER INFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
+        try{
+          toast.showToast("resultDesc: "+error.message, 5000, "danger")
+        }
+        catch(er){
+          toast.showToast("ERROR AL OBTENER INFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger")
+        }
       }
     });
   }
@@ -91,7 +101,12 @@ const getReasons = () => {
         toast.showToast(JSONError.resultDesc, 3000, "danger");
       }
       catch (e) {
-        toast.showToast("ERROR AL OBTENER MOTIVOS\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
+        try{
+          toast.showToast("resultDesc: "+error.message, 5000, "danger")
+        }
+        catch(er){
+          toast.showToast("ERROR AL OBTENER MOTIVOS\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
+        }
       }
     });
   }
@@ -116,7 +131,12 @@ const getValesDeadlines = (clienteId, desembolsoId) => {
         toast.showToast(JSONError.resultDesc, 3000, "danger");
       }
       catch (e) {
-        toast.showToast("ERROR AL OBTENERINFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
+        try{
+          toast.showToast("resultDesc: "+error.message, 5000, "danger")
+        }
+        catch(er){
+          toast.showToast("ERROR AL OBTENER INFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 3000, "danger");
+        }        
       }
     });
   }

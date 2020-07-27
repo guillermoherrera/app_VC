@@ -86,7 +86,7 @@ export const LoanItem = ({ loan, onPress, isLoan, valeType }) => (
   <ListItem button onPress={onPress}>
     <Left style={{ flex: 1.5 }}>
       <Col>
-        <View style={{ flex: 1, flexWrap: 'wrap' }}>
+        <View style={{ flex: 1 }}>
           <Text style={styles.txtName}>{isLoan ? `#${loan.noCredito}{\n}` : loan.nombreCliente}</Text>
           {/* {!isLoan && <Text style={[styles.txtDates, { color: 'black' }]}>{loan.clienteId}</Text>} */}
         </View>

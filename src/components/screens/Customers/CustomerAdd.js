@@ -123,6 +123,8 @@ class CustomerAdd extends Component {
             onChangeText={(value) => { this.props.onFormAddChanged({ key: "telefono", value }) }}
             value={formAdd.telefono}
             placeholder="Escribe el teléfono"
+            kType="numeric"
+            maxLength={10}
           />
           <InputQ
             label="Dirección"
@@ -182,6 +184,8 @@ class CustomerAdd extends Component {
             onChangeText={(value) => { this.props.onFormAddChanged({ key: "codigoPostal", value }) }}
             value={formAdd.codigoPostal}
             placeholder="Escribe el código postal"
+            kType="numeric"
+            maxLength={5}
           />
           <InputQ
             label={"Entre calle"}

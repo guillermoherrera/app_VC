@@ -130,7 +130,12 @@ export const updateAddressCF = (payload) => {
           //navigation.navigate('Error', { error: JSONError.resultDesc })
         }
         catch (e) {
-          toast.showToast("ERROR AL GUARDAR LA DIRECCIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, 'danger')
+          try{
+            toast.showToast("resultDesc: "+error.message, 5000, "danger")
+          }
+          catch(er){
+            toast.showToast("ERROR AL GUARDAR LA DIRECCIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger")
+          }
           //navigation.navigate('Error', { error: "OCURRIÓ UN ERROR, POR FAVOR INTENTA MÁS TARDE" })
         }
       });

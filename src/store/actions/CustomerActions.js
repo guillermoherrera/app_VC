@@ -21,7 +21,12 @@ const getCustomersWithBankData = () => {
         setTimeout(() => toast.showToast(JSONError.resultDesc, 5000, "danger"), 100)
       }
       catch (e) {
-        setTimeout(() => toast.showToast("ERROR AL OBTENER INFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 100)
+        try{
+          setTimeout(() => toast.showToast("resultDesc: "+error.message, 5000, "danger"), 1000)
+        }
+        catch(er){
+          setTimeout(() => toast.showToast("ERROR AL OBTENER INFORMACIÓN\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 1000)
+        }
       }
     })
   }
@@ -40,7 +45,12 @@ const getCustomers = () => {
         setTimeout(() => toast.showToast(JSONError.resultDesc, 5000, "danger"), 100)
       }
       catch (e) {
-        setTimeout(() => toast.showToast("ERROR AL OBTENER LOS CLIENTES\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 100)
+        try{
+          setTimeout(() => toast.showToast("resultDesc: "+error.message, 5000, "danger"), 1000)
+        }
+        catch(er){
+          setTimeout(() => toast.showToast("ERROR AL OBTENER LOS CLIENTES\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 1000)
+        }
       }
     })
   }
@@ -115,7 +125,12 @@ const blockCustomer = (clienteId) => {
         setTimeout(() => toast.showToast(JSONError.resultDesc, 5000, "danger"), 100)
       }
       catch (e) {
-        setTimeout(() => toast.showToast("ERROR AL BLOCKEAR AL CLIENTE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 100)
+        try{
+          setTimeout(() => toast.showToast("resultDesc: "+error.message, 5000, "danger"), 1000)
+        }
+        catch(er){
+          setTimeout(() => toast.showToast("ERROR AL BLOQUEAR AL CLIENTE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger"), 1000)
+        }
       }
     })
   }
@@ -139,8 +154,8 @@ const customerSave = (payload) => {
       primerApellido: 'required',
       segundoApellido: 'required',
       fechaNacimiento: 'required',
-      telefono: 'required',
-      codigoPostal: 'required',
+      telefono: 'required|size:10',
+      codigoPostal: 'required|size:5',
       estado: 'required',
       municipio: 'required',
       colonia: 'required',
@@ -195,7 +210,12 @@ const customerSave = (payload) => {
           navigation.navigate('ErrorModal', { error: JSONError.resultDesc })
         }
         catch (e) {
-          navigation.navigate('ErrorModal', { error: "ERROR AL GUARDAR AL CLIENTE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
+          try{
+            navigation.navigate('ErrorModal', { error: "resultDesc: "+error.message })
+          }
+          catch(er){
+            navigation.navigate('ErrorModal', { error: "ERROR AL GUARDAR AL CLIENTE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE" })
+          } 
         }
       });
     }
