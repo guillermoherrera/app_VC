@@ -42,6 +42,7 @@ class Customers extends PureComponent {
     return (
       <HeaderQ
         contentStyle={styles.containerStyle}
+        scroll={false}
         contentLeft={
           currentTab == 0 ? <TouchableOpacity onPress={() => navigation.navigate("CustomerAdd")}>
             <Thumbnail small source={images.add} />

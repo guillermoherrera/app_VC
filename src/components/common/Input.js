@@ -20,7 +20,7 @@ export const InputQ = (props) => {
         secureTextEntry={props.secureTextEntry}
         placeholderTextColor={colors.gray_strong}
         onSubmitEditing={props.onSubmitEditing}
-        keyboardType= {props.kType ? props.kType :'email-address'}
+        keyboardType= {props.kType ? props.kType :'default'}
         maxLength={props.maxLength ? props.maxLength :100}
         leftIcon={
           props.icon && <Icon
