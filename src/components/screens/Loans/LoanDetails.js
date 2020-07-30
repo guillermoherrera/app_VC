@@ -127,13 +127,13 @@ class LoanDetails extends Component {
 						</View>
 					</View>}
 					{
-						isFrom == 'ConfiaShop' && <View style={[styles.bodyItem, { height: null, flex: 1 }]}>
+						isFrom == 'ConfiaShop' && <View style={[styles.bodyItem, { height: null, flex: 1, paddingBottom: 37 }]}>
 							<Text style={[styles.titleBodyNew, { flex: 0 }]}>
 								{'Artículo detalle'}
 							</Text>
 						
-							{(creditDetails.detalleVenta || []).map(product => <Row>
-								<Image resizeMode="contain" style={{ width: scale(95), height: verticalScale(95) }} source={{uri:product.url}} />
+							{(creditDetails.detalleVenta || []).map(product => <Row style={[{ flex: 0 }]}>
+								<Image resizeMode="contain" style={{ width: moderateScale(95), height: moderateScale(70) }} source={{uri:product.url}} />
 								<View style={[styles.datesContent, { flex: 0, paddingTop: moderateScale(10), }]}>
 									<View style={[styles.itemDate, { flex: 0 }]}>
 										<Text style={styles.itemTextLeftCS}>Marca:</Text>
@@ -163,7 +163,7 @@ class LoanDetails extends Component {
 									</View>
 								</View>
 							</Row>)}
-							<Row>
+							<Row style={[{ flex: 0 }]}>
 								<Right>
 									<TouchableOpacity onPress={() => navigation.navigate('DeliveryDetails')}>
 										<Text style={{color: colors.primary}}>Detalle del envío</Text>
