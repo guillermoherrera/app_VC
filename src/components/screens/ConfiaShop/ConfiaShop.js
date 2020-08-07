@@ -72,6 +72,7 @@ class ConfiaShop extends Component {
         <View style={{ flex: 1 }}>
           <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
             {profile.accesoConfiaShop ? <WebView
+              useWebKit={true}
               ref={webview => { this.webview = webview; }}
               startInLoadingState
               javaScriptEnabledAndroid={true}

@@ -3,7 +3,7 @@ import Dialog from "react-native-dialog";
 import { connect } from 'react-redux'
 import { getPhoneNumberSync } from "react-native-device-info";
 import { moderateScale, verticalScale } from 'react-native-size-matters';
-import { View, Dimensions, TouchableOpacity, FlatList, RefreshControl, Text, SafeAreaView, Alert } from 'react-native'
+import { View, Dimensions, TouchableOpacity, FlatList, RefreshControl, Text, SafeAreaView, Alert, Platform } from 'react-native'
 import { Footer, Picker, Icon, Container, Header, Left, Button, Card, CardItem, Col, Body, Right } from 'native-base'
 import { onConfiaShopCustomerInputChange, getCustomersWithBankData, onValueItemChanged, onCustomerSelect, associateTicket, onConfiaShopToggleInput, onConfiaShopPhoneChanged } from '../../../store/actions';
 import { InputQ, ItemQ, Spinner, Loading } from '../../common';
@@ -81,7 +81,7 @@ export class AssignCredit extends Component {
           <Dialog.Description>
             Ingresa el número de teléfono para poder validar el crédito solicitado
           </Dialog.Description>
-          <Dialog.Input style={{backgroundColor: '#f0f0f0', borderBottomWidth : 1.0, borderBottomColor: '#d0d0d0'}} autoFocus={true} placeholder=" Ingresa aquí el número de teléfono" keyboardType="phone-pad" value={phoneInput} onChangeText={(phoneNumber) => this.props.onConfiaShopPhoneChanged(phoneNumber)} />
+          <Dialog.Input style={{backgroundColor: Platform.OS === 'ios' ? '#ffffff' : '#f0f0f0', borderBottomWidth : Platform.OS === 'ios' ? 0 : 1.0, borderBottomColor: '#d0d0d0'}} autoFocus={true} placeholder=" Ingresa aquí el número de teléfono" keyboardType="phone-pad" value={phoneInput} onChangeText={(phoneNumber) => this.props.onConfiaShopPhoneChanged(phoneNumber)} />
           <Dialog.Button label="Cancelar" onPress={() => this.props.onConfiaShopToggleInput()} />
           <Dialog.Button disabled={phoneInput.length == 10 ? false : true} label="Aceptar" onPress={() => this._save()} />
         </Dialog.Container>

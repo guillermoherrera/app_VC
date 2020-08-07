@@ -37,8 +37,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>La aplicación necesita acceder a tu cámara para tomar la foto de perfil</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>La aplicación necesita conocer tu ubicación para mostrar las tiendas cerca</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>La aplicación necesita conocer tu ubicación para mostrar las tiendas cerca</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>La aplicación necesita acceder al micrófono para mostrarte resultados relacionados</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>La aplicación necesita acceder a tu librería de fotos para la foto de perfil</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

@@ -201,6 +201,8 @@ const customerSave = (payload) => {
       }));      
       console.log("Data",dataUpperCase)
       request(methods.POST, paths.customer_add, dataUpperCase).then(async response => {        
+        dispatch({ type: CUSTOMER_CUSTOMERS_FETCH, payload: [] })
+        dispatch(getCustomers());
         navigation.navigate("SuccessModal", { title: 'Cliente agregado', message: 'Se ha agregado exitosamente al cliente', buttonText: 'Aceptar', route: 'Home' });
         dispatch({ type: CUSTOMER_ADD_FETCH });
       }).catch(error => {        
