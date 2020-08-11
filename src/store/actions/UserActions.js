@@ -42,8 +42,15 @@ const getProfile = (isFromConfiaShop = false) => {
           dispatch(logout());
           toast.showToast("La sesión ha expirado", 5000, "danger")
         }
-        else
-          toast.showToast(error.message, 5000, "danger")
+        else{
+          //toast.showToast(error.message, 5000, "danger")
+          try{
+            toast.showToast("resultDesc: "+error.message, 5000, "danger")
+          }
+          catch(er){
+            toast.showToast("ERROR AL OBTENER DETALLE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger")
+          }
+        }
       });
     }
   }
@@ -61,8 +68,15 @@ const getSummary = () => {
         dispatch(logout());
         toast.showToast("La sesión ha expirado", 5000, "danger")
       }
-      else
-        toast.showToast(error.message, 5000, "danger")
+      else{
+        //toast.showToast(error.message, 5000, "danger")
+        try{
+          toast.showToast("resultDesc: "+error.message, 5000, "danger")
+        }
+        catch(er){
+          toast.showToast("ERROR AL OBTENER DETALLE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger")
+        }
+      }
     });
   }
 }
@@ -93,8 +107,15 @@ const onSubmitProfile = (payload) => {
           dispatch(logout());
           toast.showToast("La sesión ha expirado", 5000, "danger")
         }
-        else
-          toast.showToast("No se pudo cargar la foto, inténtalo más tarde", 3000, "danger");
+        else{
+          //toast.showToast("No se pudo cargar la foto, inténtalo más tarde", 3000, "danger");
+          try{
+            toast.showToast("resultDesc: "+error.message, 5000, "danger")
+          }
+          catch(er){
+            toast.showToast("ERROR AL OBTENER DETALLE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger")
+          }
+        }
       }
     })
   }
@@ -109,8 +130,15 @@ const getRelation = () => {
       dispatch({ type: USER_FETCH_FAILED, payload: error.message });
       if (error.message == 'unauthorized')
         toast.showToast("La sesión ha expirado", 5000, "danger")
-      else
-        toast.showToast(error.message, 5000, "danger")
+      else{
+        //toast.showToast(error.message, 5000, "danger")
+        try{
+          toast.showToast("resultDesc: "+error.message, 5000, "danger")
+        }
+        catch(er){
+          toast.showToast("ERROR AL OBTENER DETALLE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger")
+        }
+      }
     });
   }
 }
