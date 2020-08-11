@@ -2,7 +2,7 @@
 import React, {Component, useEffect } from 'react';
 //import { NavigationContainer } from '@react-navigation/native';
 
-import { View, Text, AsyncStorage} from 'react-native';
+import { View, Text, AsyncStorage, Alert} from 'react-native';
 import {constants} from './src/assets';
 import {createStore, applyMiddleware} from 'redux';
 import reducers from './src/store/reducers';
@@ -94,7 +94,8 @@ function AppNotification({checkedSignIn, store, AppNavigator}) {
 
     function onOpenNotification(notify) {
       console.log("[App] onOpenNotification: ", notify)
-      alert("Open Notification: " + notify.body)
+      //alert("Open Notification: " + notify.body)
+      //Alert.alert(notify.title, notify.body);
     }
 
     return () => {

@@ -68,7 +68,7 @@ class LocalNotificationService {
         return {
             id: id,
             autoCancel: true,
-            largeIcon: options.largeIcon || "bootsplash_logo",
+            largeIcon: options.largeIcon || "ic_launcher_round",
             smallIcon: options.smallIcon || "ic_notification",
             bigText: message || '',
             subText: title || '',
