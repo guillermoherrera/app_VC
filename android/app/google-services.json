@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "451763299687",
+    "firebase_url": "https://app-vc-e5ea5.firebaseio.com",
+    "project_id": "app-vc-e5ea5",
+    "storage_bucket": "app-vc-e5ea5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:451763299687:android:10936a1e32c8072575bbc2",
+        "android_client_info": {
+          "package_name": "com.confia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "451763299687-0kb5pi54kqlegn843jdlj2nor506gc2j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.confia",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "451763299687-3kq55atsa069dbf6ve60035jsf77hqva.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFgAqJHratd0yMX_Pfp4TRVxI_Q25LPz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "451763299687-3kq55atsa069dbf6ve60035jsf77hqva.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
