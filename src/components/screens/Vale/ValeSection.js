@@ -83,7 +83,7 @@ class ValeSection extends Component {
         </View>
         <View style={[styles.bodyCard]}>
           <View
-            style={styles.bodyItemNumber}>
+            >
             <Text style={styles.titleBodyCenter}>
               {'Quincenas'}
             </Text>

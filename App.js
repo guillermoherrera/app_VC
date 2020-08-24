@@ -66,7 +66,7 @@ export default class App extends Component {
 
 function AppNotification({checkedSignIn, store, AppNavigator}) {
 
-  useEffect(() => {
+  /*useEffect(() => {
     fcmService.registerAppWithFCM()
     fcmService.register(onRegister, onNotification, onOpenNotification)
     localNotificationService.configure(onOpenNotification)
@@ -104,7 +104,7 @@ function AppNotification({checkedSignIn, store, AppNavigator}) {
       localNotificationService.unregister()
     }
 
-  }, [])
+  }, [])*/
 
   return (
     !checkedSignIn ? <Loading /> : <Root>
