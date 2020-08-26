@@ -15,7 +15,9 @@ export const images = {
   map: require('./images/map.png'),
   check: require('./images/CodigoEnviado.png'),
   error: require('./images/Error.png'),
-  success: require('./images/CreditoExitoso.png')
+  success: require('./images/CreditoExitoso.png'),
+  bolsa: require('./images/bolsita_confiashop.png'),
+  confiashop_color: require('./images/confiashop.png')
 }
 
 export const colors = {
