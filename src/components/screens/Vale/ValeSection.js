@@ -128,10 +128,10 @@ class ValeSection extends Component {
                 <Icon style={[styles.iconCant, { marginTop: moderateScale(10), color: desembolsoId == 14 ? colors.tertiary : colors.green }]} type="FontAwesome5" name="plus-circle" />
               </TouchableOpacity>}
             </View>
-            <View style={styles.wrapperFooterVale}>
+            {desembolsoId == 14 ? <View></View> :<View style={styles.wrapperFooterVale}>
               <Text style={styles.textPayment}>Pago quincenal</Text>
               <Text style={styles.textCantPayment}>${fortnights[deadline_selected].tipoPlazos[0].importes[amount_selected].importePagoPlazo.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
-            </View>
+            </View>}
           </View> : <View style={styles.cardMoney}><Text style={styles.textPayment}>...</Text></View>}
         </View>
         <View style={[styles.bodyCard]}>
