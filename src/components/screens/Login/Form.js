@@ -27,7 +27,7 @@ class Form extends React.Component {
     this._storeData(distribuidor);
     if (distribuidor && password) {
       let uniqueId = getUniqueId();
-      this.props.login({ distribuidor, password, identificador: uniqueId });
+      this.props.login({ distribuidor: distribuidor.replace(/\s/g, ""), password, identificador: uniqueId });
     }
     else {
       Toast.show({
