@@ -17,7 +17,9 @@ export const images = {
   error: require('./images/Error.png'),
   success: require('./images/CreditoExitoso.png'),
   bolsa: require('./images/bolsita_confiashop.png'),
-  confiashop_color: require('./images/confiashop.png')
+  confiashop_color: require('./images/confiashop.png'),
+  vale_express: require('./images/logos/vale_express.png'),
+  vale_color: require('./images/logos/vale_color.png')
 }
 
 export const colors = {

@@ -96,7 +96,7 @@ class ValeSection extends Component {
     if(methods.find(method => method.active) != undefined){
       desembolsoId = methods.find(method => method.active).desembolsoTipoId;
     }
-
+    let plazo_selected = fortnights.find(method => method.active).plazo;
     return (
       <Content
         title="Nuevo Vale"
@@ -143,7 +143,7 @@ class ValeSection extends Component {
               <Image style={{ width: moderateScale(140), height: moderateScale(130)}} source={images.bolsa}></Image>
             </View></View>}
           </View>
-          : <View>
+          : loading ? <ActivityIndicator style={{ marginTop: moderateScale(8) }} color={colors.primary} /> : <View>
             <Text style={styles.titleBodyCenter}>
               {'Quincenas'}
             </Text>
@@ -161,6 +161,9 @@ class ValeSection extends Component {
                 )}
               </View> : <View style={[styles.wrapperButtonsNumbers, { marginTop: moderateScale(10) }]}><Text style={styles.textPayment}>...</Text></View>}
             </ScrollView>
+            <View style={{alignItems: "center", paddingTop: moderateScale(20),}}>
+              <Image style={{ width: moderateScale(140), height: moderateScale(130)}} source={plazo_selected == 4 ? images.vale_express : images.vale_color}></Image>
+            </View>
           </View>}
         </View>
       </Content>
