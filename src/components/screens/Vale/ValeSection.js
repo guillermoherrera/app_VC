@@ -161,8 +161,8 @@ class ValeSection extends Component {
                 )}
               </View> : <View style={[styles.wrapperButtonsNumbers, { marginTop: moderateScale(10) }]}><Text style={styles.textPayment}>...</Text></View>}
             </ScrollView>
-            <View style={{alignItems: "center", paddingTop: moderateScale(20),}}>
-              <Image style={{ width: moderateScale(140), height: moderateScale(130)}} source={plazo_selected == 4 ? images.vale_express : images.vale_color}></Image>
+            <View style={{alignItems: "center"}}>
+              <Image style={{ width: moderateScale(140), height: moderateScale(100)}} source={plazo_selected == 4 ? images.vale_express : images.vale_color}></Image>
             </View>
           </View>}
         </View>
