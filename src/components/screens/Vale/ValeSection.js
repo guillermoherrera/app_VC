@@ -4,7 +4,7 @@ import Dialog from "react-native-dialog";
 import { View, Text, ActivityIndicator, TouchableOpacity, ScrollView, Image, Alert, Keyboard } from 'react-native'
 import { Icon, Title } from 'native-base';
 import { HeaderQ as Content } from '../../common';
-import { onValeChanged, getValesDeadlines, onAmountIncreases, onAmountDecreases, onTogglePhoneInput, onPhoneInputChanges, saveVale } from '../../../store/actions';
+import { onValeChanged, getValesDeadlines, onAmountIncreases, onAmountDecreases, onAmountReset, onTogglePhoneInput, onPhoneInputChanges, saveVale } from '../../../store/actions';
 import styles from './Vale.style';
 import { moderateScale } from 'react-native-size-matters';
 import { colors, images } from '../../../assets';
@@ -97,6 +97,10 @@ class ValeSection extends Component {
       desembolsoId = methods.find(method => method.active).desembolsoTipoId;
     }
     let plazo_selected = fortnights.find(method => method.active).plazo;
+    if(amount_selected > fortnights[deadline_selected].tipoPlazos[0].importes.length - 1){
+      amount_selected = 0;
+      this.props.onAmountReset()
+    };
     return (
       <Content
         title="Nuevo Vale"
@@ -143,7 +147,7 @@ class ValeSection extends Component {
               <Image style={{ width: moderateScale(140), height: moderateScale(130)}} source={images.bolsa}></Image>
             </View></View>}
           </View>
-          : loading ? <ActivityIndicator style={{ marginTop: moderateScale(8) }} color={colors.primary} /> : <View>
+          :<View>
             <Text style={styles.titleBodyCenter}>
               {'Quincenas'}
             </Text>
@@ -180,6 +184,7 @@ const mapDispatchToProps = {
   getValesDeadlines,
   onAmountIncreases,
   onAmountDecreases,
+  onAmountReset,
   onTogglePhoneInput,
   onPhoneInputChanges,
   saveVale

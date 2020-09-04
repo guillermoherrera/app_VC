@@ -1,4 +1,4 @@
-import { VALE_FETCHING, VALE_FETCH_FAILED, VALE_CUSTOMER_DETAILS_FETCH, VALE_TRANSACTION_TYPES_FETCH, VALE_TRANSACTION_TYPE_CHANGED, VALE_CHANGED, VALE_REASONS_FETCH, VALE_REASON_CHANGED, CUSTOMER_BANK_DATA_FETCH, VALE_CUSTOMER_FILTER, VALE_GENERATE_FETCH, VALE_CODE_CHANGED, VALE_AMOUNT_INCREASES, VALE_AMOUNT_DECREASES, VALE_VALES_DEADLINES, VALE_TOGGLE_MODAL_CONFIRMATION, VALE_DISMISS_MODAL, VALE_VALIDATE_CODE_FETCH, VALE_TOGGLE_PHONE_INPUT, VALE_CONFIRMATION_SUBMIT, VALE_PHONE_INPUT_CHANGED, VALE_OUTSTANDING_CREDIT, CUSTOMER_BLOCKED } from "../types"
+import { VALE_FETCHING, VALE_FETCH_FAILED, VALE_CUSTOMER_DETAILS_FETCH, VALE_TRANSACTION_TYPES_FETCH, VALE_TRANSACTION_TYPE_CHANGED, VALE_CHANGED, VALE_REASONS_FETCH, VALE_REASON_CHANGED, CUSTOMER_BANK_DATA_FETCH, VALE_CUSTOMER_FILTER, VALE_GENERATE_FETCH, VALE_CODE_CHANGED, VALE_AMOUNT_INCREASES, VALE_AMOUNT_DECREASES, VALE_AMOUNT_RESET, VALE_VALES_DEADLINES, VALE_TOGGLE_MODAL_CONFIRMATION, VALE_DISMISS_MODAL, VALE_VALIDATE_CODE_FETCH, VALE_TOGGLE_PHONE_INPUT, VALE_CONFIRMATION_SUBMIT, VALE_PHONE_INPUT_CHANGED, VALE_OUTSTANDING_CREDIT, CUSTOMER_BLOCKED } from "../types"
 
 const initialState = {
   loading: false,
@@ -15,7 +15,28 @@ const initialState = {
   deadline_selected: 0,
   amount_selected: 0,
   fortnights: [{
-    plazo: "8",
+    plazo: "4",
+    tipoPlazos: [{
+      tipoPlazoId: "Q",
+      importes: [{
+        importe: 500.0,
+        importePagoPlazo: 175.5
+      }, {
+        importe: 1000.0,
+        importePagoPlazo: 335.50
+      },
+      {
+        importe: 1500.0,
+        importePagoPlazo: 495.25
+      },
+      {
+        importe: 2000.0,
+        importePagoPlazo: 655.0
+      }],
+    }],
+    active: true
+  },
+  {plazo: "8",
     tipoPlazos: [{
       tipoPlazoId: "Q",
       importes: [{
@@ -34,7 +55,7 @@ const initialState = {
         importePagoPlazo: 308.0
       }],
     }],
-    active: true
+    //active: true
   },
   {
     plazo: "10",
@@ -113,11 +134,13 @@ export default (state = initialState, { type, payload }) => {
     case VALE_CODE_CHANGED:
       return { ...state, code: payload.toUpperCase() }
     case VALE_VALES_DEADLINES:
-      return { ...state, fortnights: payload[0].hasOwnProperty('plazo') ? payload : [], loading: false }
+      return { ...state, fortnights: payload[0].hasOwnProperty('plazo') ? payload : [], loading: false, deadline_selected: 0 }
     case VALE_AMOUNT_INCREASES:
       return { ...state, amount_selected: state.amount_selected + 1 }
     case VALE_AMOUNT_DECREASES:
       return { ...state, amount_selected: state.amount_selected - 1 }
+    case VALE_AMOUNT_RESET:
+      return { ...state, amount_selected: 0}
     case VALE_TOGGLE_PHONE_INPUT:
       return { ...state, showInputPhone: !state.showInputPhone }
     case VALE_TOGGLE_MODAL_CONFIRMATION:
