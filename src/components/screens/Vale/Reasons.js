@@ -17,7 +17,7 @@ class Reasons extends Component {
   }
   _save() {
     let { vale } = this.props
-    let { customer_details, methods, fortnights, deadline_selected, amount_selected, phoneInput } = vale
+    let { customer_details, methods, fortnights, deadline_selected, amount_selected, phoneInput, reasons } = vale
     let method = methods.find(method => method.active)
     let payload = {
       clienteId: customer_details.clienteId,
@@ -27,6 +27,7 @@ class Reasons extends Component {
       desembolsoTipoId: method.desembolsoTipoId,
       tipoPlazoId: fortnights[deadline_selected].tipoPlazos[0].tipoPlazoId,
       valeTipoId: 1,
+      destinoCreditoId: reasons.find(reason => reason.active).motivoTipoId,
     }
 
     Keyboard.dismiss();
