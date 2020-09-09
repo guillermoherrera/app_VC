@@ -13,7 +13,7 @@ class Login extends PureComponent {
     return (
       <Root>
         <Container style={{ backgroundColor: colors.secondary }}>
-          <Header noShadow transparent androidStatusBarColor={colors.secondary} iosBarStyle="light-content" style={{ height: verticalScale(50) }} />
+          <Header noShadow androidStatusBarColor={colors.secondary} iosBarStyle="light-content" style={{ height: verticalScale(20), backgroundColor: colors.secondary }} />
           <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: moderateScale(8) }}>
             <Image source={images.logo} style={{ width: scale(180), height: verticalScale(75) }} />
             <Text style={[LoginStyles.textInput, { fontSize: moderateScale(20), color: 'white' }]}>v. {getVersion()}</Text>

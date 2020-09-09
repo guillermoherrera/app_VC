@@ -24,7 +24,7 @@ export default class App extends Component {
 
   componentDidMount() {
     this.isSignedIn()
-      .then(res => { this.setState({ signedIn: res, checkedSignIn: true }); RNBootSplash.hide(); })
+      .then(res => { this.setState({ signedIn: res, checkedSignIn: true }); RNBootSplash.hide({duration: 900}); })
       .catch(err => console.log("App Error",err));
   }
 
