@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native';
-import { CUSTOMER_FETCHING, CUSTOMER_BANK_DATA_FETCH, CUSTOMER_FETCH_FAILED, CUSTOMER_CUSTOMERS_FETCH, CUSTOMER_TOGGLE_FILTER, CUSTOMER_FILTER_CHANGED, CUSTOMER_ORDER_CHANGED, CUSTOMER_STATUS_CHANGED, CUSTOMER_BLOCKED, CUSTOMER_ADDRESS_SUGGESTIONS, CUSTOMER_FORM_ADD_CHANGED, CUSTOMER_ADD_FETCH } from "../types";
+import { CUSTOMER_FETCHING, CUSTOMER_BANK_DATA_FETCH, CUSTOMER_FETCH_FAILED, CUSTOMER_CUSTOMERS_FETCH, CUSTOMER_TOGGLE_FILTER, CUSTOMER_FILTER_CHANGED, CUSTOMER_ORDER_CHANGED, CUSTOMER_STATUS_CHANGED, CUSTOMER_BLOCKED, CUSTOMER_ADDRESS_SUGGESTIONS, CUSTOMER_FORM_ADD_CHANGED, CUSTOMER_ADD_FETCH, VALE_OCCUPATIONS_FETCH, VALE_MARITAL_STATE_FETCH, VALE_STATES_FETCH } from "../types";
 import { constants, toast } from '../../assets';
 import { getRequest, request } from '../../config/service';
 import { ValidatorService } from '../../services/validator';
@@ -146,6 +146,45 @@ const onFormAddChanged = (payload) => ({
   payload
 })
 
+const getOcupacion = () => {
+  return async dispatch => {
+    dispatch({ type: CUSTOMER_FETCHING })
+    getRequest(methods.GET, `${paths.get_occupations}`).then(async response => {
+      console.log('ocupaciones', response);
+      dispatch({ type: VALE_OCCUPATIONS_FETCH, payload: response.data });
+    }).catch(error => {
+      dispatch({ type: CUSTOMER_FETCH_FAILED, payload: error.message })
+      console.log('ocupaciones error', error.message);
+    })
+  }
+}
+
+const getEstadoCivil = () => {
+  return async dispatch => {
+    dispatch({ type: CUSTOMER_FETCHING })
+    getRequest(methods.GET, `${paths.get_marital_status}`).then(async response => {
+      console.log('estado civil', response)
+      dispatch({ type: VALE_MARITAL_STATE_FETCH, payload: response.data });
+    }).catch(error =>{
+      dispatch({ type: CUSTOMER_FETCH_FAILED, payload: error.message })
+      console.log('ocupaciones error', error.message);
+    })
+  }
+}
+
+const getEstados = () => {
+  return async dispatch => {
+    dispatch({ type: CUSTOMER_FETCHING })
+    getRequest(methods.GET, `${paths.get_states}`).then(async response => {
+      console.log('estados', response)
+      dispatch({ type: VALE_STATES_FETCH, payload: response.data });
+    }).catch(error =>{
+      dispatch({ type: CUSTOMER_FETCH_FAILED, payload: error.message })
+      console.log('ocupaciones error', error.message);
+    })
+  }
+}
+
 const customerSave = (payload) => {
   return async dispatch => {
     //Reglas para validación
@@ -165,6 +204,10 @@ const customerSave = (payload) => {
       entreCalle2: 'required',
       tipoDomicilio: 'required',
       descripcionDomicilio: 'required',
+      ocupacionId: 'required',
+      estadoCivilId: 'required',
+      estadoNacimientoId: 'required',
+      ingresos: 'required'
     }
     //Nombre de los campos para mostrar en los errores
     let customAttributes = {
@@ -183,6 +226,10 @@ const customerSave = (payload) => {
       entreCalle2: 'y entre calle',
       tipoDomicilio: 'tipo de domicilio',
       descripcionDomicilio: 'descripción del domicilio',
+      ocupacionId: 'ocupación',
+      estadoCivilId: 'estado civil',
+      estadoNacimientoId: 'estado de nacimiento',
+      ingresos: 'ingreso mensual'
     }
 
     let validator = ValidatorService.validate(payload, rules, customAttributes)
@@ -193,6 +240,7 @@ const customerSave = (payload) => {
       toast.showToast(message, 5000, 'warning')
     }
     else {
+      console.log('###', payload)
       dispatch({ type: CUSTOMER_FETCHING });      
       let user = JSON.parse(await AsyncStorage.getItem(constants.USER))
       let data = { ...payload, distribuidorId: user.DistribuidorId }
@@ -235,5 +283,8 @@ export {
   blockCustomer,
   onAddressSuggestionChanged,
   onFormAddChanged,
-  customerSave
+  customerSave,
+  getOcupacion,
+  getEstadoCivil,
+  getEstados
 }

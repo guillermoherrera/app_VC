@@ -1,4 +1,4 @@
-import { CUSTOMER_FETCHING, CUSTOMER_CUSTOMERS_FETCH, CUSTOMER_BANK_DATA_FETCH, CUSTOMER_FETCH_FAILED, CUSTOMER_TOGGLE_FILTER, CUSTOMER_FILTER_CHANGED, CUSTOMER_ORDER_CHANGED, CUSTOMER_STATUS_CHANGED, CUSTOMER_BLOCKED, CUSTOMER_ADDRESS_SUGGESTIONS, CUSTOMER_FORM_ADD_CHANGED, CUSTOMER_ADD_FETCH } from "../types";
+import { CUSTOMER_FETCHING, CUSTOMER_CUSTOMERS_FETCH, CUSTOMER_BANK_DATA_FETCH, CUSTOMER_FETCH_FAILED, CUSTOMER_TOGGLE_FILTER, CUSTOMER_FILTER_CHANGED, CUSTOMER_ORDER_CHANGED, CUSTOMER_STATUS_CHANGED, CUSTOMER_BLOCKED, CUSTOMER_ADDRESS_SUGGESTIONS, CUSTOMER_FORM_ADD_CHANGED, CUSTOMER_ADD_FETCH, VALE_OCCUPATIONS_FETCH, VALE_MARITAL_STATE_FETCH, VALE_STATES_FETCH } from "../types";
 
 const statuses = [{
   name: 'SITUACION NORMAL',
@@ -26,7 +26,11 @@ const FORM_ADD = {
   entreCalle1: '',
   entreCalle2: '',
   tipoDomicilio: '',
-  descripcionDomicilio: ''
+  descripcionDomicilio: '',
+  ocupacionId: '',
+  estadoCivilId: '',
+  estadoNacimientoId: '',
+  ingresos: ''
 }
 
 const INITIAL_STATE = {
@@ -53,6 +57,9 @@ const INITIAL_STATE = {
   },
   addressSuggests: [],
   formAdd: { ...FORM_ADD },
+  occupations: [],
+  maritalStates: [],
+  states: []
 }
 
 
@@ -82,6 +89,12 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return { ...state, formAdd: { ...state.formAdd, [payload.key]: payload.value } }
     case CUSTOMER_ADD_FETCH:
       return { ...state, formAdd: FORM_ADD, addressSuggests: [], loading: false }
+    case VALE_OCCUPATIONS_FETCH:
+      return { ...state, occupations: payload, loading: false}
+    case VALE_MARITAL_STATE_FETCH:
+      return { ...state, maritalStates: payload, loading: false}
+    case VALE_STATES_FETCH:
+      return { ...state, states: payload, loading: false} 
     default:
       return state
   }

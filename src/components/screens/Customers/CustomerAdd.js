@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity, FlatList, Platform } from 'react-native';
 import { ListItem, Left, Icon, Right } from 'native-base';
 import { HeaderQ, Loading, InputQ, CustomDateInput, CustomPickerInput } from '../../common';
-import { onAddressSuggestionChanged, onFormAddChanged, customerSave } from '../../../store/actions';
+import { onAddressSuggestionChanged, onFormAddChanged, customerSave, getOcupacion, getEstadoCivil, getEstados } from '../../../store/actions';
 import { colors } from '../../../assets';
 import { GOOGLE_API_KEY } from '../../../config/env';
 import styles from './Customers.styles';
@@ -26,6 +26,9 @@ class CustomerAdd extends Component {
   componentDidMount() {
     console.log("xxx")
     Geocoder.fallbackToGoogle(GOOGLE_API_KEY);
+    this.props.getOcupacion();
+    this.props.getEstadoCivil();
+    this.props.getEstados();
   }
   _renderFooter() {
     let { customer } = this.props;
@@ -83,8 +86,12 @@ class CustomerAdd extends Component {
 
   render() {
     let { customer } = this.props;
-    let { addressSuggests, formAdd, loading } = customer
+    let { addressSuggests, formAdd, loading, occupations, maritalStates, states } = customer
+    let occupationsItem = [], maritalStatesItem = [], statesItem = []
     if (loading) return <Loading />
+    occupations.map((item, index) => occupationsItem.push({label: item.ocupacionDesc,value: item.ocupacionId}))
+    maritalStates.map((item, index) => maritalStatesItem.push({label: item.estadoDesc, value: item.estadoId}))
+    states.map((item, index) => statesItem.push({label: item.estadoDesc, value: item.estadoId}))
     return (
       <HeaderQ title="Nuevo Cliente" contentStyle={styles.containerStyle} footer={this._renderFooter()}>        
         <View style={styles.containerCard}>
@@ -211,6 +218,32 @@ class CustomerAdd extends Component {
             value={formAdd.descripcionDomicilio}
             placeholder="Escribe la descripción del domicilio"
           />
+          <CustomPickerInput
+            label="Ocupación"
+            items={occupationsItem}
+            value={formAdd.ocupacionId}
+            onChangeText={(value) => { this.props.onFormAddChanged({ key: "ocupacionId", value }) }}
+          />
+          <CustomPickerInput
+            label="Estado Civil"
+            items={maritalStatesItem}
+            value={formAdd.estadoCivilId}
+            onChangeText={(value) => { this.props.onFormAddChanged({ key: "estadoCivilId", value }) }}
+          />
+          <CustomPickerInput
+            label="Estado de Nacimiento"
+            items={statesItem}
+            value={formAdd.estadoNacimientoId}
+            onChangeText={(value) => { this.props.onFormAddChanged({ key: "estadoNacimientoId", value }) }}
+          />
+          <InputQ
+            label={"Ingresos"}
+            onChangeText={(value) => { this.props.onFormAddChanged({ key: "ingresos", value }) }}
+            value={formAdd.ingresos}
+            placeholder="Ingresos por mes"
+            kType="numeric"
+            maxLength={5}
+          />
         </View>
       </HeaderQ >
     );
@@ -224,7 +257,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   onAddressSuggestionChanged,
   onFormAddChanged,
-  customerSave
+  customerSave,
+  getOcupacion,
+  getEstadoCivil,
+  getEstados
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerAdd);
