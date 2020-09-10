@@ -5,7 +5,7 @@ import styles from './Login.styles';
 import { connect } from 'react-redux';
 import { ButtonQ, InputQ } from '../../common';
 import { toggleForm, login, changeInput } from '../../../store/actions';
-import { colors } from '../../../assets';
+import { colors, constants } from '../../../assets';
 import { moderateScale } from 'react-native-size-matters';
 import { getUniqueId } from "react-native-device-info";
 import navigation from '../../../services/navigation';
@@ -22,12 +22,13 @@ class Form extends React.Component {
     } catch (error) {console.log("error", error);}
   };
 
-  signIn(distribuidor, password) {
+  async signIn(distribuidor, password) {
     Keyboard.dismiss();
     this._storeData(distribuidor);
     if (distribuidor && password) {
       let uniqueId = getUniqueId();
-      this.props.login({ distribuidor: distribuidor.replace(/\s/g, ""), password, identificador: uniqueId });
+      let pushToken = await AsyncStorage.getItem(constants.PUSHTOKEN)
+      this.props.login({ distribuidor: distribuidor.replace(/\s/g, ""), password, identificador: uniqueId, pushToken });
     }
     else {
       Toast.show({
