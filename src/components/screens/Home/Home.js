@@ -6,7 +6,7 @@ import { HeaderQ, CardBalance } from '../../common';
 import { Thumbnail, Text, Row, Title, Left, Right, Button, Icon, Col } from 'native-base';
 import { Icon as RoundIcon, Tooltip } from "react-native-elements";
 import { images, colors } from '../../../assets';
-import { getSummary, getRelation, getPdf, getProfilePicture, getdeferredCharges } from '../../../store/actions';
+import { getSummary, getRelation, getPdf, getProfilePicture, getdeferredCharges, getBalanceConfiashop } from '../../../store/actions';
 import moment from "moment";
 import "moment/locale/es";
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
@@ -27,6 +27,7 @@ class Home extends PureComponent {
     this.props.getRelation()
     this.props.getPdf()
     this.props.getProfilePicture()
+    this.props.getBalanceConfiashop()
   }
 
   _onRefresh = () => {
@@ -34,6 +35,7 @@ class Home extends PureComponent {
     this.props.getSummary()
     this.props.getRelation()
     this.props.getPdf()
+    this.props.getBalanceConfiashop()
 
     this.setState({ now: moment().format('DD/MM/YYYY HH:mm a') })
   }
@@ -53,7 +55,7 @@ class Home extends PureComponent {
 
   render() {
     let { navigation, profile } = this.props;
-    let { summary, bonus, relation, personal_loan, pdf, user_photo, loading_photo, disponibleTotal, limiteTotal, saldoActualTotal, atraso, relacionDisponible, detalleCargosDiferidos } = profile
+    let { summary, bonus, relation, personal_loan, pdf, user_photo, loading_photo, disponibleTotal, limiteTotal, saldoActualTotal, atraso, relacionDisponible, detalleCargosDiferidos, monederoConfiashop } = profile
     return (
       <HeaderQ
         navigation={this.props.navigation}
@@ -92,6 +94,10 @@ class Home extends PureComponent {
             <Row style={styles.mrt15}>
               <Left><Title style={styles.totalDetail}>Línea otorgada</Title></Left>
               <Right style={{ justifyContent: "flex-end" }}><Text style={styles.totalPrice}>${limiteTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text></Right>
+            </Row>
+            <Row style={styles.mrt15}>
+              <Left><Title style={styles.totalDetail}>Monedero ConfiaShop</Title></Left>
+              <Right style={{ justifyContent: "flex-end" }}><Text style={styles.totalPrice}>${monederoConfiashop.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text></Right>
             </Row>
             {detalleCargosDiferidos && <Row style={styles.mrt15}>
               <Left><Title style={styles.totalDetail}>Saldo COVID</Title></Left>
@@ -265,7 +271,8 @@ const mapDispatchToProps = {
   getRelation,
   getPdf,
   getProfilePicture,
-  getdeferredCharges
+  getdeferredCharges,
+  getBalanceConfiashop
 };
 
 export default connect(

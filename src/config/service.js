@@ -28,6 +28,18 @@ export const request = async (type, path, data = {}) => {
   });
 }
 
+export const requestGeneric = async (type, path, data = {}, headers = {}) => {
+  console.log("url request --> ", `$${path}`);
+  let argument = data != null ? {method: type, headers: headers, body: JSON.stringify(data)} : {method: type, headers: headers} 
+  return await fetch(`${path}`, argument).then(async response => {    
+    if (response.status == 401) throw new Error('unauthorized')
+    else if (!response.ok) throw new Error(await response.text());
+    return response.json()
+  }).catch(error => {
+    throw new Error(error.message)
+  });
+}
+
 export const getRequest = async (type, path) => {  
   let _url = await getEnv();
   console.log("url getRequest --> ", `${_url}/${path}`);

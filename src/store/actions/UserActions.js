@@ -16,9 +16,10 @@ import {
   USER_LOGOUT_FETCHING,
   USER_LOGOUT_FETCH_FAILED,
   USER_DEFERRED_CHARGES_FETCH,
+  USER_BCONFIASHOP_FETCH,
 } from "../types";
 import { constants, images, toast } from '../../assets';
-import { getRequest, requestFile } from '../../config/service';
+import { getRequest, requestFile, requestGeneric } from '../../config/service';
 import NavigationService from "../../services/navigation";
 
 // methods allowed and paths to request
@@ -77,6 +78,33 @@ const getSummary = () => {
           toast.showToast("ERROR AL OBTENER DETALLE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger")
         }
       }
+    });
+  }
+}
+
+const getBalanceConfiashop = () =>{
+  return async dispatch => {
+    dispatch({ type: USER_FETCHING });
+    let data = { email: 'jjaramillo@fconfia.com', password: 'jjaramillo'};
+    let headers = {'Content-Type': 'application/json'}
+    requestGeneric(methods.POST, `http://lealtad.confiashop.com/api/Auth/login`, data, headers).then(async response => {
+      console.log("###Token", response);
+      
+      //Request Consulta Saldo////////////////
+      let user = JSON.parse(await AsyncStorage.getItem(constants.USER));
+      headers = {'Content-Type': 'application/json', "Authorization": `Bearer ${response.token}`};
+      requestGeneric(methods.Get, `http://lealtad.confiashop.com/api/Lealtad?id_usuario=${user.DistribuidorId}`, null, headers).then(async response => {
+        console.log("###Token2", response);
+        dispatch({ type: USER_BCONFIASHOP_FETCH, payload: response[0] });
+      }).catch(error => {
+        dispatch({ type: USER_FETCH_FAILED, payload: error.message });
+        toast.showToast(`Error al consultar Monedero Confiashop\n (${error.message})`, 5000, "danger")
+      });
+      ///////////////////////////////////////
+
+    }).catch(error => {
+      dispatch({ type: USER_FETCH_FAILED, payload: error.message });
+      toast.showToast(`Error al consultar Monedero Confiashop\n (${error.message})`, 5000, "danger")
     });
   }
 }
@@ -214,5 +242,6 @@ export {
   getPdf,
   getProfilePicture,
   getdeferredCharges,
-  logout
+  logout,
+  getBalanceConfiashop,
 }

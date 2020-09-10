@@ -24,6 +24,7 @@ import {
   USER_ACTIVATE_FETCH,
   USER_UPDATE_ADDRESS_FETCH,
   USER_DEFERRED_CHARGES_FETCH,
+  USER_BCONFIASHOP_FETCH,
 } from "../types";
 
 const FormRecovery = {
@@ -88,6 +89,7 @@ const INITIAL_STATE = {
   disponibleTotal: 0,
   limiteTotal: 0,
   relacionDisponible: false,
+  monederoConfiashop: 0,
 }
 
 
@@ -111,6 +113,8 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return { ...state, loading: false, hasError: payload }
     case USER_SUMMARY_FETCH:
       return { ...state, summary: payload.detalle, ...payload, loading: false, refreshing: false }
+    case USER_BCONFIASHOP_FETCH:
+      return { ...state, monederoConfiashop: payload != null ? payload.saldo : 0}
     case USER_FETCH_FAILED:
       return { ...state, loading: false, refreshing: false }
     case USER_PROFILE_CHANGED:
