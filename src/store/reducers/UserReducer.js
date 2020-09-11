@@ -90,6 +90,8 @@ const INITIAL_STATE = {
   limiteTotal: 0,
   relacionDisponible: false,
   monederoConfiashop: 0,
+  versionIOS: 1.1,
+  versionAndroid: 1.1,
 }
 
 

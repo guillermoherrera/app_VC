@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, TouchableOpacity, RefreshControl, FlatList, Linking } from 'react-native';
+import { View, TouchableOpacity, RefreshControl, FlatList, Linking, Image, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './Home.styles';
 import { HeaderQ, CardBalance } from '../../common';
@@ -10,13 +10,17 @@ import { getSummary, getRelation, getPdf, getProfilePicture, getdeferredCharges,
 import moment from "moment";
 import "moment/locale/es";
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
+import Modal from 'react-native-modal';
+import { getVersion } from 'react-native-device-info';
 
 class Home extends PureComponent {
   state = {
     now: moment().format('DD/MM/YYYY HH:mm a'),
     totalUsed: 0,
     totalAvailable: 0,
-    totalGranted: 0
+    totalGranted: 0,
+    showModal: false,
+    checkVersion: false,
   }
 
   componentDidMount() {
@@ -37,7 +41,7 @@ class Home extends PureComponent {
     this.props.getPdf()
     this.props.getBalanceConfiashop()
 
-    this.setState({ now: moment().format('DD/MM/YYYY HH:mm a') })
+    this.setState({ now: moment().format('DD/MM/YYYY HH:mm a'), checkVersion: false })
   }
 
   _downloadPDF(pdf) {
@@ -56,6 +60,12 @@ class Home extends PureComponent {
   render() {
     let { navigation, profile } = this.props;
     let { summary, bonus, relation, personal_loan, pdf, user_photo, loading_photo, disponibleTotal, limiteTotal, saldoActualTotal, atraso, relacionDisponible, detalleCargosDiferidos, monederoConfiashop } = profile
+    console.log('###', profile.versionAndroid);
+    console.log('###', Platform.OS)
+    if(!this.state.checkVersion){
+      if(Platform.OS === 'ios' && profile.versionIOS > getVersion()) this.setState({ showModal: true })
+      if(Platform.OS === 'android' && profile.versionAndroid > getVersion()) this.setState({ showModal: true })
+    }
     return (
       <HeaderQ
         navigation={this.props.navigation}
@@ -75,6 +85,19 @@ class Home extends PureComponent {
             refreshing={profile.refreshing}
             onRefresh={this._onRefresh} />
         }>
+        <Modal isVisible={this.state.showModal} animationType = {"slide"}>
+          <View style={{backgroundColor: 'white', borderRadius:40}}>
+            <View style={{ alignItems: 'center'}}>
+              <Image style={{ backgroundColor: colors.secondary, borderTopRightRadius: 40, borderTopLeftRadius: 40, width: '100%', height: moderateScale(200)}} source={images.logo}></Image>
+            </View>
+            <View style={{ padding: moderateScale(20)}}>
+              <Text style={{ textAlign:'center', fontSize: moderateScale(15), fontWeight: 'bold' }} >{profile.mensaje}</Text>
+              <View style={{ alignItems: 'center', marginTop: moderateScale(20)}}>
+                <Button style={styles.buttonFooter} onPress={() => this.setState({ showModal: false, checkVersion: true })} ><Text style={styles.textButtonFooter}>Entendido</Text></Button>
+              </View>
+            </View>
+          </View>
+        </Modal>
         <View>
           {/*  title */}
           <View style={styles.paddingContent}>

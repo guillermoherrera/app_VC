@@ -69,9 +69,9 @@ export default class App extends Component {
 function AppNotification({checkedSignIn, store, AppNavigator}) {
 
   const [showModal, setShowModal] = useState(false);
-  const [title, setTitle] = useState('Titulo de la notificación');
+  const [title, setTitle] = useState('Vale Confía');
   const [content, setContent] = useState('Mensaje detallado de la notificacion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
-  const [image, setImage] = useState('https://is5-ssl.mzstatic.com/image/thumb/Purple123/v4/fb/e3/0a/fbe30a3d-00a4-e7db-29e4-b908d69a7d5e/source/512x512bb.jpg');
+  const [image, setImage] = useState('https://firebasestorage.googleapis.com/v0/b/app-vc-e5ea5.appspot.com/o/notificaciones%2FvaleConfia.jpg?alt=media&token=d7979930-613b-418d-a960-eb3fb6880c3e');
 
   useEffect(() => {
     fcmService.registerAppWithFCM()
@@ -99,13 +99,21 @@ function AppNotification({checkedSignIn, store, AppNavigator}) {
         options
       )
     }
+    
+    function _cleanNotification(){
+      setImage('https://firebasestorage.googleapis.com/v0/b/app-vc-e5ea5.appspot.com/o/notificaciones%2FvaleConfia.jpg?alt=media&token=d7979930-613b-418d-a960-eb3fb6880c3e')
+      setTitle('Vale Confía')
+    }
 
     function onOpenNotification(notify) {
       console.log("[App] onOpenNotification: ", notify)
-      setShowModal(true)
-      setTitle(notify['title'])
-      setContent(notify['body'])
-      setImage(notify['android']['imageUrl'])
+      _cleanNotification();
+      if(notify['body'] != null){
+        setShowModal(true)
+        if(notify['title'] != null)setTitle(notify['title'])
+        setContent(notify['body'])
+        if(notify['android']['imageUrl'] != null )setImage(notify['android']['imageUrl'])
+      }
       //alert("Open Notification: " + notify.body)
       //Alert.alert(notify.title, notify.body);
     }
@@ -127,7 +135,7 @@ function AppNotification({checkedSignIn, store, AppNavigator}) {
             <View style={{ alignItems: 'center'}}>
               <Image style={{ backgroundColor: '#f8f8f8', width: moderateScale(250), height: moderateScale(200)}} resizeMode='contain' source={{uri: image}}></Image>
             </View>
-            <Text style={{ paddingBottom: moderateScale(10), paddingTop: moderateScale(10), textAlign:'justify', fontSize: moderateScale(12) } } >{content}</Text>
+            <Text style={{ paddingBottom: moderateScale(10), paddingTop: moderateScale(10), textAlign:'justify', fontSize: moderateScale(14) } } >{content}</Text>
             <Button color={colors.secondary} title="Entendido" onPress={() => setShowModal(false)} />
           </View>
         </Modal>
