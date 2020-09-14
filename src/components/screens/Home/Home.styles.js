@@ -16,6 +16,11 @@ export default styles = StyleSheet.create({
     color: colors.green,
     fontWeight: '900'
   },
+  totalDetailIOS:{
+    fontSize: moderateScale(14),
+    color: colors.green,
+    fontWeight: '900'
+  },
   totalPrice:{
     fontWeight: '900',
     fontSize: moderateScale(18),

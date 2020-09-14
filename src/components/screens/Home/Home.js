@@ -119,7 +119,7 @@ class Home extends PureComponent {
               <Right style={{ justifyContent: "flex-end" }}><Text style={styles.totalPrice}>${limiteTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text></Right>
             </Row>
             <Row style={styles.mrt15}>
-              <Left><Title style={styles.totalDetail}>Monedero ConfiaShop</Title></Left>
+              <Left><Title style={Platform.OS === 'ios' ? styles.totalDetailIOS : styles.totalDetail}>Monedero ConfiaShop</Title></Left>
               <Right style={{ justifyContent: "flex-end" }}><Text style={styles.totalPrice}>${monederoConfiashop.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text></Right>
             </Row>
             {detalleCargosDiferidos && <Row style={styles.mrt15}>

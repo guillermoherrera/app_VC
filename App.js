@@ -73,7 +73,7 @@ function AppNotification({checkedSignIn, store, AppNavigator}) {
   const [content, setContent] = useState('Mensaje detallado de la notificacion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
   const [image, setImage] = useState('https://firebasestorage.googleapis.com/v0/b/app-vc-e5ea5.appspot.com/o/notificaciones%2FvaleConfia.jpg?alt=media&token=d7979930-613b-418d-a960-eb3fb6880c3e');
 
-  useEffect(() => {
+  /*useEffect(() => {
     fcmService.registerAppWithFCM()
     fcmService.register(onRegister, onNotification, onOpenNotification)
     localNotificationService.configure(onOpenNotification)
@@ -124,7 +124,7 @@ function AppNotification({checkedSignIn, store, AppNavigator}) {
       localNotificationService.unregister()
     }
 
-  }, [])
+  }, [])*/
 
   return (
     !checkedSignIn ? <Loading /> : <Root>
