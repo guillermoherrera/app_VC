@@ -60,8 +60,8 @@ class Home extends PureComponent {
   render() {
     let { navigation, profile } = this.props;
     let { summary, bonus, relation, personal_loan, pdf, user_photo, loading_photo, disponibleTotal, limiteTotal, saldoActualTotal, atraso, relacionDisponible, detalleCargosDiferidos, monederoConfiashop } = profile
-    console.log('###', profile.versionAndroid);
-    console.log('###', Platform.OS)
+    //console.log('###', profile.versionAndroid);
+    //console.log('###', Platform.OS)
     if(!this.state.checkVersion){
       if(Platform.OS === 'ios' && profile.versionIOS > getVersion()) this.setState({ showModal: true })
       if(Platform.OS === 'android' && profile.versionAndroid > getVersion()) this.setState({ showModal: true })

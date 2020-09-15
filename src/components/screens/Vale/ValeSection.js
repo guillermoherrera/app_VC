@@ -11,7 +11,18 @@ import { colors, images } from '../../../assets';
 
 class ValeSection extends Component {
   _nextPage() {
-    this.props.navigation.navigate('Reasons')
+    let { vale } = this.props
+    let { fortnights, deadline_selected} = vale
+    let plazo = fortnights[deadline_selected].plazo
+    if(plazo > 0){
+      this.props.navigation.navigate('Reasons')
+    }else{
+      Alert.alert(
+        'Oops', 
+        `Ha ocurido un error al guardar la información, por favor vuelve a intenarlo`, 
+        [{text: 'Volver a intentarlo', onPress: () => this.props.navigation.goBack()}]
+      )
+    }
   }
 
   componentDidMount() {

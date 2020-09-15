@@ -107,8 +107,8 @@ function AppNotification({checkedSignIn, store, AppNavigator}) {
 
     function onOpenNotification(notify) {
       console.log("[App] onOpenNotification: ", notify)
-      _cleanNotification();
       if(notify['body'] != null){
+        _cleanNotification();
         setShowModal(true)
         if(notify['title'] != null)setTitle(notify['title'])
         setContent(notify['body'])

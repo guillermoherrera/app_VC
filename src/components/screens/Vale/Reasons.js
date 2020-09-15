@@ -34,6 +34,16 @@ class Reasons extends Component {
     this.props.saveVale(payload)
   }
 
+  _alertMotivo(){
+    let { vale } = this.props
+    let { reasons } = vale
+    if(reasons.find(reason => reason.active) == null){
+      Alert.alert('Selecciona un motivo', `Por favor selecciona un motivo para poder continuar.`, [{ text: 'Entendido', onPress: () => {} }])
+    } else{
+      this._confirmAlert()
+    }
+  }
+
   _confirmAlert() {
     let { vale } = this.props
     let { customer_details } = vale
@@ -50,7 +60,7 @@ class Reasons extends Component {
     if (!loading) {
       return (
         <TouchableOpacity
-          onPress={() => this._confirmAlert()}
+          onPress={() => this._alertMotivo()}
           style={[styles.footerCard]}>
           <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
             <Text style={styles.textButton}>
