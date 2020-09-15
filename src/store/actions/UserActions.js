@@ -98,13 +98,13 @@ const getBalanceConfiashop = () =>{
         dispatch({ type: USER_BCONFIASHOP_FETCH, payload: response[0] });
       }).catch(error => {
         dispatch({ type: USER_FETCH_FAILED, payload: error.message });
-        toast.showToast(`Error al consultar Monedero Confiashop\n (${error.message})`, 5000, "danger")
+        toast.showToast(`Error al consultar saldo Monedero Confiashop ${user.DistribuidorId}\n (${error.message})`, 5000, "danger")
       });
       ///////////////////////////////////////
 
     }).catch(error => {
       dispatch({ type: USER_FETCH_FAILED, payload: error.message });
-      toast.showToast(`Error al consultar Monedero Confiashop\n (${error.message})`, 5000, "danger")
+      toast.showToast(`Error al conectar con Monedero Confiashop\n (${error.message})`, 5000, "danger")
     });
   }
 }
