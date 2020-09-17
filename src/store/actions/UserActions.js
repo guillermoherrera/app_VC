@@ -87,13 +87,13 @@ const getBalanceConfiashop = () =>{
     dispatch({ type: USER_FETCHING });
     let data = { email: 'jjaramillo@fconfia.com', password: 'jjaramillo'};
     let headers = {'Content-Type': 'application/json'}
-    requestGeneric(methods.POST, `http://lealtad.confiashop.com/api/Auth/login`, data, headers).then(async response => {
+    requestGeneric(methods.POST, `https://lealtad.confiashop.com/api/Auth/login`, data, headers).then(async response => {
       console.log("###Token", response);
       
       //Request Consulta Saldo////////////////
       let user = JSON.parse(await AsyncStorage.getItem(constants.USER));
       headers = {'Content-Type': 'application/json', "Authorization": `Bearer ${response.token}`};
-      requestGeneric(methods.Get, `http://lealtad.confiashop.com/api/Lealtad?id_usuario=${user.DistribuidorId}`, null, headers).then(async response => {
+      requestGeneric(methods.Get, `https://lealtad.confiashop.com/api/Lealtad?id_usuario=${user.DistribuidorId}`, null, headers).then(async response => {
         console.log("###Token2", response);
         dispatch({ type: USER_BCONFIASHOP_FETCH, payload: response[0] });
       }).catch(error => {
