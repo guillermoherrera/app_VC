@@ -1,4 +1,4 @@
-import { LOAN_FETCH_FAILED, LOAN_FETCHING, LOAN_LOANS_FETCH, LOAN_CHANGED_TAB, LOAN_TOGGLE_FILTER, LOAN_FILTER_CHANGED, LOAN_ORDER_CHANGED, LOAN_STATUS_CHANGED, LOAN_DATE_CHANGED, LOAN_VALES_FETCH, LOAN_CREDIT_DETAILS_FETCH, LOAN_CONFIASHOP_FETCH, LOAN_VALE_TYPE_CHANGED, LOAN_SET_FOLIO_DIGITAL, LOAN_VALE_CANCEL, DELIVERY_FETCHING } from "../types"
+import { LOAN_FETCH_FAILED, LOAN_FETCHING, LOAN_LOANS_FETCH, LOAN_CHANGED_TAB, LOAN_TOGGLE_FILTER, LOAN_FILTER_CHANGED, LOAN_ORDER_CHANGED, LOAN_STATUS_CHANGED, LOAN_DATE_CHANGED, LOAN_VALES_FETCH, LOAN_CREDIT_DETAILS_FETCH, LOAN_CONFIASHOP_FETCH, LOAN_VALE_TYPE_CHANGED, LOAN_SET_FOLIO_DIGITAL, LOAN_VALE_CANCEL, DELIVERY_FETCHING, LOAN_ARTICLE_DETAILS_FETCH } from "../types"
 import { colors } from "../../assets"
 
 const statuses = [{
@@ -35,6 +35,9 @@ const initialState = {
   loans: [],
   loansFiltered: [],
   creditDetails: null,
+  articleDetail: {
+    talla: null
+  },
   backgroundColor: colors.secondary,
   showValeFilter: false,
   showShopFilter: false,
@@ -74,6 +77,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, loans: payload, loansFiltered: payload, loadingLoans: false }
     case LOAN_CREDIT_DETAILS_FETCH:
       return { ...state, creditDetails: payload, loading: false }
+    case LOAN_ARTICLE_DETAILS_FETCH:
+      return { ...state, articleDetail: payload }
     case LOAN_FETCH_FAILED:
       return { ...state, loading: false }
     case LOAN_CHANGED_TAB:

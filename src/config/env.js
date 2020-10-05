@@ -7,3 +7,6 @@ export const URL =  `${BASEURL}`;
 
 export const URL_DEMO = "https://testvcapi.finconfia.com.mx/v1.0";
 export const GOOGLE_API_KEY = 'AIzaSyDobS-DIxXHS79mIgIzbz_kHJQuMjK6bFg';
+
+export const URL_CSSERVICE = 'https://servicios.confiashop.com/api';
+export const URL_CSSERVICE_DEMO = 'https://servicios-dev.confiashop.com/api';

@@ -44,7 +44,7 @@ class LoanDetails extends Component {
 	}
 	render() {
 		let { navigation, loan } = this.props
-		let { loading, creditDetails } = loan
+		let { loading, creditDetails, articleDetail } = loan
 		let isFrom = navigation.getParam('isFrom')
 		let color = navigation.getParam('backgroundColor')
 		return (
@@ -144,12 +144,16 @@ class LoanDetails extends Component {
 										<Text style={styles.itemTextRightCS}>{product.estilo.substring(0,10)}</Text>
 									</View>
 									<View style={[styles.itemDate, { flex: 0 }]}>
+										<Text style={styles.itemTextLeftCS}>Cantidad:</Text>
+										<Text style={styles.itemTextRightCS}>{product.cantidad}</Text>
+									</View>
+									<View style={[styles.itemDate, { flex: 0 }]}>
 										<Text style={styles.itemTextLeftCS}>Color:</Text>
 										<Text style={styles.itemTextRightCS}>{product.color.substring(0,10)}</Text>
 									</View>
 									<View style={[styles.itemDate, { flex: 0 }]}>
-										<Text style={styles.itemTextLeftCS}>Cantidad:</Text>
-										<Text style={styles.itemTextRightCS}>{product.cantidad}</Text>
+										<Text style={styles.itemTextLeftCS}>Talla:</Text>
+										<Text style={styles.itemTextRightCS}>{articleDetail.talla}</Text>
 									</View>
 								</View>
 								<View style={[styles.datesContent, { flex: 0, paddingTop: moderateScale(10), }]}>

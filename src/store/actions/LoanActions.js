@@ -1,4 +1,4 @@
-import { getRequest, request } from "../../config/service"
+import { getRequest, request, getConfiaShopRequest } from "../../config/service"
 import { AsyncStorage } from "react-native"
 import { constants, toast } from "../../assets"
 import {
@@ -17,7 +17,8 @@ import {
   LOAN_VALE_TYPE_CHANGED,
   LOAN_SET_FOLIO_DIGITAL,
   LOAN_VALE_CANCEL,
-  DELIVERY_FETCHING
+  DELIVERY_FETCHING,
+  LOAN_ARTICLE_DETAILS_FETCH,
 } from "../types"
 import moment from "moment"
 import navigation from "../../services/navigation"
@@ -93,6 +94,11 @@ const getDetailsCredit = (credit) => {
       let user = JSON.parse(await AsyncStorage.getItem(constants.USER))
       getRequest(methods.GET, `${paths.credit_details}${user.DistribuidorId}/${credit}`).then(response => {
         console.log("Credit", response)
+        if(response.datos.detalleVenta.length > 0){
+          let idTicket = response.datos.detalleVenta[0].idTicket;
+          let sku = response.datos.detalleVenta[0].idSku;
+          dispatch(getDetailsArticle(idTicket, sku));
+        }
         dispatch({ type: LOAN_CREDIT_DETAILS_FETCH, payload: response.datos })
       }).catch(error => {
         dispatch({ type: LOAN_FETCH_FAILED, payload: error.message });
@@ -114,6 +120,44 @@ const getDetailsCredit = (credit) => {
     }
     else
       dispatch({ type: LOAN_SET_FOLIO_DIGITAL, payload: credit })
+  }
+}
+
+const getDetailsArticle = (idTicket, sku) => {
+  return async dispatch => {
+    dispatch({ type: LOAN_ARTICLE_DETAILS_FETCH, payload: {talla: null} })
+    let user = JSON.parse(await AsyncStorage.getItem(constants.USER));
+    let status = 'OPERADO';
+    let ticketDetalle;
+    getConfiaShopRequest(methods.GET, `${paths.confiaShop_Ticket_Info}?id_empresa=1&tipo_usuario=1&id_usuario=${user.DistribuidorId}&estatus=${status}&id_ticket=${idTicket}`).then(response => {
+      if(response.length > 0){
+        ticketDetalle = response[0].ticket_detalle;
+        try{
+          let talla = ticketDetalle.find(articulo => articulo.id_sku == sku).talla;
+          console.log('TALLA', talla)
+          dispatch({ type: LOAN_ARTICLE_DETAILS_FETCH, payload: {talla: talla} })
+        }catch(e){
+          console.log("### ERROR ConfiaShop_Ticket_Info OPERADO", e)
+          dispatch({ type: LOAN_ARTICLE_DETAILS_FETCH, payload: {talla: null} })
+        }
+      }else{
+        status = 'CAPTURA';
+        getConfiaShopRequest(methods.GET, `${paths.confiaShop_Ticket_Info}?id_empresa=1&tipo_usuario=1&id_usuario=${user.DistribuidorId}&estatus=${status}&id_ticket=${idTicket}`).then(response => {
+          ticketDetalle = response[0].ticket_detalle;
+          try{
+            let talla = ticketDetalle.find(articulo => articulo.id_sku == sku).talla;
+            console.log('TALLA', talla)
+            dispatch({ type: LOAN_ARTICLE_DETAILS_FETCH, payload: {talla: talla} })
+          }catch(e){
+            console.log("### ERROR ConfiaShop_Ticket_Info OPERADO", e)
+          }
+        }).catch(error => {
+          console.log("### ERROR ConfiaShop_Ticket_Info CAPTURA", error)
+        })
+      }
+    }).catch(error => {
+      console.log("### ERROR ConfiaShop_Ticket_Info OPERADO", error)
+    })
   }
 }
 
