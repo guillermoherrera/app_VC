@@ -92,7 +92,7 @@ export class AssignCredit extends Component {
             <CardItem style={{ borderRadius: moderateScale(25) }}>
               <Col>
                 <View style={{ borderWidth: 2.5, borderColor: colors.secondary, marginLeft: moderateScale(8), marginRight: moderateScale(8) }}>
-                  <Picker
+                  {!exclusiveDist && <Picker
                     note={!selectedItem ? true : false}
                     mode="dropdown"
                     placeholder="Selecciona"
@@ -105,8 +105,22 @@ export class AssignCredit extends Component {
                   >
                     <Picker.Item label="Selecciona"></Picker.Item>
                     <Picker.Item label="Para mí" value={1}></Picker.Item>
-                    {!exclusiveDist && <Picker.Item label="Para otra persona" value={2}></Picker.Item>}
-                  </Picker>
+                    <Picker.Item label="Para otra persona" value={2}></Picker.Item>
+                  </Picker>}
+                  {exclusiveDist && <Picker
+                    note={!selectedItem ? true : false}
+                    mode="dropdown"
+                    placeholder="Selecciona"
+                    headerBackButtonText="Regresar"
+                    iosHeader="Seleccionar"
+                    iosIcon={<Icon name="arrow-down" />}
+                    style={{ width: undefined, paddingRight: moderateScale(10) }}
+                    selectedValue={selectedItem}
+                    onValueChange={(value) => this.props.onValueItemChanged(value)}
+                  >
+                    <Picker.Item label="Selecciona"></Picker.Item>
+                    <Picker.Item label="Para mí" value={1}></Picker.Item>
+                  </Picker>}
                 </View>
               </Col>
             </CardItem>
