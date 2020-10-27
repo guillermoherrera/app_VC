@@ -167,13 +167,13 @@ class LoanDetails extends Component {
 									</View>
 								</View>
 							</Row>)}
-							<Row style={[{ flex: 0 }]}>
+							{/*<Row style={[{ flex: 0 }]}>
 								<Right>
 									<TouchableOpacity onPress={() => navigation.navigate('DeliveryDetails')}>
 										<Text style={{color: colors.primary}}>Detalle del envío</Text>
 									</TouchableOpacity>
 								</Right>
-							</Row>
+							</Row>*/}
 							{/*(creditDetails.detalleVenta || []).map(product => <Text key={`product-${product.idSku}`} style={styles.titleProduct}>- {product.jerarquia01}, {product.jerarquia02}, {product.jerarquia03}, {product.jerarquia04}</Text>)*/}
 						</View>
 					}
