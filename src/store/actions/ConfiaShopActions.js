@@ -1,6 +1,6 @@
-import { CONFIASHOP_CUSTOMER_INPUT_CHANGED, CONFIASHOP_ASSOCIATE_TICKET, CONFIASHOP_FETCHING, CONFIASHOP_FETCH_FAILED, CONFIASHOP_SET_TICKET, CONFIASHOP_ITEM_CHANGED, CONFIASHOP_CUSTOMER_SELECTED, CONFIASHOP_TOGGLE_PHONE_INPUT, CONFIASHOP_PHONE_INPUT_CHANGED, CONFIASHOP_CODE_CHANGED, CONFIASHOP_PAGE_CHANGED, CONFIASHOP_CODE_VALIDATE, CONFIASHOP_TOGGLE_MODAL, CONFIASHOP_DISMISS_ERROR, CONFIASHOP_ADDRESSES_FETCH, CONFIASHOP_ADDRESS_CHANGED, LOGIN_ERROR, USER_FETCHING, USER_UPDATE_ADDRESS_FETCH } from "../types";
+import { CONFIASHOP_CUSTOMER_INPUT_CHANGED, CONFIASHOP_ASSOCIATE_TICKET, CONFIASHOP_FETCHING, CONFIASHOP_FETCH_FAILED, CONFIASHOP_SET_TICKET, CONFIASHOP_ITEM_CHANGED, CONFIASHOP_CUSTOMER_SELECTED, CONFIASHOP_TOGGLE_PHONE_INPUT, CONFIASHOP_PHONE_INPUT_CHANGED, CONFIASHOP_CODE_CHANGED, CONFIASHOP_PAGE_CHANGED, CONFIASHOP_CODE_VALIDATE, CONFIASHOP_TOGGLE_MODAL, CONFIASHOP_DISMISS_ERROR, CONFIASHOP_ADDRESSES_FETCH, CONFIASHOP_ADDRESS_CHANGED, LOGIN_ERROR, USER_FETCHING, USER_UPDATE_ADDRESS_FETCH, CONFIASHOP_TICKET_FETCHING } from "../types";
 import { constants, toast } from '../../assets';
-import { request, getRequest } from '../../config/service';
+import { request, getRequest, requestGeneric } from '../../config/service';
 import { AsyncStorage, Alert } from "react-native";
 import navigation from "../../services/navigation";
 import { ValidatorService } from "../../services/validator";
@@ -67,6 +67,26 @@ const getAddresses = () => {
     }).catch(error => {
       console.log("ERROR", error.message)
       toast.showToast(error.message, 5000, "danger")
+    });
+  }
+}
+
+const confiaShopTicketInfo = () => {
+  return async dispatch => {
+    dispatch({ type: CONFIASHOP_FETCHING });
+    let _env = await AsyncStorage.getItem('env');
+    let env_url = _env == "DEMO" ? 'servicios-dev' : 'servicios';
+    let user = JSON.parse(await AsyncStorage.getItem(constants.USER));
+    let ticketId = await AsyncStorage.getItem(constants.TICKET);
+    let headers = {'Content-Type': 'application/json'};
+    requestGeneric(methods.Get, `https://${env_url}.confiashop.com/api/ConfiaShop_Ticket_Info?id_empresa=1&tipo_usuario=1&id_usuario=${user.DistribuidorId}&estatus=CAPTURA&id_ticket=${ticketId}`, null, headers).then(async response => {
+      var exclusiveDist = response[0].ticket_detalle.find(article => article.id_promocion == 14);
+      if(exclusiveDist == null) exclusiveDist = response[0].ticket_detalle.find(article => article.dinele_utilizado > 0);
+      dispatch({ type: CONFIASHOP_TICKET_FETCHING, payload: exclusiveDist != null });
+    }).catch(error => {
+      dispatch({ type: CONFIASHOP_FETCH_FAILED, payload: error.message });
+      console.log('###Error confiaShopTicketInfo', `Error al consultar ticket de confiashop ${ticketId}\n (${error.message})`);
+      //toast.showToast(`Error al consultar ticket de confiashop ${ticketId}\n (${error.message})`, 5000, "danger")
     });
   }
 }
@@ -251,5 +271,6 @@ export {
   onConfiaShopModalConfirm,
   dismissError,
   getAddresses,
-  onAddressChanged
+  onAddressChanged,
+  confiaShopTicketInfo,
 }

@@ -5,7 +5,7 @@ import { getPhoneNumberSync } from "react-native-device-info";
 import { moderateScale, verticalScale } from 'react-native-size-matters';
 import { View, Dimensions, TouchableOpacity, FlatList, RefreshControl, Text, SafeAreaView, Alert, Platform } from 'react-native'
 import { Footer, Picker, Icon, Container, Header, Left, Button, Card, CardItem, Col, Body, Right } from 'native-base'
-import { onConfiaShopCustomerInputChange, getCustomersWithBankData, onValueItemChanged, onCustomerSelect, associateTicket, onConfiaShopToggleInput, onConfiaShopPhoneChanged } from '../../../store/actions';
+import { onConfiaShopCustomerInputChange, getCustomersWithBankData, onValueItemChanged, onCustomerSelect, associateTicket, onConfiaShopToggleInput, onConfiaShopPhoneChanged, confiaShopTicketInfo } from '../../../store/actions';
 import { InputQ, ItemQ, Spinner, Loading } from '../../common';
 import { colors } from '../../../assets';
 import styles from './ConfiaShop.styles';
@@ -14,6 +14,8 @@ const { width } = Dimensions.get('window');
 
 export class AssignCredit extends Component {
   componentWillMount() {
+    this.props.onValueItemChanged(0)
+    this.props.confiaShopTicketInfo();
     this.props.getCustomersWithBankData();
   }
 
@@ -58,11 +60,11 @@ export class AssignCredit extends Component {
 
   render() {
     let { confiashop, customer } = this.props;
-    let { customersFiltered, customers, selectedItem, showInputPhone, phoneInput } = confiashop
+    let { customersFiltered, customers, selectedItem, showInputPhone, phoneInput, exclusiveDist } = confiashop
     let { loading } = customer
-    if (this.props.confiashop.loading) {
-      return <Loading />
-    }
+    //if (this.props.confiashop.loading) {
+    //  return <Loading />
+    //}
     return (
       <Container style={{ backgroundColor: colors.tertiary }}>
         <Header noShadow transparent androidStatusBarColor={colors.tertiary} iosBarStyle="light-content">
@@ -85,7 +87,7 @@ export class AssignCredit extends Component {
           <Dialog.Button label="Cancelar" onPress={() => this.props.onConfiaShopToggleInput()} />
           <Dialog.Button disabled={phoneInput.length == 10 ? false : true} label="Aceptar" onPress={() => this._save()} />
         </Dialog.Container>
-        <SafeAreaView style={{ flex: 1 }}>
+        {!this.props.confiashop.loading && <SafeAreaView style={{ flex: 1 }}>
           <Card style={{ flex: 1, paddingTop: moderateScale(10), paddingBottom: moderateScale(10), borderRadius: moderateScale(25) }}>
             <CardItem style={{ borderRadius: moderateScale(25) }}>
               <Col>
@@ -103,7 +105,7 @@ export class AssignCredit extends Component {
                   >
                     <Picker.Item label="Selecciona"></Picker.Item>
                     <Picker.Item label="Para mí" value={1}></Picker.Item>
-                    <Picker.Item label="Para otra persona" value={2}></Picker.Item>
+                    {!exclusiveDist && <Picker.Item label="Para otra persona" value={2}></Picker.Item>}
                   </Picker>
                 </View>
               </Col>
@@ -139,7 +141,8 @@ export class AssignCredit extends Component {
               </TouchableOpacity>
             </Footer>
           }
-        </SafeAreaView>
+        </SafeAreaView>}
+        {this.props.confiashop.loading && <Loading />}
       </Container>
     )
   }
@@ -159,6 +162,7 @@ const mapDispatchToProps = {
   associateTicket,
   onConfiaShopToggleInput,
   onConfiaShopPhoneChanged,
+  confiaShopTicketInfo,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssignCredit)
