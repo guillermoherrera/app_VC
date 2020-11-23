@@ -62,7 +62,7 @@ const getAddresses = () => {
     let responseDos = [];
     getRequest(methods.GET, `${paths.get_addresses}${user.DistribuidorId}`).then(async response => {
       responseDos = response.data;
-      responseDos[0] = {...responseDos[0], active: true}
+      if(responseDos.length > 0)responseDos[0] = {...responseDos[0], active: true}
       dispatch({ type: CONFIASHOP_ADDRESSES_FETCH, payload: responseDos })
     }).catch(error => {
       console.log("ERROR", error.message)

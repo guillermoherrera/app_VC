@@ -86,11 +86,11 @@ export class AddressSelection extends Component{
               } />}
             <CardItem style={{ borderRadius: moderateScale(25) }}>
               <Button icon onPress={() => navigation.navigate('AddressCF')} style={[styles.buttonAddAddress]}>
-                <Text style={styles.textButtonNew2}><Icon type="FontAwesome5" name="plus" style={styles.iconNew} /> AÑADIR OTRA DIRECCION</Text>
+                <Text style={styles.textButtonNew2}><Icon type="FontAwesome5" name="plus" style={styles.iconNew} /> AÑADIR DIRECCION</Text>
               </Button>
             </CardItem>
           </Card>
-          {true &&
+          {addresses.length > 0 &&
             <Footer style={{ height: moderateScale(55), backgroundColor: colors.tertiary, elevation: 0, borderTopColor: 'transparent' }}>
               <TouchableOpacity
                 onPress={() => navigation.navigate('AssignCredit')}
