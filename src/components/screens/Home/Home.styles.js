@@ -356,5 +356,21 @@ export default styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:"space-between",
     alignItems:"center"
-  }
+  },
+  cardMoney:{
+    flex:1,
+    marginHorizontal: moderateScale(10),
+    padding: moderateScale(10),
+    borderRadius: moderateScale(12),
+    backgroundColor: colors.green_light,
+    flexDirection:"column",
+    alignItems:"stretch",
+    justifyContent: 'flex-start',
+  },
+  textCard:{
+    fontSize: moderateScale(16),
+    color: colors.red,
+    fontWeight: '200',
+    textAlign:"left"
+   },
 });

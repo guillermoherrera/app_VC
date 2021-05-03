@@ -25,6 +25,7 @@ import {
   USER_UPDATE_ADDRESS_FETCH,
   USER_DEFERRED_CHARGES_FETCH,
   USER_BCONFIASHOP_FETCH,
+  USER_COLOCAYGANA_FETCH,
 } from "../types";
 
 const FormRecovery = {
@@ -92,6 +93,10 @@ const INITIAL_STATE = {
   monederoConfiashop: 0,
   versionIOS: 1.1,
   versionAndroid: 1.1,
+  CYGActual: 0.00,
+  CYGMeta: 0.00,
+  CYGIndicador: 0.1,
+  CYGVigencia: '',
 }
 
 
@@ -115,6 +120,8 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return { ...state, loading: false, hasError: payload }
     case USER_SUMMARY_FETCH:
       return { ...state, summary: payload.detalle, ...payload, loading: false, refreshing: false }
+    case USER_COLOCAYGANA_FETCH:
+      return { ...state, CYGActual: payload.actual_colocacion, CYGMeta: payload.meta_colocacion, CYGIndicador: payload.Indicador, CYGVigencia: payload.vigencia, loading: false, refreshing: false }
     case USER_BCONFIASHOP_FETCH:
       return { ...state, monederoConfiashop: payload != null ? payload.saldo : 0}
     case USER_FETCH_FAILED:

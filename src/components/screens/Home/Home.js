@@ -6,12 +6,13 @@ import { HeaderQ, CardBalance } from '../../common';
 import { Thumbnail, Text, Row, Title, Left, Right, Button, Icon, Col } from 'native-base';
 import { Icon as RoundIcon, Tooltip } from "react-native-elements";
 import { images, colors } from '../../../assets';
-import { getSummary, getRelation, getPdf, getProfilePicture, getdeferredCharges, getBalanceConfiashop } from '../../../store/actions';
+import { getSummary, getRelation, getPdf, getProfilePicture, getdeferredCharges, getBalanceConfiashop, getConfiaYGana} from '../../../store/actions';
 import moment from "moment";
 import "moment/locale/es";
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
 import Modal from 'react-native-modal';
 import { getVersion } from 'react-native-device-info';
+import * as Progress from 'react-native-progress';
 
 class Home extends PureComponent {
   state = {
@@ -32,6 +33,7 @@ class Home extends PureComponent {
     this.props.getPdf()
     this.props.getProfilePicture()
     this.props.getBalanceConfiashop()
+    this.props.getConfiaYGana()
   }
 
   _onRefresh = () => {
@@ -40,6 +42,7 @@ class Home extends PureComponent {
     this.props.getRelation()
     this.props.getPdf()
     this.props.getBalanceConfiashop()
+    this.props.getConfiaYGana()
 
     this.setState({ now: moment().format('DD/MM/YYYY HH:mm a'), checkVersion: false })
   }
@@ -59,7 +62,7 @@ class Home extends PureComponent {
 
   render() {
     let { navigation, profile } = this.props;
-    let { summary, bonus, relation, personal_loan, pdf, user_photo, loading_photo, disponibleTotal, limiteTotal, saldoActualTotal, atraso, relacionDisponible, detalleCargosDiferidos, monederoConfiashop } = profile
+    let { summary, bonus, relation, personal_loan, pdf, user_photo, loading_photo, disponibleTotal, limiteTotal, saldoActualTotal, atraso, relacionDisponible, detalleCargosDiferidos, monederoConfiashop, CYGActual, CYGMeta, CYGIndicador, CYGVigencia } = profile
     //console.log('###', profile.versionAndroid);
     //console.log('###', Platform.OS)
     if(!this.state.checkVersion){
@@ -99,6 +102,21 @@ class Home extends PureComponent {
           </View>
         </Modal>
         <View>
+          {CYGMeta > 0 && <View style={styles.cardMoney}>
+            <Title >COLOCA Y GANA</Title>
+            <Row>
+              <View style={{marginTop: moderateScale(18)}}>
+                <Progress.Bar progress={CYGIndicador} width={moderateScale(240)} height={moderateScale(30)} borderRadius={moderateScale(12)} color={colors.secondary} borderColor={colors.secondary}>
+                  <Title style={[styles.textCard, {alignSelf:"center",position:"absolute",top: moderateScale(4),} ]}>${CYGActual.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Title>
+                </Progress.Bar>
+              </View>
+              <View style={{paddingHorizontal: moderateScale(5), alignItems: 'center'}}>
+                <Title style={[styles.textCard, { }]}>Meta</Title>
+                <Title style={[styles.textCard, { }]}>${CYGMeta.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Title>
+              </View>
+            </Row>
+            <Text style={[styles.textTitle, { fontSize: moderateScale(9), marginTop: moderateScale(3) }]}>{CYGVigencia}</Text>
+          </View>}
           {/*  title */}
           <View style={styles.paddingContent}>
             <Row style={styles.mrt15}>
@@ -295,7 +313,8 @@ const mapDispatchToProps = {
   getPdf,
   getProfilePicture,
   getdeferredCharges,
-  getBalanceConfiashop
+  getBalanceConfiashop,
+  getConfiaYGana,
 };
 
 export default connect(

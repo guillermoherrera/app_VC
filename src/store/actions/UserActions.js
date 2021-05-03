@@ -17,6 +17,7 @@ import {
   USER_LOGOUT_FETCH_FAILED,
   USER_DEFERRED_CHARGES_FETCH,
   USER_BCONFIASHOP_FETCH,
+  USER_COLOCAYGANA_FETCH,
 } from "../types";
 import { constants, images, toast } from '../../assets';
 import { getRequest, requestFile, requestGeneric } from '../../config/service';
@@ -76,6 +77,33 @@ const getSummary = () => {
         }
         catch(er){
           toast.showToast("ERROR AL OBTENER DETALLE\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger")
+        }
+      }
+    });
+  }
+}
+
+const getConfiaYGana = () => {
+  return async dispatch => {
+    dispatch({ type: USER_FETCHING });
+    let user = JSON.parse(await AsyncStorage.getItem(constants.USER))
+    console.warn(`${paths.get_cyg}${user.DistribuidorId}`);
+    getRequest(methods.GET, `${paths.get_cyg}${user.DistribuidorId}`).then(async response => {
+      console.warn('payload CYG', response.data);
+      dispatch({ type: USER_COLOCAYGANA_FETCH, payload: response.data });
+    }).catch(error => {
+      dispatch({ type: USER_FETCH_FAILED, payload: error.message });
+      if (error.message == 'unauthorized') {
+        dispatch(logout());
+        toast.showToast("La sesión ha expirado", 5000, "danger")
+      }
+      else{
+        //toast.showToast(error.message, 5000, "danger")
+        try{
+          toast.showToast("resultDesc: (ColocaYGana) "+error.message, 5000, "danger")
+        }
+        catch(er){
+          toast.showToast("(ColocaYGana) ERROR AL OBTENER DETALLE CYG\n\nPOR FAVOR REVISA TU CONEXIÓN A INTERNET O INTENTA DE NUEVO MÁS TARDE", 5000, "danger")
         }
       }
     });
@@ -244,4 +272,5 @@ export {
   getdeferredCharges,
   logout,
   getBalanceConfiashop,
+  getConfiaYGana,
 }

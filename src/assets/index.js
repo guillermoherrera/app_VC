@@ -117,6 +117,7 @@ export const constants = {
     get_occupations: 'secure/consulta/catalogo/ocupacionesTipos/',
     get_marital_status: 'secure/consulta/catalogo/estadoCivilTipos/',
     get_states: 'secure/consulta/catalogo/estados/',
+    get_cyg: 'secure/consulta/colocaygana/',
 
     confiaShop_Ticket_Info: 'ConfiaShop_Ticket_Info',
   }
