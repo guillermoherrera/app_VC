@@ -124,7 +124,17 @@ const getValesDeadlines = (clienteId, desembolsoId) => {
     getRequest(methods.GET, `${paths.vale_calculate}${user.DistribuidorId}/${clienteId}/${desembolsoId}`).then(async response => {
       dispatch({ type: VALE_VALES_DEADLINES, payload: response.data });
     }).catch(error => {
-      dispatch({ type: VALE_VALES_DEADLINES, payload: [{}] });
+      dispatch({ type: VALE_VALES_DEADLINES, payload: [{
+        plazo: "0",
+        tipoPlazos: [{
+          tipoPlazoId: "Q",
+          importes: [{
+            importe: 0,
+            importePagoPlazo: 0
+          }],
+        }],
+        active: true
+      }] });
       dispatch({ type: VALE_FETCH_FAILED, payload: error.message });
       try {
         let JSONError = JSON.parse(error.message)
