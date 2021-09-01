@@ -93,6 +93,7 @@ const INITIAL_STATE = {
   monederoConfiashop: 0,
   versionIOS: 1.1,
   versionAndroid: 1.1,
+  TipoPago: '',
   CYGActual: 0.00,
   CYGMeta: 0.00,
   CYGIndicador: 0.1,

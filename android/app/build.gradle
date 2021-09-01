@@ -133,8 +133,8 @@ android {
         applicationId "com.confia"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 24
-        versionName "3.5"
+        versionCode 25
+        versionName "3.6"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }

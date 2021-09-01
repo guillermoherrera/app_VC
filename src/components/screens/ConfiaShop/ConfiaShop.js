@@ -38,7 +38,7 @@ class ConfiaShop extends Component {
   componentDidUpdate(){
     if (this.props.profile.user.DistribuidorId){
       let { user } = this.props.profile
-      console.log('confiashop env -->', `https://confia-${this.state.env}.supernova-desarrollo.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}`)
+      console.log('confiashop env -->', `https://webapp.confiashop.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}&tk3=${this.props.profile.TipoPago}`)
     }
   }
 
@@ -79,7 +79,7 @@ class ConfiaShop extends Component {
               renderLoading={() => <Loading />}
               javaScriptEnabled={true}
               onMessage={(event) => this._setTicket(event.nativeEvent.data)}
-              source={{ uri: `https://confia-${this.state.env}.supernova-desarrollo.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}` }}
+              source={{ uri: `https://webapp.confiashop.com/?meta=1&page=mobile&env=dist&tk1=${user.DistribuidorId}&tk2=&benefit=${user.categoriaId}&tk3=${this.props.profile.TipoPago}` }}
             /> : <View style={{alignItems: "center", flex: 1, paddingTop: moderateScale(100), paddingHorizontal: moderateScale(20),}}>
               <Text style={{fontSize: moderateScale(30), fontWeight: 'bold'}}>{'ConfiaShop no disponible\n'}</Text>
               <Text style={{justifyContent: 'center'}}>Lo sentimos, por el momento el servicio de ConfiaShop no esta disponible para esta sesión</Text>
