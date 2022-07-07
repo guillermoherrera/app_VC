@@ -16,7 +16,7 @@
     "@react-native-firebase/app": "^8.3.0",
     "@react-native-firebase/messaging": "^7.6.1",
     "add": "^2.0.6",
-    "moment": "^2.26.0",
+    "moment": "^2.29.4",
     "native-base": "^2.13.12",
     "react": "16.11.0",
     "react-native": "0.62.2",
